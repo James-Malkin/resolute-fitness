@@ -65,3 +65,5 @@ group :test do
 end
 
 gem "slim-rails"
+
+gem "tailwindcss-ruby", "~> 4.0"
