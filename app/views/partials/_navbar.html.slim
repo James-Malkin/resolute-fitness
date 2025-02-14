@@ -1,6 +1,10 @@
 header.bg-red.flex.justify-between.items-center.px-10.py-3.border-b.border-gray-100
-  a#navbar-brand href="#"
+  = link_to root_path, id: 'nav-brand'
     = image_tag 'brand.png', alt: 'Resolute Fitness', class: 'w-46'
-  nav.font-semibold
-    a href="#"
-      | Home
+  nav.font-semibold.flex.flex-row
+    = link_to 'Home', root_path, id: 'nav-brand'
+    - if user_signed_in?
+      = button_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'ml-4', data: { turbo: false }
+    - else
+      = link_to 'Sign In', new_user_session_path, class: 'ml-4'
+      = link_to 'Sign Up', new_user_registration_path, class: 'ml-4'
