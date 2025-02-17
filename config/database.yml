@@ -7,21 +7,20 @@
 default: &default
   adapter: postgresql
   host: localhost
+  username: resolute_app
+  password: admin
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  timeout: 5000
 
 development:
   <<: *default
-  database: resolute-dev
-  username: resolute-app
-  password: admin
+  database: resolute_dev
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  database: storage/test.sqlite3
+  database: resolute_test
 
 
 # Store production database in the storage/ directory, which by default

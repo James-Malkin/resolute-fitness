@@ -1,7 +1,7 @@
 .w-50.mx-auto
   h1.text-xl.font-semibold.mb-10.text-center Sign In
 
-  = form_with model: resource, url: session_path(resource_name), class: 'flex flex-col' do |f|
-    = f.email_field :email, placeholder: 'Email', class: 'form-input'
-    = f.password_field :password, placeholder: 'Password', class: 'form-input'
-    = f.submit 'Sign In', class: 'btn btn-primary mt-4'
+  = form_with model: resource, url: session_path(resource_name), class: "flex flex-col" do |f|
+    = f.email_field :email, placeholder: "Email", class: "form-input"
+    = f.password_field :password, placeholder: "Password", class: "form-input"
+    = f.submit "Sign In", class: "btn btn-primary mt-4"
