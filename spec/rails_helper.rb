@@ -43,11 +43,18 @@ Capybara.register_driver(:cuprite) do |app|
   })
 end
 
-Capybara.default_driver = :cuprite
 Capybara.javascript_driver = :cuprite
+
+Capybara.disable_animation = true
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
+
+  config.before(:each, type: :system) do
+    driven_by :cuprite
+  end
+
+  config.filter_gems_from_backtrace("capybara", "cuprite", "ferrum")
 end
