@@ -38,7 +38,7 @@ end
 Capybara.register_driver(:cuprite) do |app|
   Capybara::Cuprite::Driver.new(app, {
     headless: true,
-    window_size: [1280, 720],
+    window_size: [ 1280, 720 ],
     timeout: 60
   })
 end

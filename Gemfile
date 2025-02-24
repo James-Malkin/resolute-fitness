@@ -77,4 +77,3 @@ gem "term-ansicolor", "~> 1.11"
 gem "rails_best_practices-rake_task", "~> 1.0"
 
 gem "slim_lint", "~> 0.31.1"
-
