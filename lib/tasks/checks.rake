@@ -1,6 +1,9 @@
-desc "Run various code quality checks"
+# frozen_string_literal: true
+
+desc 'Run various code quality checks'
 task checks: %i[
   slim_lint
   rubocop
   rails_best_practices
+  rspec
 ]

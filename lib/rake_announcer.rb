@@ -1,4 +1,6 @@
-require "term/ansicolor"
+# frozen_string_literal: true
+
+require 'term/ansicolor'
 
 class RakeAnnouncer
   def self.log_step(message)

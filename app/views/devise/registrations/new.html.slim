@@ -1,6 +1,6 @@
-= form_with model: resource, url: registration_path(resource_name), class: "flex flex-col" do |f|
-  = f.text_field :username, placeholder: "Username", class: "form-input"
-  = f.email_field :email, placeholder: "Email", class: "form-input"
-  = f.password_field :password, placeholder: "Password", class: "form-input"
-  = f.password_field :password_confirmation, placeholder: "Password Confirmation", class: "form-input"
-  = f.submit "Sign Up", class: "btn btn-primary mt-4"
+= form_with model: resource, url: registration_path(resource_name), class: 'flex flex-col' do |f|
+  = f.text_field :username, placeholder: 'Username', class: 'form-input'
+  = f.email_field :email, placeholder: 'Email', class: 'form-input'
+  = f.password_field :password, placeholder: 'Password', class: 'form-input'
+  = f.password_field :password_confirmation, placeholder: 'Password Confirmation', class: 'form-input'
+  = f.submit 'Sign Up', class: 'btn btn-primary mt-4'
