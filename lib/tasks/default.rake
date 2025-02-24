@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # require 'rake_accouncer'
 
 Rake::Task[:default].prerequisites.clear if Rake::Task.task_defined?(:default)
