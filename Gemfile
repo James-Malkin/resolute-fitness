@@ -60,7 +60,8 @@ end
 group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem "capybara"
-  gem "selenium-webdriver"
+  gem "rspec-rails", "~> 7.1"
+  gem "cuprite"
 end
 
 gem "slim-rails"
@@ -77,4 +78,3 @@ gem "rails_best_practices-rake_task", "~> 1.0"
 
 gem "slim_lint", "~> 0.31.1"
 
-gem "rspec-rails", "~> 7.1"
