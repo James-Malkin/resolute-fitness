@@ -13,6 +13,16 @@ services:
     environment:
       DB_HOST: db
       DB_USERNAME: postgres
+  caddy:
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile
+    depends_on:
+      - app
 
 volumes:
   postgresql_data: {}
