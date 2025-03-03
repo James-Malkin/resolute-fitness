@@ -1,11 +1,10 @@
-version: "1.0.0"
 services:
   db:
     image: postgres:17
     volumes:
       - postgresql_data:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: ""
+      POSTGRES_PASSWORD: "password"
   app:
     build: .
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -b '0.0.0.0'"
