@@ -15,8 +15,6 @@ services:
       DB_USERNAME: postgres
       RAILS_ENV: production
       RAILS_MASTER_KEY: dd7c5333247ba4989e7a4690f53546fa
-  depends_on:
-    - db
   caddy:
     image: caddy:latest
     restart: unless-stopped
