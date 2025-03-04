@@ -74,5 +74,3 @@ gem 'tailwindcss-ruby', '~> 4.0'
 gem 'pg', '~> 1.5'
 
 gem 'devise', '~> 4.9'
-
-gem 'bigdecimal', '~> 3.1.8'
