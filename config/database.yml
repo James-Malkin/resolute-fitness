@@ -27,7 +27,8 @@ test:
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
   <<: *default
-  host: db
+  host: <%= ENV["DB_HOST"] %>
   database: resolute
-  secret_key_base:  <%= ENV.fetch("RAILS_MASTER_KEY") %>
+  username: resolute-app
+  password: <%= ENV["POSTGRES_PASSWORD"] %>
 
