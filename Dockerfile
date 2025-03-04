@@ -37,7 +37,7 @@ FROM base
 
 # Copy built artifacts: gems, application
 COPY --from=build /usr/local/bundle /usr/local/bundle
-COPY --from=build /rails /resolute-fitness
+COPY --from=build /resolute-fitness /resolute-fitness
 
 # Entrypoint prepares the database.
 # ENTRYPOINT ["/rails/bin/docker-entrypoint"]
