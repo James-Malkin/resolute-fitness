@@ -37,3 +37,6 @@
 !/app/assets/builds/.keep
 
 /node_modules
+
+# Ignore chrome binary
+google-chrome-stable_current_amd64.deb

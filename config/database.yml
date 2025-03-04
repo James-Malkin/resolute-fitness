@@ -26,18 +26,8 @@ test:
 # Store production database in the storage/ directory, which by default
 # is mounted as a persistent Docker volume in config/deploy.yml.
 production:
-  primary:
-    <<: *default
-    database: storage/production.sqlite3
-  cache:
-    <<: *default
-    database: storage/production_cache.sqlite3
-    migrations_paths: db/cache_migrate
-  queue:
-    <<: *default
-    database: storage/production_queue.sqlite3
-    migrations_paths: db/queue_migrate
-  cable:
-    <<: *default
-    database: storage/production_cable.sqlite3
-    migrations_paths: db/cable_migrate
+  <<: *default
+  host: db
+  database: resolute
+  secret_key_base: 259936a519779419b74f3c7666fedce30adb7f9bfb575187d1da7ea3a8d4ccb268271d2708cb91ff266f4550a3602e858ea724d1478d72725c4c9d2f302b9800
+
