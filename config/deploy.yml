@@ -4,7 +4,7 @@ image: jmalkin/resolute-fitness
 
 # Deploy to these servers.
 servers:
-  - 144.126.201.179
+  - 159.65.60.245
 
 registry:
   username: jmalkin
@@ -13,7 +13,7 @@ registry:
 
 env:
   clear:
-    DB_HOST: 144.126.201.179
+    DB_HOST: 159.65.60.245
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
@@ -24,7 +24,7 @@ builder:
 accessories:
   db:
     image: postgres:17
-    host: 144.126.201.179
+    host: 159.65.60.245
     port: 5432
     env:
       clear:
