@@ -51,7 +51,7 @@ group :development, :test do
   gem 'rubocop'
   gem 'rubocop-capybara'
   gem 'rubocop-performance', require: false
-  gem 'slim_lint', '~> 0.31.1'
+  gem 'slim_lint', '~> 0.32.1'
   gem 'term-ansicolor', '~> 1.11'
 end
 
