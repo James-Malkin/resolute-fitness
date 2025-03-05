@@ -1,7 +1,7 @@
 # syntax = docker/dockerfile:1
 
 # Make sure RUBY_VERSION matches the Ruby version in .ruby-version and Gemfile
-FROM ruby:3.3.3-bookworm as base
+FROM ruby:3.3.3-bookworm AS base
 
 # Rails app lives here
 WORKDIR /resolute-fitness
@@ -14,7 +14,7 @@ ENV RAILS_ENV="production" \
 
 
 # Throw-away build stage to reduce size of final image
-FROM base as build
+FROM base AS build
 
 # Install application gems
 COPY Gemfile Gemfile.lock ./
