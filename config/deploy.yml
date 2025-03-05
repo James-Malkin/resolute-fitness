@@ -4,16 +4,25 @@ image: jmalkin/resolute-fitness
 
 # Deploy to these servers.
 servers:
-  - 159.65.60.245
+  web:
+    hosts:
+      - 159.65.60.245
+    options:
+      memory: 512m
 
 registry:
   username: jmalkin
   password:
     - KAMAL_REGISTRY_PASSWORD
 
+proxy:
+  ssl: false 
+  app_port: 3000
+  host: resolute-fitness.com
+
 env:
   clear:
-    DB_HOST: 159.65.60.245
+    DB_HOST: resolute-fitness-db
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
