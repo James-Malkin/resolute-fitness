@@ -31,4 +31,3 @@ production:
   database: resolute
   username: resolute-app
   password: <%= ENV["POSTGRES_PASSWORD"] %>
-
