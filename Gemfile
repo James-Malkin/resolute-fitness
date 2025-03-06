@@ -65,6 +65,8 @@ group :test do
   gem 'capybara'
   gem 'cuprite'
   gem 'rspec-rails', '~> 7.1'
+  gem "simplecov"
+  gem "simplecov-cobertura"
 end
 
 gem 'slim-rails'
