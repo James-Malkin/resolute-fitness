@@ -64,8 +64,8 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'cuprite'
+  gem 'factory_bot', '~> 6.5'
   gem 'rspec-rails', '~> 7.1'
-  gem "factory_bot", "~> 6.5"
 end
 
 gem 'slim-rails'
@@ -75,4 +75,3 @@ gem 'tailwindcss-ruby', '~> 4.0'
 gem 'pg', '~> 1.5'
 
 gem 'devise', '~> 4.9'
-
