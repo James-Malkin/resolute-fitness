@@ -1,18 +1,17 @@
 require 'rails_helper'
 
 describe 'Users' do
-  
   describe 'GET /:username' do
     let(:user) { create(:user) }
 
     before do
-      sign_in user
-      visit user_path(user)
+      sign_in user, scope: user
+      get user_path(user.username)
     end
 
     it "shows the user's profile information" do
-      expect(page).to have_content(user.username)
-      expect(page).to have_content(user.email)
+      expect(response.body).to include(user.username)
+      expect(response.body).to include(user.email)
     end
   end
 end
