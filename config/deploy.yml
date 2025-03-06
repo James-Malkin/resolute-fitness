@@ -16,9 +16,9 @@ registry:
     - KAMAL_REGISTRY_PASSWORD
 
 proxy:
-  ssl: false 
+  ssl: true 
   app_port: 3000
-  host: do-ldn.resolutefitness.studio
+  host: resolutefitness.studio
 
 env:
   clear:
