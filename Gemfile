@@ -65,6 +65,7 @@ group :test do
   gem 'capybara'
   gem 'cuprite'
   gem 'factory_bot', '~> 6.5'
+  gem 'faker', '~> 3.5'
   gem 'rspec-rails', '~> 7.1'
 end
 
