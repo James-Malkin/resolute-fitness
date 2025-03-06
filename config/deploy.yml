@@ -6,7 +6,7 @@ image: jmalkin/resolute-fitness
 servers:
   web:
     hosts:
-      - 159.65.60.245
+      - do-ldn.resolutefitness.studio
     options:
       memory: 512m
 
@@ -18,7 +18,7 @@ registry:
 proxy:
   ssl: false 
   app_port: 3000
-  host: 159.65.60.245
+  host: do-ldn.resolutefitness.studio
 
 env:
   clear:
@@ -33,7 +33,7 @@ builder:
 accessories:
   db:
     image: postgres:17
-    host: 159.65.60.245
+    host: do-ldn.resolutefitness.studio
     port: 5432
     env:
       clear:
