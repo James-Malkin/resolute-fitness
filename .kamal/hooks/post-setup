@@ -1,4 +1,4 @@
 #!/bin/sh
 
 echo "Running database setup..."
-kamal exec web --reuse "bundle exec rails db:create db:schema:load"
+kamal app exec --reuse "bundle exec rails db:create db:schema:load"
