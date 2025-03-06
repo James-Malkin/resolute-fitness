@@ -65,6 +65,7 @@ group :test do
   gem 'capybara'
   gem 'cuprite'
   gem 'rspec-rails', '~> 7.1'
+  gem "factory_bot", "~> 6.5"
 end
 
 gem 'slim-rails'
@@ -74,3 +75,4 @@ gem 'tailwindcss-ruby', '~> 4.0'
 gem 'pg', '~> 1.5'
 
 gem 'devise', '~> 4.9'
+
