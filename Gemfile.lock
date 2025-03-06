@@ -123,6 +123,8 @@ GEM
       tzinfo
     factory_bot (6.5.1)
       activesupport (>= 6.1.0)
+    faker (3.5.1)
+      i18n (>= 1.8.11, < 2)
     ferrum (0.15)
       addressable (~> 2.5)
       concurrent-ruby (~> 1.1)
@@ -402,6 +404,7 @@ DEPENDENCIES
   debug
   devise (~> 4.9)
   factory_bot (~> 6.5)
+  faker (~> 3.5)
   importmap-rails
   jbuilder
   kamal
