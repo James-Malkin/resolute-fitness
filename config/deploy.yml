@@ -17,8 +17,8 @@ registry:
 
 proxy:
   ssl: true 
-  app_port: 3000
   host: resolutefitness.studio
+  app_port: 3000
 
 env:
   clear:
