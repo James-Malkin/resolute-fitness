@@ -56,5 +56,5 @@ jobs:
       - name: Deploy Image
         run: bundle exec kamal deploy --skip-push
         env:
-          RAILS_MASTER_KEY: 
+          RAILS_MASTER_KEY:  ${{ secrets.RAILS_MASTER_KEY }}
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_KEY }}
