@@ -52,3 +52,9 @@ jobs:
             "jmalkin/resolute-fitness:${{ steps.tag.outputs.tag }}"
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      
+      - name: Deploy Image
+        run: bundle exec kamal deploy --skip-push
+        env:
+          RAILS_MASTER_KEY: 
+          KAMAL_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_KEY }}
