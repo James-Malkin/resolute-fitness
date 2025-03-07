@@ -67,6 +67,8 @@ group :test do
   gem 'factory_bot_rails'
   gem 'faker', '~> 3.5'
   gem 'rspec-rails', '~> 7.1'
+  gem 'simplecov'
+  gem 'simplecov-cobertura'
 end
 
 gem 'slim-rails'
