@@ -5,6 +5,7 @@ require 'simplecov-cobertura'
 
 SimpleCov.start 'rails' do
   add_filter '/spec/'
+  add_filter '/lib/rake_announcer.rb'
 end
 
 SimpleCov.formatters = [
