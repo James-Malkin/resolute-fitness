@@ -7,7 +7,7 @@ export default class extends Controller {
 
 
   connect() {
-    this.mql.addEventListener("change", (e) => {e.matches && this.close()})
+  this.mql.addEventListener("change", (e) => {e.matches && this.close()})
   }
 
   toggle(event) {

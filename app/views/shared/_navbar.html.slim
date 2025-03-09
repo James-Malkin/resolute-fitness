@@ -1,7 +1,10 @@
 header.navbar data-controller='navbar'
   = link_to root_path, class: 'nav-brand'
     = image_tag 'brand.png', alt: 'Resolute Fitness', class: 'w-46'
-  button.nav-toggler.btn data-action='click->navbar#toggle'
+  button.nav-toggler data-action='click->navbar#toggle'
+    .
+    .
+    .
   nav data-navbar-target='menu'
     - if user_signed_in?
       = link_to 'Profile', current_user.username
