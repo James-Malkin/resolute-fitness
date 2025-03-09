@@ -12,4 +12,55 @@
   .form-input {
     @apply px-3 py-2 border border-gray-200 rounded w-full;
   }
+  
+
+  .navbar {
+    @apply flex flex-col px-5 py-3 items-start;
+
+    @media (min-width: 768px) {
+      @apply border-b border-gray-100 px-10 flex-row justify-between items-center;
+    }
+
+    &.open {
+      .nav-brand, .nav-toggler {
+        @apply z-20;
+      }
+
+      nav {
+        @apply translate-x-0;
+      }
+    }
+
+    .nav-brand {
+      @media (max-width: 768px) {
+        @apply self-center;
+      }
+    }
+
+    nav {
+      @apply flex flex-col font-semibold mt-5 divide-y divide-gray-200 w-full
+      -translate-x-full bg-white absolute top-0 left-0 z-10 h-screen mt-30 px-5
+      transition-transform duration-300 ease-in-out;
+
+      a, button {
+        @apply py-5 px-4 text-xl;
+      }
+
+      @media (min-width: 768px) {
+        @apply flex-row items-center mt-0 divide-y-0 w-fit static h-fit translate-x-0;
+
+        a, button {
+          @apply ml-4 py-0 text-lg;
+        }
+      }
+    }
+
+    .nav-toggler {
+      @apply absolute top-5 left-5;
+
+      @media (min-width: 768px) {
+        @apply hidden;
+      }
+    }
+  }
 }
