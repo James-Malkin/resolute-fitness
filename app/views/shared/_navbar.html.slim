@@ -10,5 +10,5 @@ header.navbar data-controller='navbar'
       = link_to 'Profile', current_user.username
       = button_to 'Sign Out', destroy_user_session_path, method: :delete, data: { turbo: false }
     - else
-      = link_to 'Sign In', new_user_session_path 
+      = link_to 'Sign In', new_user_session_path
       = link_to 'Sign Up', new_user_registration_path
