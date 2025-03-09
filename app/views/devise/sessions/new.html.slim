@@ -1,7 +1,8 @@
-.w-50.mx-auto
-  h1.text-xl.font-semibold.mb-10.text-center Sign In
-
-  = form_with model: resource, url: session_path(resource_name), class: 'flex flex-col' do |f|
-    = f.email_field :email, placeholder: 'Email', class: 'form-input'
-    = f.password_field :password, placeholder: 'Password', class: 'form-input'
-    = f.submit 'Sign In', class: 'btn btn-primary mt-4'
+= form_with model: resource, url: session_path(resource_name), class: 'flex flex-col border border-gray-200 p-10 rounded-xl gap-2 mx-auto max-w-md w-full' do |f|
+  h2.text-3xl.font-semibold.text-center.mb-3 Sign In
+  p.mb-3.text-center.text-sm
+    | Don't have an account?
+    = link_to 'Sign up here.', new_user_registration_path, class: 'ml-1 text-primary underline'
+  = f.email_field :email, placeholder: 'Email', class: 'form-input'
+  = f.password_field :password, placeholder: 'Password', class: 'form-input'
+  = f.submit 'Sign In', class: 'btn btn-primary mt-4'
