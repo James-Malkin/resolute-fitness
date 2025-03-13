@@ -3,6 +3,6 @@
   p.mb-3.text-center.text-sm
     | Don't have an account?
     = link_to 'Sign up here.', new_user_registration_path, class: 'ml-1 text-primary underline'
-  = f.email_field :email, placeholder: 'Email', class: 'form-input'
+  = f.text_field :login, placeholder: 'Username or Email', class: 'form-input'
   = f.password_field :password, placeholder: 'Password', class: 'form-input'
   = f.submit 'Sign In', class: 'btn btn-primary mt-4'

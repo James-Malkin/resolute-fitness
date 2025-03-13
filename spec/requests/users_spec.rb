@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Users' do
   describe 'GET /:username' do
-    let(:user) { create(:user) }
+    let(:user) { create(:user, username: 'test') }
 
     before do
       sign_in user, scope: user
