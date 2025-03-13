@@ -42,7 +42,7 @@ describe 'Authentication' do
       end
 
       it 'logs the user in' do
-        expect(response).to redirect_to(root_path)
+        expect(controller.current_user).to eq(user)
       end
     end
 
@@ -61,7 +61,7 @@ describe 'Authentication' do
       end
 
       it 'logs the user in' do
-        expect(response).to redirect_to(root_path)
+        expect(controller.current_user).to eq(user)
       end
     end
   end
