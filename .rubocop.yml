@@ -12,3 +12,7 @@ Style/Documentation:
 
 Layout/LineLength:
   Max: 180
+
+Metrics/BlockLength:
+  Exclude:
+    - spec/**/*
