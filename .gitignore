@@ -47,8 +47,3 @@ config/master.key
 # Ignore coverage
 /coverage
 /log/development.log
-/config/credentials/development.key
-
-/config/credentials/production.key
-
-/config/credentials/poo.key
