@@ -63,7 +63,7 @@ Rails.application.configure do
 
   # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
   config.action_mailer.smtp_settings = {
-    address: smtp-relay.brevo.com
+    address: 'smtp-relay.brevo.com',
     domain: "resolutefitness.studio",
     user_name: Rails.application.credentials.dig(:smtp, :username),
     password: Rails.application.credentials.dig(:smtp, :password),
