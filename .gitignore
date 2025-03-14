@@ -47,3 +47,4 @@ config/master.key
 # Ignore coverage
 /coverage
 /log/development.log
+/config/credentials/development.key

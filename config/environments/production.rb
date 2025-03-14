@@ -65,9 +65,8 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
     address: smtp-relay.brevo.com
     domain: "resolutefitness.studio",
-    user_name: Rails.application.credentials.dig(:smtp, :user_name),
+    user_name: Rails.application.credentials.dig(:smtp, :username),
     password: Rails.application.credentials.dig(:smtp, :password),
-    address: "smtp.example.com",
     port: 587,
     authentication: :plain
   }
