@@ -1,0 +1,7 @@
+# frozen_string_literal: true
+
+class TestMailer < ApplicationMailer
+  def test_email
+    mail(to: 'j.steven.malkin@gmail.com', subject: 'Test Email')
+  end
+end
