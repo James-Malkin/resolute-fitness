@@ -15,13 +15,13 @@ describe 'Profile' do
       expect(response.body).to include(user.username)
     end
   end
-  
-    describe 'GET /profile/edit' do
-      it 'returns the edit profile page' do
-        get profile_edit_path
-        expect(response.body).to include(user.username)
-      end
+
+  describe 'GET /profile/edit' do
+    it 'returns the edit profile page' do
+      get profile_edit_path
+      expect(response.body).to include(user.username)
     end
+  end
 
   describe 'GET /profile/:username' do
     let!(:user_two) { create(:user) }

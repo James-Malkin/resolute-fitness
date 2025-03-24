@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Users' do
   describe 'PATCH /users/:id' do
-    subject (:patch_user) { patch user_path(user), params: { user: { username: 'new_username' } } }
+    subject(:patch_user) { patch user_path(user), params: { user: { username: 'new_username' } } }
 
     let(:user) { create(:user) }
 
