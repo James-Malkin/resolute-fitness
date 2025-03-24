@@ -1,0 +1,10 @@
+= @user.errors.full_messages.each do |msg|
+  div = msg
+
+= form_for @user do |f|
+  h2 Username
+  p = f.text_field :username
+  h2 Email
+  p = f.email_field :email
+  = f.submit 'Update'
+  = link_to 'Cancel', profile_path(@user), class: 'button'
