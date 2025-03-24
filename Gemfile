@@ -82,4 +82,4 @@ gem 'devise', '~> 4.9'
 
 gem 'bootstrap-email'
 
-gem "lucide-rails", "~> 0.5.1"
+gem 'lucide-rails', '~> 0.5.1'

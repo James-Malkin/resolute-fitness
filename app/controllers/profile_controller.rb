@@ -13,6 +13,5 @@ class ProfileController < ApplicationController
 
   def edit
     @user = current_user
-    @profile_presenter = UserProfilePresenter.new(@user)
   end
 end

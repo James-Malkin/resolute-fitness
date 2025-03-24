@@ -1,4 +1,4 @@
-= link_to profile_edit_path(), class: 'btn btn-primary' do
+= link_to profile_edit_path, class: 'btn btn-primary' do
   = lucide_icon('pencil')
 
-= render partial: 'profile_details', locals: { profile_presenter: @profile_presenter, user: @user }
+= render 'profile_details', profile_presenter: @profile_presenter, user: @user

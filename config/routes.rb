@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'profile#edit', as: :profile_edit
   get '/profile/:username', to: 'profile#show', as: :profile_show
 
-  resources :user, only: [:update]
+  resources :users, only: [:update]
 
   root to: 'home#index'
 
