@@ -81,3 +81,5 @@ gem 'pg', '~> 1.5'
 gem 'devise', '~> 4.9'
 
 gem 'bootstrap-email'
+
+gem "lucide-rails", "~> 0.5.1"

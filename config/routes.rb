@@ -9,7 +9,11 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
-  get '/:username', to: 'users#show', as: :user
+  get '/profile', to: 'profile#index', as: :profile
+  get '/profile/edit', to: 'profile#edit', as: :profile_edit
+  get '/profile/:username', to: 'profile#show', as: :profile_show
+
+  resources :user, only: [:update]
 
   root to: 'home#index'
 
