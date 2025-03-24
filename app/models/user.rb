@@ -23,4 +23,10 @@ class User < ApplicationRecord
        { value: login.downcase }]
     ).first
   end
+
+  def cancel_change_email!
+    self.unconfirmed_email = nil
+    self.confirmation_token = nil
+    save!
+  end
 end

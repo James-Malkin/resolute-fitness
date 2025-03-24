@@ -28,4 +28,19 @@ describe 'Users' do
       end
     end
   end
+
+  describe 'DELETE /users/:id/cancel_change_email' do
+    subject(:cancel_change_email) { delete cancel_change_email_user_path(user) }
+
+    let(:user) { create(:user, :unconfirmed_change) }
+
+    before do
+      cancel_change_email
+    end
+
+    it 'returns a success message' do
+      expect(response).to redirect_to(profile_path)
+      expect(flash[:notice]).to eq('Email change was successfully canceled.')
+    end
+  end
 end

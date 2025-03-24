@@ -14,4 +14,8 @@ class UserProfilePresenter
       'Guest'
     end
   end
+
+  def email_pending?
+    @user.unconfirmed_email.present?
+  end
 end
