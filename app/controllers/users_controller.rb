@@ -13,7 +13,7 @@ class UsersController < ApplicationController
 
   def cancel_change_email
     @user.cancel_change_email!
-    redirect_to profile_path, notice: 'Email change was successfully canceled.'
+    redirect_back fallback_location: profile_path, notice: 'Email change was successfully canceled.'
   end
 
   private
