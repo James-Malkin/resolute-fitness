@@ -1,6 +1,3 @@
-= @user.errors.full_messages.each do |msg|
-  div = msg
-
 = form_for @user do |f|
   h2 Username
   p = f.text_field :username
@@ -8,22 +5,21 @@
   = f.submit 'Update'
   = link_to 'Cancel', profile_path(@user), class: 'button'
 
-
-= turbo_frame_tag :email_field do
-  h2 Email
-  - if @user.unconfirmed_email.present?
-    .flex.gap-2
-      .form-input.flex.items-center.justify-between.border-yellow-400
-        = @user.unconfirmed_email
-        .flex.gap-1.text-sm.items-center
-          = lucide_icon('circle-alert', class: 'w-4 h-4')
-          | Pending
-      = button_to 'Cancel', cancel_change_email_user_path(@user), method: :delete, class: 'btn bg-red-700'
-  - else
-    = form_with model: @user do |f|
+h2 Email
+- if @user.unconfirmed_email?
+  .flex.gap-2
+    .form-input.flex.items-center.justify-between.border-yellow-400
+      = @user.unconfirmed_email
+      .flex.gap-1.text-sm.items-center
+        = lucide_icon('circle-alert', class: 'w-4 h-4')
+        | Pending
+    = button_to 'Cancel', cancel_change_email_user_path(@user), method: :delete, class: 'btn bg-red-700'
+- else
+  = turbo_frame_tag :email_field do
+    = form_with model: @user, url: update_email_user_path(@user), data: { turbo_frame: :email_field } do |f|
       .flex.gap-2
         = f.text_field :email, class: 'form-input'
         = f.submit 'Update', class: 'btn'
+      = error_message_for(@user, :email)
   / h2 Email
   / p.form-input = @user.email
-  = link_to 'Change Email', edit_user_registration_path, class: 'button'

@@ -11,6 +11,14 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_email
+    if @user.update(email_params)
+      redirect_to profile_path, notice: 'Email was successfully updated.'
+    else
+      render 'profile/edit'
+    end
+  end
+
   def cancel_change_email
     @user.cancel_change_email!
     redirect_back fallback_location: profile_path, notice: 'Email change was successfully canceled.'
@@ -23,6 +31,10 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:email, :username, :password, :password_confirmation)
+    params.require(:user).permit(:username, :password, :password_confirmation)
+  end
+
+  def email_params
+    params.require(:user).permit(:email)
   end
 end
