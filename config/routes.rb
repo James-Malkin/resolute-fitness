@@ -13,7 +13,12 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'profile#edit', as: :profile_edit
   get '/profile/:username', to: 'profile#show', as: :profile_show
 
-  resources :users, only: [:update]
+  resources :users, only: [:update] do
+    member do
+      patch :update_email
+      delete :cancel_change_email
+    end
+  end
 
   root to: 'home#index'
 

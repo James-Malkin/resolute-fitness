@@ -32,4 +32,18 @@ describe User do
       end
     end
   end
+
+  describe '#cancel_change_email!' do
+    subject(:cancel_change_email) { user.cancel_change_email! }
+
+    let(:user) { create(:user, :unconfirmed_change) }
+
+    it 'clears the unconfirmed email' do
+      expect { cancel_change_email }.to change(user, :unconfirmed_email).to(nil)
+    end
+
+    it 'clears the confirmation token' do
+      expect { cancel_change_email }.to change(user, :confirmation_token).to(nil)
+    end
+  end
 end

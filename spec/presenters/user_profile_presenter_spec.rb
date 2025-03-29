@@ -35,4 +35,20 @@ describe UserProfilePresenter do
       end
     end
   end
+
+  describe '#email_pending?' do
+    context 'when the user has an unconfirmed email' do
+      let(:user) { create(:user, :unconfirmed_change) }
+
+      it 'returns true' do
+        expect(presenter.email_pending?).to be true
+      end
+    end
+
+    context 'when the user has a confirmed email' do
+      it 'returns false' do
+        expect(presenter.email_pending?).to be false
+      end
+    end
+  end
 end
