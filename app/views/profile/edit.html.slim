@@ -1,7 +1,14 @@
 = form_for @user do |f|
   h2 Username
-  p = f.text_field :username
-  h2 Email
+
+  - if @user.avatar.attached?
+    = image_tag @user.avatar, class: 'w-32 h-32 rounded-full object-cover'
+
+  = f.text_field :username
+  = f.file_field :avatar
+
+
+
   = f.submit 'Update'
   = link_to 'Cancel', profile_path(@user), class: 'button'
 

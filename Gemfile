@@ -83,3 +83,5 @@ gem 'devise', '~> 4.9'
 gem 'bootstrap-email'
 
 gem 'lucide-rails', '~> 0.5.1'
+
+gem "image_processing", "~> 1.2"
