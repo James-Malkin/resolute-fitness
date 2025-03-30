@@ -1,10 +1,13 @@
-= form_for @user do |f|
-  h2 Username
+= form_for @user, url: update_username_user_path(@user) do |f|
+  = f.label :username
 
+  .flex.gap-2
+    = f.text_field :username, class: 'form-input'
+    = f.submit 'Update', class: 'btn'
+
+= form_for @user do |f|
   - if @user.avatar.attached?
     = image_tag @user.avatar, class: 'w-32 h-32 rounded-full object-cover'
-
-  = f.text_field :username
   = f.file_field :avatar
 
   = f.submit 'Update'

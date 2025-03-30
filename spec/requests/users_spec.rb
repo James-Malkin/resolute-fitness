@@ -77,4 +77,26 @@ describe 'Users' do
       expect(flash[:notice]).to eq('Email change was successfully canceled.')
     end
   end
+
+  describe 'PATCH /users/:id/update_username' do
+    subject(:update_username) { patch update_username_user_path(user), params: { user: { username: } } }
+
+    let(:user) { create(:user) }
+    let(:username) { 'new_username' }
+
+    before do
+      update_username
+    end
+
+    context 'when the update is succeeds' do
+      it 'redirects to the profile page' do
+        expect(response).to redirect_to(profile_path)
+      end
+
+      it 'updates user username' do
+        user.reload
+        expect(user.username).to eq('new_username')
+      end
+    end
+  end
 end

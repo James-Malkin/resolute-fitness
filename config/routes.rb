@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   resources :users, only: [:update] do
     member do
       patch :update_email
+      patch :update_username
       delete :cancel_change_email
     end
   end
