@@ -12,6 +12,10 @@ class User < ApplicationRecord
   has_one :member, dependent: :destroy
   has_one :employee, dependent: :destroy
 
+  has_one_attached :avatar
+
+  # validates :avatar, content_type: { in: %w[image/png image/jpg image/jpeg] }, size: { less_than: 5.megabytes }, if: -> { avatar.attached? }
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     login = conditions.delete(:login)
