@@ -7,8 +7,6 @@
   = f.text_field :username
   = f.file_field :avatar
 
-
-
   = f.submit 'Update'
   = link_to 'Cancel', profile_path(@user), class: 'button'
 
@@ -28,5 +26,3 @@ h2 Email
         = f.text_field :email, class: 'form-input'
         = f.submit 'Update', class: 'btn'
       = error_message_for(@user, :email)
-  / h2 Email
-  / p.form-input = @user.email
