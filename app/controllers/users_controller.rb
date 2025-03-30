@@ -19,6 +19,11 @@ class UsersController < ApplicationController
     end
   end
 
+  def update_username
+    @user.update(params.require(:user).permit(:username))
+    redirect_to profile_path, notice: 'Username was successfully updated.'
+  end
+
   def cancel_change_email
     @user.cancel_change_email!
     redirect_back fallback_location: profile_path, notice: 'Email change was successfully canceled.'
