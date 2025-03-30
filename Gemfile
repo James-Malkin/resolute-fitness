@@ -84,4 +84,4 @@ gem 'bootstrap-email'
 
 gem 'lucide-rails', '~> 0.5.1'
 
-gem "image_processing", "~> 1.2"
+gem 'image_processing', '~> 1.2'
