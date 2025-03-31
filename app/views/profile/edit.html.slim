@@ -26,10 +26,11 @@ h2 Email
   = turbo_frame_tag :email_field do
     - if @profile_presenter.edit_email?
       = form_with model: @user, url: update_email_user_path(@user) do |f|
-        .flex.gap-2
-          = f.text_field :email, class: 'form-input'
-          button type='submit' class='btn'
-            = lucide_icon('check')
+        .flex.gap-1
+          .flex.rounded.overflow-clip.w-full
+            = f.text_field :email, class: 'form-input rounded-r-none'
+            button type='submit' class='btn rounded-l-none'
+              = lucide_icon('check')
           = link_to profile_edit_path, class: 'icon-btn bg-red-700'
             = lucide_icon('x')
         = error_message_for(@user, :email)
