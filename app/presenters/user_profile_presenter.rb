@@ -23,4 +23,8 @@ class UserProfilePresenter
   def edit_email?
     @page_context == 'edit_email'
   end
+
+  def edit_username?
+    @page_context == 'edit_username'
+  end
 end
