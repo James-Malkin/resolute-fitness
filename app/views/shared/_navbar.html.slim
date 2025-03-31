@@ -24,19 +24,14 @@ header.navbar data-controller='navbar'
         button data-action='click->navbar#close'
           = lucide_icon('x')
 
+      = link_to 'Profile', profile_path, class: 'drawer-link'
       = button_to 'Sign Out', destroy_user_session_path, method: :delete, data: { turbo: false }
 
   - else
     - unless current_page?(new_user_session_path)
       = link_to 'Sign In', new_user_session_path, class: 'right-nav-action'
 
-  nav.left-drawer data-navbar-target='mobileMenu'
-    .drawer-header
-      = image_tag 'brand.png', alt: 'Resolute Fitness', class: 'w-32'
-
-      button data-action='click->navbar#close'
-        = lucide_icon('x')
-
+  nav.desktop-menu
     = link_to 'Home', root_path
 
     - if user_signed_in?
@@ -48,3 +43,15 @@ header.navbar data-controller='navbar'
     - else
       = link_to 'Sign Up', new_user_registration_path
       = link_to 'Sign In', new_user_session_path
+
+  nav.left-drawer data-navbar-target='mobileMenu'
+    .drawer-header
+      = image_tag 'brand.png', alt: 'Resolute Fitness', class: 'w-32'
+
+      button data-action='click->navbar#close'
+        = lucide_icon('x')
+
+    = link_to 'Home', root_path
+
+    - unless user_signed_in?
+      = link_to 'Sign Up', new_user_registration_path
