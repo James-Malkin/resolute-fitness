@@ -21,13 +21,17 @@ class UsersController < ApplicationController
       end
     else
       @profile_presenter = UserProfilePresenter.new(@user, 'edit_email')
-      render 'profile/edit'
+      render profile_edit_path
     end
   end
 
   def update_username
     @user.update(params.require(:user).permit(:username))
-    redirect_to profile_path, notice: 'Username was successfully updated.'
+    flash[:notice] = 'Username was successfully updated.'
+    respond_to do |format|
+      format.turbo_stream { render turbo_stream: turbo_stream.refresh(request_id: nil) }
+      format.html { redirect_to profile_edit_path }
+    end
   end
 
   def cancel_change_email

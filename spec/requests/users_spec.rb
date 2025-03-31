@@ -90,7 +90,7 @@ describe 'Users' do
 
     context 'when the update is succeeds' do
       it 'redirects to the profile page' do
-        expect(response).to redirect_to(profile_path)
+        expect(response).to redirect_to(profile_edit_path)
       end
 
       it 'updates user username' do
