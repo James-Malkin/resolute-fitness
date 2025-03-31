@@ -24,8 +24,18 @@ h2 Email
     = button_to 'Cancel', cancel_change_email_user_path(@user), method: :delete, class: 'btn bg-red-700'
 - else
   = turbo_frame_tag :email_field do
-    = form_with model: @user, url: update_email_user_path(@user), data: { turbo_frame: :email_field } do |f|
-      .flex.gap-2
-        = f.text_field :email, class: 'form-input'
-        = f.submit 'Update', class: 'btn'
-      = error_message_for(@user, :email)
+    - if @profile_presenter.edit_email?
+      = form_with model: @user, url: update_email_user_path(@user) do |f|
+        .flex.gap-1
+          .flex.rounded.overflow-clip.w-full
+            = f.text_field :email, class: 'form-input rounded-r-none'
+            button type='submit' class='btn rounded-l-none'
+              = lucide_icon('check')
+          = link_to profile_edit_path, class: 'icon-btn bg-red-700'
+            = lucide_icon('x')
+        = error_message_for(@user, :email)
+    - else
+      .form-editable-field
+        = @user.email
+        = link_to profile_edit_path(page_context: 'edit_email')
+          = lucide_icon('square-pen')

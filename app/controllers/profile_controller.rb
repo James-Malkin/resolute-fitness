@@ -13,5 +13,6 @@ class ProfileController < ApplicationController
 
   def edit
     @user = current_user
+    @profile_presenter = UserProfilePresenter.new(@user, params[:page_context])
   end
 end

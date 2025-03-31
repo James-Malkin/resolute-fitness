@@ -7,14 +7,20 @@ class UsersController < ApplicationController
     if @user.update(user_params)
       redirect_to profile_path, notice: 'User was successfully updated.'
     else
+      @profile_presenter = UserProfilePresenter.new(@user, 'edit_email')
       render profile_edit_path
     end
   end
 
   def update_email
     if @user.update(email_params)
-      redirect_to profile_path, notice: 'Email was successfully updated.'
+      flash[:notice] = 'Email was successfully updated.'
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.refresh(request_id: nil) }
+        format.html { redirect_to profile_path }
+      end
     else
+      @profile_presenter = UserProfilePresenter.new(@user, 'edit_email')
       render 'profile/edit'
     end
   end
