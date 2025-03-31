@@ -166,24 +166,24 @@
     }
 
     .nav-avatar {
-      @apply w-10 h-10 rounded-full border border-gray-400 cursor-pointer overflow-clip hidden;
+      @apply w-10 h-10 rounded-full border border-gray-400 cursor-pointer overflow-clip hidden items-center justify-center;
       
       img {
-        @apply w-full h-full object-cover;
+        @apply w-full h-full object-cover min-w-10 min-h-10;
       }
 
       &:not(:has(img)) {
-        @apply flex items-center justify-center bg-primary font-semibold text-xl text-white;
+        @apply bg-primary font-semibold text-xl text-white;
       }
 
       &:not(.mobile) {
         @media (min-width: 768px) {
-          @apply block;
+          @apply flex;
         }
       }
 
       &.mobile {
-        @apply block absolute top-1/2 -translate-y-1/2 right-8;
+        @apply flex absolute top-1/2 -translate-y-1/2 right-8;
 
         @media (min-width: 768px) {
           @apply hidden;
