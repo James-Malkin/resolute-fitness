@@ -9,6 +9,10 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
--webkit-appearance: none;
--moz-appearance: none;
-appearance: none;
+body {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  overflow-x: hidden;
+}
