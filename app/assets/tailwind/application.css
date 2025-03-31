@@ -9,10 +9,21 @@
     @apply bg-primary text-white font-semibold py-2 px-4 rounded;
   }
 
+  .icon-btn {
+    @apply bg-primary text-white font-semibold py-2 px-2 rounded flex items-center;
+  }
+
   .form-input {
     @apply px-3 py-2 border border-gray-200 rounded w-full;
   }
-  
+
+  .form-editable-field {
+    @apply flex items-center justify-between border border-gray-200 rounded overflow-clip pl-3;
+
+    button, a {
+      @apply bg-gray-200 text-gray-600 font-semibold py-2 px-3;
+    }
+  }
 
   .navbar {
     @apply flex flex-col px-5 py-3 items-start relative;
