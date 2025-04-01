@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class AddPersonalDetailsToUser < ActiveRecord::Migration[8.0]
   def change
     add_column :users, :first_name, :string
@@ -11,7 +13,7 @@ class AddPersonalDetailsToUser < ActiveRecord::Migration[8.0]
       t.string :city
       t.string :county
       t.string :postcode
-      t.string :country, null: false, default: "UK"
+      t.string :country, null: false, default: 'UK'
     end
 
     add_reference :users, :address, foreign_key: true
