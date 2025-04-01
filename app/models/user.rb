@@ -12,6 +12,9 @@ class User < ApplicationRecord
   has_one :member, dependent: :destroy
   has_one :employee, dependent: :destroy
 
+  has_one :address, dependent: :destroy
+  accepts_nested_attributes_for :address, allow_destroy: true
+
   has_one_attached :avatar
 
   # validates :avatar, content_type: { in: %w[image/png image/jpg image/jpeg] }, size: { less_than: 5.megabytes }, if: -> { avatar.attached? }

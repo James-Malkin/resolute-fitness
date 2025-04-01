@@ -16,6 +16,6 @@ class AddPersonalDetailsToUser < ActiveRecord::Migration[8.0]
       t.string :country, null: false, default: 'UK'
     end
 
-    add_reference :users, :address, foreign_key: true
+    add_reference :addresses, :user, foreign_key: true
   end
 end

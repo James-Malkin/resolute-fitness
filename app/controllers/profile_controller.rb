@@ -13,6 +13,7 @@ class ProfileController < ApplicationController
 
   def edit
     @user = current_user
+    @user.build_address unless @user.address
     @profile_presenter = UserProfilePresenter.new(@user, params[:page_context])
   end
 end
