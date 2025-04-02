@@ -9,6 +9,10 @@
     @apply bg-primary text-white font-semibold py-2 px-4 rounded;
   }
 
+  .btn-slim {
+    @apply bg-primary text-white font-semibold py-1 px-4 rounded;
+  }
+
   .icon-btn {
     @apply bg-primary text-white font-semibold py-2 px-2 rounded flex items-center;
   }
@@ -34,7 +38,7 @@
   }
 
   .avatar {
-    @apply w-10 h-10 rounded-full border border-gray-400 cursor-pointer overflow-clip;
+    @apply w-10 h-10 rounded-full border border-gray-400 overflow-clip;
 
     img {
       @apply w-full h-full object-cover;
@@ -46,10 +50,10 @@
   }
 
   .navbar {
-    @apply flex flex-col px-5 py-3 items-start relative h-28;
+    @apply flex px-5 py-3 items-center justify-center relative h-28;
 
     @media (min-width: 768px) {
-      @apply border-b border-gray-100 px-10 flex-row justify-between items-center;
+      @apply border-b border-gray-100 px-10 flex-row justify-between;
     }
 
     &::before {
@@ -89,7 +93,7 @@
 
     .nav-brand {
       @media (max-width: 768px) {
-        @apply self-center mr-2;
+        @apply self-center mr-5;
       }
     }
 
@@ -97,7 +101,7 @@
       @apply absolute top-1/2 -translate-y-1/2 right-8;
 
       &a {
-        @apply px-3 py-1 rounded-lg font-semibold border;
+        @apply px-2 py-0.5 rounded-lg font-semibold border;
 
         @media (min-width: 768px) {
           @apply hidden;
