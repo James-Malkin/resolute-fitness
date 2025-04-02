@@ -50,3 +50,37 @@ h2 Email
         = @user.email
         = link_to profile_edit_path(page_context: 'edit_email')
           = lucide_icon('square-pen')
+
+h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mt-3.mb-2 Personal Details
+
+= form_with model: @user do |f|
+  = f.label :first_name, 'First Name'
+  = f.text_field :first_name, class: 'form-input mb-2'
+
+  = f.label :last_name, 'Last Name'
+  = f.text_field :last_name, class: 'form-input mb-2'
+
+  = f.label :date_of_birth, 'Date of Birth'
+  .date-select-wrapper.mb-2
+    = f.date_select :date_of_birth, class: 'form-input', start_year: 1900, end_year: Date.current.year, order: %i[day month year], include_blank: true
+
+  = f.fields_for :address do |address_fields|
+    = address_fields.label :line1, 'Line 1'
+    = address_fields.text_field :line1, class: 'form-input mb-2'
+
+    = address_fields.label :line2, 'Line 2'
+    = address_fields.text_field :line2, class: 'form-input mb-2'
+
+    = address_fields.label :city
+    = address_fields.text_field :city, class: 'form-input mb-2'
+
+    = address_fields.label :county
+    = address_fields.text_field :county, class: 'form-input mb-2'
+
+    = address_fields.label :country
+    = address_fields.text_field :country, class: 'form-input mb-2'
+
+    = address_fields.label :postcode
+    = address_fields.text_field :postcode, class: 'form-input mb-2'
+
+    = f.submit 'Update profile', class: 'btn'

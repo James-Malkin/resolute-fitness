@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 20_250_329_191_013) do
+ActiveRecord::Schema[8.0].define(version: 20_250_401_122_408) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pg_catalog.plpgsql'
 
@@ -44,6 +44,17 @@ ActiveRecord::Schema[8.0].define(version: 20_250_329_191_013) do
     t.index %w[blob_id variation_digest], name: 'index_active_storage_variant_records_uniqueness', unique: true
   end
 
+  create_table 'addresses', force: :cascade do |t|
+    t.string 'line1', null: false
+    t.string 'line2'
+    t.string 'city'
+    t.string 'county'
+    t.string 'postcode'
+    t.string 'country', default: 'UK', null: false
+    t.bigint 'user_id'
+    t.index ['user_id'], name: 'index_addresses_on_user_id'
+  end
+
   create_table 'employees', force: :cascade do |t|
     t.bigint 'user_id', null: false
     t.datetime 'created_at', null: false
@@ -67,12 +78,14 @@ ActiveRecord::Schema[8.0].define(version: 20_250_329_191_013) do
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
     t.string 'username', null: false
-    t.string 'provider'
-    t.string 'uid'
     t.string 'confirmation_token'
     t.datetime 'confirmed_at'
     t.datetime 'confirmation_sent_at'
     t.string 'unconfirmed_email'
+    t.string 'first_name'
+    t.string 'last_name'
+    t.date 'date_of_birth'
+    t.string 'phone_number'
     t.index ['confirmation_token'], name: 'index_users_on_confirmation_token', unique: true
     t.index ['email'], name: 'index_users_on_email', unique: true
     t.index ['reset_password_token'], name: 'index_users_on_reset_password_token', unique: true
@@ -81,6 +94,7 @@ ActiveRecord::Schema[8.0].define(version: 20_250_329_191_013) do
 
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
+  add_foreign_key 'addresses', 'users'
   add_foreign_key 'employees', 'users'
   add_foreign_key 'members', 'users'
 end
