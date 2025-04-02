@@ -1,10 +1,16 @@
-= form_for @user do |f|
-  - if @user.avatar.attached?
-    = image_tag @user.avatar, class: 'w-32 h-32 rounded-full object-cover'
+= form_with model: @user, class: 'flex flex-col items-center w-full mb-8' do |f|
+  .avatar.w-48.h-48.bg-gray-200.border-5
+    - if @user.avatar.attached?
+      = image_tag @user.avatar
+    - else
+      = lucide_icon('user', class: 'w-32 h-32 text-gray-400')
+
   = f.file_field :avatar
 
   = f.submit 'Update'
   = link_to 'Cancel', profile_path(@user), class: 'button'
+
+h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mb-2 Account Details
 
 h2 Username
 = turbo_frame_tag :username_field do
