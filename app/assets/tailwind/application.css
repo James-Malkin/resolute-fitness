@@ -111,7 +111,7 @@
       &.left-drawer,
       &.right-drawer {
         @apply flex-col divide-y divide-gray-200 bg-white absolute top-0 z-10 transition-transform
-               duration-300 ease-in-out max-w-120 h-screen border border-gray-200 w-full;
+               duration-300 ease-in-out max-w-120 h-screen border border-gray-200 w-11/12;
       }
 
       a, button {
@@ -119,10 +119,14 @@
       }
 
       .drawer-header {
-        @apply flex items-center justify-between px-5 py-3;
+        @apply flex items-center justify-between p-4;
 
         button {
-          cursor: pointer;
+          @apply p-0 cursor-pointer;
+        }
+
+        .avatar {
+          @apply w-8 h-8;
         }
       }
 
