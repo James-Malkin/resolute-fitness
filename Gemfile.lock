@@ -89,7 +89,7 @@ GEM
       nokogiri (~> 1.6)
       premailer (~> 1.7)
       sass-embedded (~> 1.53)
-    brakeman (7.0.0)
+    brakeman (7.0.1)
       racc
     builder (3.3.0)
     capybara (3.40.0)
