@@ -1,8 +1,6 @@
-require:
-  - rubocop-capybara
-
 plugins:
   - rubocop-performance
+  - rubocop-capybara
 
 AllCops:
   NewCops: enable
