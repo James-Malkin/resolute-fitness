@@ -74,7 +74,7 @@ end
 
 gem 'slim-rails'
 
-gem 'tailwindcss-ruby', '~> 4.0'
+gem 'tailwindcss-ruby', '~> 4.1'
 
 gem 'pg', '~> 1.5'
 
