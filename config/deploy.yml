@@ -28,8 +28,8 @@ env:
     - POSTGRES_PASSWORD
 
 volumes:
-  - rails-storage:/app/storage
-  - log:/var/log/app
+  - rails-storage:/resolute-fitness/storage
+  - log:/resolute-fitness/log
 
 builder:
   arch: amd64
