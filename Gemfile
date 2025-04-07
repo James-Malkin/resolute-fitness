@@ -70,6 +70,7 @@ group :test do
   gem 'rspec-rails', '~> 7.1'
   gem 'simplecov'
   gem 'simplecov-cobertura'
+  gem 'shoulda-matchers'
 end
 
 gem 'slim-rails'
@@ -85,3 +86,4 @@ gem 'bootstrap-email'
 gem 'lucide-rails', '~> 0.5.1'
 
 gem 'image_processing', '~> 1.2'
+gem 'active_storage_validations'
