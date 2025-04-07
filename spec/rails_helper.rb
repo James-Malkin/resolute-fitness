@@ -49,6 +49,13 @@ Capybara.javascript_driver = :cuprite
 
 Capybara.disable_animation = true
 
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
+end
+
 RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 

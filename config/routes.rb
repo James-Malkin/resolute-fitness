@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :exercise_classes, only: [:index], path: 'classes'
+
   root to: 'home#index'
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
