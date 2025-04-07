@@ -27,6 +27,10 @@ env:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
 
+volumes:
+  - rails-storage:/app/storage
+  - log:/var/log/app
+
 builder:
   arch: amd64
 
