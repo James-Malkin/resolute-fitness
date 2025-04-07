@@ -47,6 +47,8 @@ group :development, :test do
   gem 'brakeman', require: false
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
 
+  gem 'factory_bot_rails'
+  gem 'faker', '~> 3.5'
   gem 'rails_best_practices-rake_task', '~> 1.0'
   gem 'rubocop'
   gem 'rubocop-capybara'
@@ -65,12 +67,10 @@ group :test do
   # Use system testing [https://guides.rubyonrails.org/testing.html#system-testing]
   gem 'capybara'
   gem 'cuprite'
-  gem 'factory_bot_rails'
-  gem 'faker', '~> 3.5'
   gem 'rspec-rails', '~> 7.1'
+  gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'simplecov-cobertura'
-  gem 'shoulda-matchers'
 end
 
 gem 'slim-rails'
@@ -85,5 +85,5 @@ gem 'bootstrap-email'
 
 gem 'lucide-rails', '~> 0.5.1'
 
-gem 'image_processing', '~> 1.2'
 gem 'active_storage_validations'
+gem 'image_processing', '~> 1.2'

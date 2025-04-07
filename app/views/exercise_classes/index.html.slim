@@ -1,0 +1,5 @@
+.flex.flex-wrap.gap-2
+  - @exercise_classes.each do |exercise_class|
+    .bg-gray-200
+      = image_tag exercise_class.image, class: 'exercise-class-image'
+      h2.font-semibold.text-center.my-1 = exercise_class.name

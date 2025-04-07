@@ -1,16 +1,18 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-describe 'Classes' do
+describe 'Exercise Classes' do
   describe 'GET /classes' do
-    let!(:classes) { create_list(:class, 3) }
+    let!(:exercise_classes) { create_list(:exercise_class, 3) }
 
     before do
-      get classes_path
+      get exercise_classes_path
     end
 
     it 'returns a list of classes' do
-      classes.each do |class_instance|
-        expect(response.body).to include(class_instance.name)
+      exercise_classes.each do |exercise_class|
+        expect(response.body).to include(exercise_class.name)
       end
     end
 
