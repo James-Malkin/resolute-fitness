@@ -1,12 +1,27 @@
 # frozen_string_literal: true
 
 class ExerciseClassesController < ApplicationController
+  before_action :find_exercise_class, only: %i[edit update]
+
   def index
     @exercise_classes = ExerciseClass.all
   end
 
   def new
     @exercise_class = ExerciseClass.new
+  end
+
+  def edit; end
+
+  def update
+    if @exercise_class.update(exercise_class_params)
+      redirect_to exercise_classes_path, notice: 'Class updated successfully.'
+    else
+      respond_to do |format|
+        format.turbo_stream { render turbo_stream: turbo_stream.replace('exercise_class_form', partial: 'exercise_classes/form', locals: { exercise_class: @exercise_class }) }
+        format.html { render :edit }
+      end
+    end
   end
 
   def create
@@ -19,6 +34,10 @@ class ExerciseClassesController < ApplicationController
   end
 
   private
+
+  def find_exercise_class
+    @exercise_class = ExerciseClass.find(params[:id])
+  end
 
   def exercise_class_params
     params.require(:exercise_class).permit(:name, :description, :image)
