@@ -21,7 +21,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :exercise_classes, only: %i[index new create], path: 'classes'
+  resources :exercise_classes, only: %i[index new create edit update], path: 'classes'
 
   root to: 'home#index'
 
