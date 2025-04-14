@@ -1,17 +1,27 @@
-h1 Book a class
+h1.text-xl.mb-5.font-medium Book a class
 
 / = @schedule_presenter.next_two_weeks_by_date
 
 .flex.flex-col.gap-3
   - @schedule_presenter.next_two_weeks_by_date.each do |date, schedules|
     .flex.flex-col.rounded-sm.overflow-clip
-      h2.w-full.bg-neutral-100.font-semibold.py-2.text-center = date.strftime("%A, %B %d")
+      h2.bg-neutral-200.w-full.font-semibold.py-2.text-center = date.strftime("%A, %B %d")
+      .items-center.bg-primary.px-3.py-2.text-white.hidden.md:flex
+        .basis-5/12.text-sm.font-semibold
+          | Class
+        .basis-1/4.text-sm.font-semibold
+          | Time (Duration)
+        .basis-1/4.text-sm.font-semibold
+          | Trainer
+        .basis-1/12.text-sm.font-semibold
+          | Capacity
       - schedules.each do |class_schedule|
-        .class-schedule.bg-neutral-200.px-3.py-2.border-t.border-neutral-300.flex.items-center
-          h3.font-semibold.basis-5/12 = class_schedule.exercise_class.name
-          .basis-1/4.text-sm
-            = "#{class_schedule.date_time.strftime("%I:%M%P")} (#{class_schedule.duration} mins)"
-          .basis-1/4.text-sm
-            = class_schedule.trainer.user.username
-          .basis-1/12.text-sm
+        .schedule-card.border-t.border-neutral-300
+          .flex.flex-col.md:flex-row
+            h3.font-semibold = class_schedule.exercise_class.name
+            .text-sm
+              = "#{class_schedule.date_time.strftime("%I:%M%P")} (#{class_schedule.duration} mins)"
+            .text-sm
+              = class_schedule.trainer.user.username
+          .basis-1/4.md:basis-1/12.text-sm
             = class_schedule.capacity
