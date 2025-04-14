@@ -1,12 +1,19 @@
-h1.text-xl.mb-5.font-medium Book a class
+.flex.justify-between.mb-3.items-center
+  h1.text-xl.font-medium Book a Class
 
-/ = @schedule_presenter.next_two_weeks_by_date
+  .hidden.gap-2.md:flex
+    button.btn-slim.flex.gap-1.items-center.bg-white.border-neutral-400.border.text-neutral-400.px-2.font-bold
+      = lucide_icon('calendar', class: 'w-5 h-5')
+      | Week View
+    button.btn-slim.flex.gap-1.items-center.bg-white.border-primary.border.text-primary.px-2.font-bold
+      = lucide_icon('list', class: 'w-5 h-5')
+      | List View
 
 .flex.flex-col.gap-3
   - @schedule_presenter.next_two_weeks_by_date.each do |date, schedules|
     .flex.flex-col.rounded-sm.overflow-clip
-      h2.bg-neutral-200.w-full.font-semibold.py-2.text-center = date.strftime("%A, %B %d")
-      .items-center.bg-primary.px-3.py-2.text-white.hidden.md:flex
+      h2.bg-primary.w-full.font-semibold.py-2.text-center.text-white = date.strftime("%A, %B %d")
+      .items-center.bg-neutral-200.px-3.py-2.hidden.md:flex
         .basis-5/12.text-sm.font-semibold
           | Class
         .basis-1/4.text-sm.font-semibold
