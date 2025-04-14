@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   resources :exercise_classes, only: %i[index new create edit update], path: 'classes'
 
-  resources :class_schedules, only: %i[index new create edit update], path: 'bookings'
+  resources :class_schedules, only: %i[index], path: 'bookings'
 
   root to: 'home#index'
 
