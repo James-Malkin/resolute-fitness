@@ -15,7 +15,7 @@ describe 'Bookings' do
     end
 
     it 'renders the bookings page' do
-      expect(response.body).to include('Book a class')
+      expect(response.body).to include('Book a Class')
     end
   end
 end

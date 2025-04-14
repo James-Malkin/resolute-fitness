@@ -25,7 +25,7 @@
       - schedules.each do |class_schedule|
         .schedule-card.border-t.border-neutral-300
           .flex.flex-col.md:flex-row
-            h3.font-semibold = class_schedule.exercise_class.name
+            h3.font-semibold = class_schedule.exercise_class_name
             .text-sm
               = "#{class_schedule.date_time.strftime('%I:%M%P')} (#{class_schedule.duration} mins)"
             .text-sm
