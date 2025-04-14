@@ -3,6 +3,16 @@
 require 'rails_helper'
 
 describe User do
+  describe 'validations' do
+    before { create(:user) }
+
+    it { is_expected.to validate_presence_of(:username) }
+    it { is_expected.to validate_length_of(:username).is_at_least(3).is_at_most(20) }
+    it { is_expected.to validate_uniqueness_of(:username).case_insensitive }
+    it { is_expected.to allow_value('valid-username').for(:username) }
+    it { is_expected.not_to allow_value('invalid username!').for(:username) }
+  end
+
   describe '.find_for_database_authentication' do
     subject(:user_found) { described_class.find_for_database_authentication(login: find_params) }
 

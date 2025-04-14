@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Users' do
   describe 'PATCH /users/:id' do
-    subject(:patch_user) { patch user_path(user), params: { user: { username: 'new_username' } } }
+    subject(:patch_user) { patch user_path(user), params: { user: { username: 'new-username' } } }
 
     let(:user) { create(:user) }
 
@@ -12,7 +12,7 @@ describe 'Users' do
       it 'updates the user' do
         patch_user
         user.reload
-        expect(user.username).to eq('new_username')
+        expect(user.username).to eq('new-username')
       end
     end
 
@@ -82,7 +82,7 @@ describe 'Users' do
     subject(:update_username) { patch update_username_user_path(user), params: { user: { username: } } }
 
     let(:user) { create(:user) }
-    let(:username) { 'new_username' }
+    let(:username) { 'new-username' }
 
     before do
       update_username
@@ -95,7 +95,7 @@ describe 'Users' do
 
       it 'updates user username' do
         user.reload
-        expect(user.username).to eq('new_username')
+        expect(user.username).to eq('new-username')
       end
     end
   end
