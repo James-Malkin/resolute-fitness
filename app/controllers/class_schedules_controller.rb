@@ -2,6 +2,6 @@
 
 class ClassSchedulesController < ApplicationController
   def index
-    @class_schedules = ClassSchedule.all
+    @schedule_presenter = ClassSchedulePresenter.new(ClassSchedule.all)
   end
 end

@@ -1,7 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #3bb371;
+  --color-chateau-green-50: #eefbf3;
+  --color-chateau-green-100: #d5f6df;
+  --color-chateau-green-200: #afebc4;
+  --color-chateau-green-300: #7bdaa2;
+  --color-chateau-green-400: #3bb371;
+  --color-chateau-green-500: #22a762;
+  --color-chateau-green-600: #15864e;
+  --color-chateau-green-700: #116b41;
+  --color-chateau-green-800: #105535;
+  --color-chateau-green-900: #0e462d;
+  --color-chateau-green-950: #07271a;
+
+  --color-primary: var(--color-chateau-green-400);
 }
 
 @layer components {
@@ -201,6 +213,28 @@
 
         @media (min-width: 768px) {
           @apply hidden;
+        }
+      }
+    }
+  }
+
+  .schedule-card {
+    @apply flex items-center px-3 py-2 bg-neutral-100;
+
+    &:hover {
+      @apply bg-chateau-green-100 cursor-pointer;
+    }
+
+    div:first-child {
+      @apply basis-3/4 md:basis-11/12;
+
+      @media (min-width: 768px) {
+        h3 {
+          flex-basis: calc(100%/12*5 * (1 - 1/12 + 1));
+        }
+
+        div {
+          flex-basis: calc(25% * (1 - 1/12 + 1));
         }
       }
     }
