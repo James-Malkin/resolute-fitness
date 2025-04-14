@@ -1,1 +1,17 @@
 h1 Book a class
+
+/ = @schedule_presenter.next_two_weeks_by_date
+
+.flex.flex-col.gap-3
+  - @schedule_presenter.next_two_weeks_by_date.each do |date, schedules|
+    .flex.flex-col.rounded-sm.overflow-clip
+      h2.w-full.bg-neutral-100.font-semibold.py-2.text-center = date.strftime("%A, %B %d")
+      - schedules.each do |class_schedule|
+        .class-schedule.bg-neutral-200.px-3.py-2.border-t.border-neutral-300.flex.items-center
+          h3.font-semibold.basis-5/12 = class_schedule.exercise_class.name
+          .basis-1/4.text-sm
+            = "#{class_schedule.date_time.strftime("%I:%M%P")} (#{class_schedule.duration} mins)"
+          .basis-1/4.text-sm
+            = class_schedule.trainer.user.username
+          .basis-1/12.text-sm
+            = class_schedule.capacity
