@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 20_250_407_124_223) do
+ActiveRecord::Schema[8.0].define(version: 20_250_412_220_122) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pg_catalog.plpgsql'
 
@@ -53,6 +53,18 @@ ActiveRecord::Schema[8.0].define(version: 20_250_407_124_223) do
     t.string 'country', default: 'UK', null: false
     t.bigint 'user_id'
     t.index ['user_id'], name: 'index_addresses_on_user_id'
+  end
+
+  create_table 'class_schedules', force: :cascade do |t|
+    t.datetime 'date_time', null: false
+    t.integer 'duration', null: false
+    t.integer 'capacity', null: false
+    t.bigint 'exercise_class_id', null: false
+    t.bigint 'trainer_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['exercise_class_id'], name: 'index_class_schedules_on_exercise_class_id'
+    t.index ['trainer_id'], name: 'index_class_schedules_on_trainer_id'
   end
 
   create_table 'employees', force: :cascade do |t|
@@ -102,6 +114,8 @@ ActiveRecord::Schema[8.0].define(version: 20_250_407_124_223) do
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'addresses', 'users'
+  add_foreign_key 'class_schedules', 'employees', column: 'trainer_id'
+  add_foreign_key 'class_schedules', 'exercise_classes'
   add_foreign_key 'employees', 'users'
   add_foreign_key 'members', 'users'
 end
