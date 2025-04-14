@@ -12,7 +12,7 @@
 .flex.flex-col.gap-3
   - @schedule_presenter.next_two_weeks_by_date.each do |date, schedules|
     .flex.flex-col.rounded-sm.overflow-clip
-      h2.bg-primary.w-full.font-semibold.py-2.text-center.text-white = date.strftime("%A, %B %d")
+      h2.bg-primary.w-full.font-semibold.py-2.text-center.text-white = date.strftime('%A, %B %d')
       .items-center.bg-neutral-200.px-3.py-2.hidden.md:flex
         .basis-5/12.text-sm.font-semibold
           | Class
@@ -27,7 +27,7 @@
           .flex.flex-col.md:flex-row
             h3.font-semibold = class_schedule.exercise_class.name
             .text-sm
-              = "#{class_schedule.date_time.strftime("%I:%M%P")} (#{class_schedule.duration} mins)"
+              = "#{class_schedule.date_time.strftime('%I:%M%P')} (#{class_schedule.duration} mins)"
             .text-sm
               = class_schedule.trainer.user.username
           .basis-1/4.md:basis-1/12.text-sm
