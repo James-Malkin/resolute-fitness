@@ -1,10 +1,7 @@
-dialog.modal aria-hidden='true' data-controller='modal' class="#{"modal-#{size}" if defined?(size)}"
+dialog#modal aria-hidden='true' data-controller='modal' class="#{"modal-#{size}" if defined?(size)}"
   .modal-header
-    h1.font-semibold data-modal-target='title' Fallback
-    button aria-label='close' data-action='click->modal#close'
+    h1.font-semibold data-modal-target='title'
+    button aria-label='close' data-action='click->modal#close' autofocus=true
       = lucide_icon('x')
   .modal-body
     = turbo_frame_tag :modal_content, data: { modal_target: 'frame' }, target: '_top'
-
-javascript:
-  document.querySelector('dialog').showModal();
