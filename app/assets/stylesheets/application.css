@@ -15,4 +15,5 @@ body {
   appearance: none;
 
   overflow-x: hidden;
+  position: relative;
 }

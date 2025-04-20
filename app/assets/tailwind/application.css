@@ -239,4 +239,24 @@
       }
     }
   }
+
+  dialog {
+    @apply fixed inset-1/2 -translate-x-1/2 -translate-y-1/2 bg-neutral-100 rounded-md w-120 py-3;
+
+    &::backdrop {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .modal-header, .modal-content {
+      @apply px-3;
+    }
+
+    .modal-header {
+      @apply flex justify-between items-center border-b border-neutral-300 pb-3;
+    }
+
+    .modal-content {
+      @apply pt-3;
+    }
+  }
 }

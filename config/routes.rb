@@ -25,6 +25,8 @@ Rails.application.routes.draw do
 
   resources :class_schedules, only: %i[index], path: 'bookings'
 
+  get '/test', to: 'home#test', as: :test
+
   root to: 'home#index'
 
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
