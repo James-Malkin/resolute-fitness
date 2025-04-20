@@ -7,7 +7,7 @@ describe 'Bookings' do
     let!(:class_schedule) { create_list(:class_schedule, 3) }
 
     before do
-      get class_schedules_path
+      get bookings_path
     end
 
     it 'returns a 200 status code' do

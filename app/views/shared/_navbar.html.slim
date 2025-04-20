@@ -25,6 +25,8 @@ header.navbar data-controller='navbar'
           = lucide_icon('x')
 
       = link_to 'Profile', profile_path, class: 'drawer-link'
+      - if current_user.employee
+        = link_to 'Staff Tools', staff_tools_path, class: 'drawer-link flex gap-2 items-center'
       = button_to 'Sign Out', destroy_user_session_path, method: :delete, data: { turbo: false }
 
   - else
@@ -34,7 +36,7 @@ header.navbar data-controller='navbar'
   nav.desktop-menu
     = link_to 'Home', root_path
     = link_to 'Classes', exercise_classes_path
-    = link_to 'Timetable', class_schedules_path
+    = link_to 'Timetable', bookings_path
 
     - if user_signed_in?
       button.nav-avatar data-action='click->navbar#open' data-target='profileMenu'
@@ -55,7 +57,7 @@ header.navbar data-controller='navbar'
 
     = link_to 'Home', root_path
     = link_to 'Classes', exercise_classes_path
-    = link_to 'Timetable', class_schedules_path
+    = link_to 'Timetable', bookings_path
 
     - unless user_signed_in?
       = link_to 'Sign Up', new_user_registration_path
