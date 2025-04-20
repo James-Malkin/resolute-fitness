@@ -1,6 +1,6 @@
 p Home
 
-= button_to test_path(), method: :get, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }
+= button_to test_path, method: :get, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }
   | test
 
 = render 'shared/modal'
