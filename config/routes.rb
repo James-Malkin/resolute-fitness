@@ -13,6 +13,10 @@ Rails.application.routes.draw do
   get '/profile/edit', to: 'profile#edit', as: :profile_edit
   get '/profile/:username', to: 'profile#show', as: :profile_show
 
+  get '/staff', to: 'staff_tools#index', as: :staff_tools
+  get '/staff/schedule/new', to: 'class_schedules#new', as: :new_class_schedule
+  post '/staff/schedule', to: 'class_schedules#create', as: :class_schedules
+
   resources :users, only: [:update] do
     member do
       patch :update_email
@@ -23,7 +27,7 @@ Rails.application.routes.draw do
 
   resources :exercise_classes, only: %i[index new create edit update], path: 'classes'
 
-  resources :class_schedules, only: %i[index], path: 'bookings'
+  resources :class_schedules, only: %i[index], path: 'bookings', as: :bookings
 
   get '/test', to: 'home#test', as: :test
 
