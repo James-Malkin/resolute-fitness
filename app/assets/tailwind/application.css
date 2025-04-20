@@ -254,5 +254,9 @@
     .modal-header {
       @apply flex justify-between items-center border-b border-neutral-300 pb-3;
     }
+
+    .modal-content {
+      @apply pt-3;
+    }
   }
 }

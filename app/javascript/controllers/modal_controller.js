@@ -6,9 +6,8 @@ export default class extends Controller {
   connect() {
     document.addEventListener('turbo:frame-render', () => this.updateTitle())
     document.addEventListener('turbo:after-stream-render', () => this.updateTitle())
-    this.element.addEventListener('el.modal.show', (event) => this.open(event))
+    this.element.addEventListener('el.modal.show', () => this.open())
     this.element.addEventListener("click", (event) => this.handleBackdropClick(event));
-    document.addEventListener('turbo:frame-render', (e) => this.handleFrameRender(e))
   }
 
   resetFrame() {
@@ -23,14 +22,7 @@ export default class extends Controller {
     }
   }
 
-  handleFrameRender(event) {
-    console.log(event)
-    if (event.target === this.frameTarget) {
-      console.log('frame!!')
-    }
-  }
-
-  open(event) {
+  open() {
     this.element.setAttribute('aria-hidden', false)
     this.element.showModal()
   }
