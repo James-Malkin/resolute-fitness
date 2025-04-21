@@ -2,7 +2,23 @@
 
 require 'rails_helper'
 
-describe 'Staff Tools' do
+describe 'Class Schedules' do
+  describe 'GET /class_schedules' do
+    let!(:class_schedule) { create_list(:class_schedule, 3) }
+
+    before do
+      get class_schedules_path
+    end
+
+    it 'returns a 200 status code' do
+      expect(response.status).to eq(200)
+    end
+
+    it 'renders the bookings page' do
+      expect(response.body).to include('Book a Class')
+    end
+  end
+
   describe 'GET /staff/schedule/new' do
     before do
       get new_class_schedule_path

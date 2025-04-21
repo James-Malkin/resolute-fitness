@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 20_250_412_220_122) do
+ActiveRecord::Schema[8.0].define(version: 20_250_421_090_208) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pg_catalog.plpgsql'
 
@@ -53,6 +53,15 @@ ActiveRecord::Schema[8.0].define(version: 20_250_412_220_122) do
     t.string 'country', default: 'UK', null: false
     t.bigint 'user_id'
     t.index ['user_id'], name: 'index_addresses_on_user_id'
+  end
+
+  create_table 'bookings', force: :cascade do |t|
+    t.bigint 'member_id', null: false
+    t.bigint 'class_schedule_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['class_schedule_id'], name: 'index_bookings_on_class_schedule_id'
+    t.index ['member_id'], name: 'index_bookings_on_member_id'
   end
 
   create_table 'class_schedules', force: :cascade do |t|
@@ -114,6 +123,8 @@ ActiveRecord::Schema[8.0].define(version: 20_250_412_220_122) do
   add_foreign_key 'active_storage_attachments', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'active_storage_variant_records', 'active_storage_blobs', column: 'blob_id'
   add_foreign_key 'addresses', 'users'
+  add_foreign_key 'bookings', 'class_schedules'
+  add_foreign_key 'bookings', 'members'
   add_foreign_key 'class_schedules', 'employees', column: 'trainer_id'
   add_foreign_key 'class_schedules', 'exercise_classes'
   add_foreign_key 'employees', 'users'

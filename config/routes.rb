@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   # post '/staff/schedule', to: 'class_schedules#create', as: :class_schedules
 
   resources :class_schedules, only: %i[index new create]
-  resources :bookings, only: %i[new]
+  resources :bookings, only: %i[new create]
 
   resources :users, only: [:update] do
     member do
