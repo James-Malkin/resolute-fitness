@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 describe 'Exercise Classes' do
+  let(:employee) { create(:employee) }
+
   describe 'GET /classes' do
     let!(:exercise_classes) { create_list(:exercise_class, 3) }
 
@@ -23,6 +25,7 @@ describe 'Exercise Classes' do
 
   describe 'GET /classes/new' do
     before do
+      sign_in employee.user, scope: :user
       get new_exercise_class_path
     end
 
@@ -46,6 +49,10 @@ describe 'Exercise Classes' do
       }
     end
 
+    before do
+      sign_in employee.user, scope: :user
+    end
+
     context 'when the class is created successfully' do
       it 'creates a new class' do
         expect { post_classes }.to change(ExerciseClass, :count).by(1)
@@ -67,6 +74,7 @@ describe 'Exercise Classes' do
     let(:exercise_class) { create(:exercise_class) }
 
     before do
+      sign_in employee.user, scope: :user
       get edit_exercise_class_path(exercise_class)
     end
 
@@ -90,6 +98,10 @@ describe 'Exercise Classes' do
     end
 
     subject(:patch_class) { patch exercise_class_path(exercise_class), params: { exercise_class: exercise_class_params } }
+
+    before do
+      sign_in employee.user, scope: :user
+    end
 
     context 'when the class is updated successfully' do
       it 'updates the class' do

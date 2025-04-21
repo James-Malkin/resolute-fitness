@@ -3,6 +3,8 @@
 require 'rails_helper'
 
 describe 'Class Schedules' do
+  let(:trainer) { create(:employee) }
+
   describe 'GET /class_schedules' do
     let!(:class_schedule) { create_list(:class_schedule, 3) }
 
@@ -21,6 +23,7 @@ describe 'Class Schedules' do
 
   describe 'GET /staff/schedule/new' do
     before do
+      sign_in trainer.user, scope: :user
       get new_class_schedule_path
     end
 
@@ -36,9 +39,12 @@ describe 'Class Schedules' do
   describe 'POST /staff/schedule' do
     subject(:post_class_schedule) { post class_schedules_path, params: { class_schedule: class_schedule_params } }
 
-    let(:trainer) { create(:employee) }
     let(:exercise_class) { create(:exercise_class) }
     let!(:class_schedule_params) { build(:class_schedule, trainer:, exercise_class:).attributes }
+
+    before do
+      sign_in trainer.user, scope: :user
+    end
 
     context 'when the class schedule is created successfully' do
       it 'creates a new class schedule' do

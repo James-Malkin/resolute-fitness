@@ -21,6 +21,7 @@ Metrics/BlockLength:
 Metrics/MethodLength:
   Exclude:
     - db/migrate/*.rb
+    - app/models/ability.rb
 
 Metrics/AbcSize:
   Exclude:
