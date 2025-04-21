@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class ExerciseClassesController < ApplicationController
-  before_action :find_exercise_class, only: %i[edit update]
+  load_and_authorize_resource
 
   def index
     @exercise_classes = ExerciseClass.all
@@ -34,10 +34,6 @@ class ExerciseClassesController < ApplicationController
   end
 
   private
-
-  def find_exercise_class
-    @exercise_class = ExerciseClass.find(params[:id])
-  end
 
   def exercise_class_params
     params.require(:exercise_class).permit(:name, :description, :image)

@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class ProfileController < ApplicationController
+  before_action :authenticate_user!, only: %i[index edit]
+
   def index
     @user = current_user
     @profile_presenter = UserProfilePresenter.new(@user)

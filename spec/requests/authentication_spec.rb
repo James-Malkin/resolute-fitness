@@ -86,4 +86,19 @@ describe 'Authentication' do
       end
     end
   end
+
+  describe 'user abilities' do
+    let(:user) { create(:user) }
+
+    before do
+      sign_in user, scope: :user
+      allow_any_instance_of(Ability).to receive(:can?).and_return(false)
+    end
+
+    it 'denies access to unauthorized actions' do
+      get staff_tools_path
+      expect(response).to redirect_to(root_path)
+      expect(flash[:alert]).to eq('You are not authorized to access this page.')
+    end
+  end
 end
