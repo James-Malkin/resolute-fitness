@@ -219,7 +219,7 @@
   }
 
   .schedule-card {
-    @apply flex items-center px-3 py-2 bg-neutral-100;
+    @apply flex items-center px-3 py-2 bg-neutral-100 w-full;
 
     &:hover {
       @apply bg-chateau-green-100 cursor-pointer;
