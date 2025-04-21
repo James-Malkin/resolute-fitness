@@ -1,9 +1,13 @@
 = form_with model: resource, url: registration_path(resource_name), class: 'flex flex-col border border-gray-200 p-10 pb-5 rounded-xl gap-2 mx-auto max-w-md w-full' do |f|
   h2.text-3xl.font-semibold.text-center.mb-8 Create Account
   = f.text_field :username, placeholder: 'Username', class: 'form-input'
+  = error_message_for(resource, :username)
   = f.email_field :email, placeholder: 'Email', class: 'form-input'
+  = error_message_for(resource, :email)
   = f.password_field :password, placeholder: 'Password', class: 'form-input'
   = f.password_field :password_confirmation, placeholder: 'Password Confirmation', class: 'form-input'
+  = error_message_for(resource, :password)
+  = error_message_for(resource, :password_confirmation)
   = f.submit 'Sign Up', class: 'btn mt-2'
   p.mt-3.text-center.text-sm
     | Already have an account?
