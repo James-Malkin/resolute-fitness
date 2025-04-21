@@ -14,8 +14,11 @@ Rails.application.routes.draw do
   get '/profile/:username', to: 'profile#show', as: :profile_show
 
   get '/staff', to: 'staff_tools#index', as: :staff_tools
-  get '/staff/schedule/new', to: 'class_schedules#new', as: :new_class_schedule
-  post '/staff/schedule', to: 'class_schedules#create', as: :class_schedules
+  # get '/staff/schedule/new', to: 'class_schedules#new', as: :new_class_schedule
+  # post '/staff/schedule', to: 'class_schedules#create', as: :class_schedules
+
+  resources :class_schedules, only: %i[index new create]
+  resources :bookings, only: %i[new create]
 
   resources :users, only: [:update] do
     member do
@@ -26,8 +29,6 @@ Rails.application.routes.draw do
   end
 
   resources :exercise_classes, only: %i[index new create edit update], path: 'classes'
-
-  resources :class_schedules, only: %i[index], path: 'bookings', as: :bookings
 
   get '/test', to: 'home#test', as: :test
 

@@ -1,6 +1,6 @@
 dialog#modal aria-hidden='true' data-controller='modal' class="#{"modal-#{size}" if defined?(size)}"
   .modal-header
-    h1.font-semibold data-modal-target='title'
+    h1.font-semibold.text-lg data-modal-target='title'
     button aria-label='close' data-action='click->modal#close' autofocus=true
       = lucide_icon('x')
   .modal-body

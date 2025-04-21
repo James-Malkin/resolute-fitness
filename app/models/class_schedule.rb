@@ -4,5 +4,8 @@ class ClassSchedule < ApplicationRecord
   belongs_to :trainer, class_name: 'Employee'
   belongs_to :exercise_class
 
-  delegate :name, to: :exercise_class, prefix: true
+  has_many :bookings, dependent: :destroy
+  has_many :members, through: :bookings
+
+  delegate :name, :description, to: :exercise_class, prefix: true
 end
