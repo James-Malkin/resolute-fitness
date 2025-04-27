@@ -23,7 +23,7 @@ proxy:
 env:
   clear:
     DB_HOST: resolute-fitness-db
-    STRIPE_SECRET_KEY: STRIPE_SECRET_KEY
+    STRIPE_SECRET_KEY: $STRIPE_SECRET_KEY
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
