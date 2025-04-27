@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file contains descriptions of all your stripe products
 
 # Example

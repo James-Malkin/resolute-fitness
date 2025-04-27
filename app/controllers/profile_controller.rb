@@ -17,9 +17,5 @@ class ProfileController < ApplicationController
     @user = current_user
     @user.build_address unless @user.address
     @profile_presenter = UserProfilePresenter.new(@user, params[:page_context])
-    @payment_methods = Stripe::PaymentMethod.list(
-      customer: @user.member.stripe_customer_id,
-      type: 'card'
-    )
   end
 end

@@ -2,11 +2,11 @@
 
 module StripeManager
   class Subscription
-    def self.create(user, params)
+    def self.create(member, params)
       Stripe::Subscription.create(
-        customer: user.member.stripe_customer_id,
+        customer: member.stripe_customer_id,
         items: [
-          { price: params[:price_id]}
+          { price: params[:price_id] }
         ],
         default_payment_method: params[:payment_method_id]
       )

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file contains descriptions of all your stripe plans
 
 # Example
@@ -50,4 +52,3 @@ Stripe.plan :gold do |plan|
   plan.currency = 'gbp'
   plan.interval = 'month'
 end
-

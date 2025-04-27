@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post '/subscribe', to: 'members#subscribe'
+
   resources :exercise_classes, only: %i[index new create edit update], path: 'classes'
 
   get '/test', to: 'home#test', as: :test
