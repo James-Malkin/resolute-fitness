@@ -8,6 +8,6 @@ class MembersController < ApplicationController
   private
 
   def subscribe_params
-    params.require(:member).permit(:price_id, :payment_method_id)
+    params.permit(:price_id, :payment_method_id)
   end
 end

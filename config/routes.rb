@@ -30,13 +30,13 @@ Rails.application.routes.draw do
 
   # get '/plans', to: 'plans#index'
 
-  resources :plans, only: %i[index] do
-    collection do
-      get :join
-    end
+  resources :plans, only: [:index] do
+    get :join, on: :collection
   end
 
-  post '/subscribe', to: 'members#subscribe'
+  resources :members, only: [] do
+    post :subscribe, on: :member
+  end
 
   resources :exercise_classes, only: %i[index new create edit update], path: 'classes'
 

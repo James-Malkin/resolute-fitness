@@ -7,5 +7,11 @@ class PlansController < ApplicationController
 
   def join
     StripeManager::Customer.create(current_user.member)
+
+    @plans = Stripe::Plans.all
+    @payment_methods = Stripe::PaymentMethod.list(
+      customer: current_user.member.stripe_customer_id,
+      type: 'card'
+    )
   end
 end
