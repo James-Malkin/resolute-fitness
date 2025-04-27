@@ -26,6 +26,7 @@ env:
   secret:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
+    - STRIPE_SECRET_KEY
 
 volumes:
   - rails-storage:/resolute-fitness/storage
