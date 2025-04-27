@@ -7,9 +7,7 @@ module StripeManager
 
       subscription = Stripe::Subscription.create(
         customer: member.stripe_customer_id,
-        items: [
-          { price: params[:price_id] }
-        ],
+        items: [{ price: params[:price_id] }],
         default_payment_method: params[:payment_method_id]
       )
 

@@ -10,7 +10,7 @@
               | This is a description of the #{plan.id} plan.
             p.text-center = number_to_currency(plan.amount / 100.0, unit: '£')
         = f.radio_button :price_id, plan.id, id: "plan_#{plan.id}"
-    
+
   - @payment_methods.each do |payment_method|
     .flex.flex-col.gap-1
       .flex.gap-2

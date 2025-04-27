@@ -8,6 +8,8 @@ class Member < ApplicationRecord
 
   enum :plan, { guest: 0, bronze: 1, silver: 2, gold: 3 }, default: :guest
 
+  delegate :email, to: :user
+
   def update_subscription!(subscription)
     update!(
       stripe_subscription_id: subscription.id,
