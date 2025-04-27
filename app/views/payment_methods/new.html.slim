@@ -1,0 +1,9 @@
+= turbo_frame_tag :modal_content, data: { modal_target: 'frame' }, target: '_top'
+  . data-modal-target='titleValue' data-title='New Payment Method'
+  = form_with url: payment_methods_path, id: 'payment-method-form', local: true, data: { controller: 'payment-method', action: 'submit->payment-method#submit' } do |f|
+    .form-group
+      label for="card-element" Card Details
+      . data-payment-method-target='cardElement'
+      . data-payment-method-target='cardErrors'
+    = f.hidden_field :payment_method_id, data: { payment_method_target: 'paymentMethodID' }
+    = f.submit 'Add Payment Method', class: 'btn btn-primary'

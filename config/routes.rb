@@ -40,6 +40,8 @@ Rails.application.routes.draw do
 
   resources :exercise_classes, only: %i[index new create edit update], path: 'classes'
 
+  resources :payment_methods, only: %i[new create destroy], path: 'payment-methods'
+
   get '/test', to: 'home#test', as: :test
 
   root to: 'home#index'

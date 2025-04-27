@@ -6,7 +6,7 @@ module StripeManager
       return if member.stripe_customer_id?
 
       stripe_customer = Stripe::Customer.create(
-        email: member.email,
+        email: member.user.email,
         metadata: {
           member_id: member.id
         }
