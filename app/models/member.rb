@@ -11,9 +11,10 @@ class Member < ApplicationRecord
   delegate :email, to: :user
 
   def update_subscription!(subscription)
+    Rails.logger.debug "Updating subscription with ID: #{subscription.id}"
     update!(
       stripe_subscription_id: subscription.id,
-      subscription_period_start: Time.at(subscription.current_period_start),
+      subscription_period_end: Time.at(subscription.items.data[0].current_period_end),
       default_payment_method_id: subscription.default_payment_method
     )
   end
