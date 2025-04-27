@@ -28,6 +28,14 @@ Rails.application.routes.draw do
     end
   end
 
+  # get '/plans', to: 'plans#index'
+
+  resources :plans, only: %i[index] do
+    collection do
+      get :join
+    end
+  end
+
   resources :exercise_classes, only: %i[index new create edit update], path: 'classes'
 
   get '/test', to: 'home#test', as: :test

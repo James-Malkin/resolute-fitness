@@ -35,6 +35,10 @@ class User < ApplicationRecord
     ).first
   end
 
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
   def cancel_change_email!
     self.unconfirmed_email = nil
     self.confirmation_token = nil
