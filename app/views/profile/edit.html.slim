@@ -57,6 +57,9 @@ h2 Email
         = link_to profile_edit_path(page_context: 'edit_email')
           = lucide_icon('square-pen')
 
+  = button_to new_payment_method_path, method: :get, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'btn btn-primary'
+    | Add Payment Method
+
 h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mt-3.mb-2 Personal Details
 
 = form_with model: @user do |f|
@@ -90,3 +93,5 @@ h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mt-3.mb-2 Personal Det
     = address_fields.text_field :postcode, class: 'form-input mb-2'
 
     = f.submit 'Update profile', class: 'btn'
+
+= render 'shared/modal'
