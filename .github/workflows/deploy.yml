@@ -61,6 +61,7 @@ jobs:
           RAILS_MASTER_KEY:  ${{ secrets.RAILS_MASTER_KEY }}
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_KEY }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
       
       - name: Migrate Database
         run: bundle exec kamal app exec "bundle exec rails db:migrate"
@@ -68,3 +69,4 @@ jobs:
           RAILS_MASTER_KEY:  ${{ secrets.RAILS_MASTER_KEY }}
           KAMAL_REGISTRY_PASSWORD: ${{ secrets.DOCKER_REGISTRY_KEY }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          STRIPE_SECRET_KEY: ${{ secrets.STRIPE_SECRET_KEY }}
