@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
+
 @import "tailwindcss";
 
 @theme {
@@ -16,6 +19,24 @@
   --color-bronze: #CD7F32;
 
   --color-primary: var(--color-chateau-green-400);
+
+  --font-cal-sans: 'Cal Sans', sans-serif;
+  --font-display: 'Inter', sans-serif;
+}
+
+@layer base {
+  html {
+    @apply font-display;
+  }
+
+  body {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+  
+    overflow-x: hidden;
+    position: relative;
+  }
 }
 
 @layer components {
@@ -307,7 +328,7 @@
   }
 
   .plan-label {
-    @apply w-full flex flex-col items-center gap-2 border-2 p-5 rounded-md;
+    @apply w-full flex flex-col items-center gap-2 border-2 p-5 rounded-md cursor-pointer;
 
     &#bronze_plan_label {
       @apply border-bronze;
