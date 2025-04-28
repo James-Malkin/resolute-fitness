@@ -1,14 +1,10 @@
 - content_for :head
   script src="https://kit.fontawesome.com/4bc312b1dc.js" crossorigin="anonymous"
 
-= form_with url: subscribe_member_path(current_user.member), class: 'flex flex-col', data: { controller: 'purchase-plan', action: 'change->purchase-plan#change'} do |f|
+= form_with url: subscribe_member_path(current_user.member), class: 'flex flex-col', data: { controller: 'purchase-plan', action: 'change->purchase-plan#change' } do |f|
   .flex.flex-col.md:flex-row.gap-3.w-full.mb-3.md:mb-5
     - @join_presenter.formatted_plans.each do |plan|
-      = f.label "plan_#{plan.id}", id: "#{plan.id}_plan_label", class: 'plan-label' do
-        h3.font-semibold.text-lg.capitalize.text-center = plan.id
-        p.text-sm.text-neutral-500.text-center This is a description of the #{plan.id} plan.
-        span.text-center data- = plan.price
-        = f.radio_button :price_id, plan.id, id: "plan_#{plan.id}", data: { action: 'change->purchase-plan#changePlan', plan: plan.id.capitalize, price: plan.price }, class: 'mt-3'
+      = render 'plan_card', f:, plan:
 
   .flex.flex-col.md:flex-row.gap-3
     .w-full.md:w-2/3.rounded-lg.border.border-neutral-300.p-3
@@ -21,11 +17,7 @@
           .text-center.text-neutral-500.text-sm.py-5 No payment methods available. Please add one.
         - else
           - @join_presenter.member_payment_methods.each do |payment_method|
-            = f.label "payment-method-#{payment_method.id}", class: 'flex gap-3 items-center py-2 cursor-pointer px-2 rounded-md payment-method-label border border-white' do
-              i class="fa-brands fa-cc-#{payment_method.brand} fa-xl"
-              span = "•••• •••• •••• #{payment_method.last4}"
-              span = "Exp #{payment_method.exp_month}/#{payment_method.exp_year.to_s[-2..]}"
-              = f.radio_button :payment_method_id, payment_method.id, id: "payment-method-#{payment_method.id}", data: { action: "change->purchase-plan#changeCard", card: payment_method.last4 }, class: 'ml-auto'
+            = render 'payment_method_card', f:, payment_method:
 
     .flex.flex-col.gap-2.w-full.md:w-1/3
       .flex
@@ -41,9 +33,6 @@
         = lucide_icon('chevron-right')
         = "Starting #{Date.current.strftime('%B %d, %Y')}"
 
-      = f.submit 'Join', disabled: true, data: { purchase_plan_target:'submitButton'} , class: 'btn btn-primary mt-3'
+      = f.submit 'Join', disabled: true, data: { purchase_plan_target: 'submitButton' }, class: 'btn btn-primary mt-3'
 
 = render 'shared/modal'
-
-javascript:
-  document.querySelectorAll('#payment-methods')
