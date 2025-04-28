@@ -3,29 +3,15 @@
 
 = form_with url: subscribe_member_path(current_user.member) do |f|
   .flex.gap-3
-
-    - @plans.each do |plan|
+    - @join_presenter.formatted_plans.each do |plan|
       .flex.flex-col.gap-2.w-full.items-center
         = f.label "plan_#{plan.id}", class: 'flex gap-2 items-center' do
           .flex.flex-col
-            h3.font-semibold.text-lg.capitalize.text-center = plan
+            h3.font-semibold.text-lg.capitalize.text-center = plan.id
             p.text-sm.text-gray-500
               | This is a description of the #{plan.id} plan.
-            p.text-center = number_to_currency(plan.amount / 100.0, unit: '£')
+            p.text-center = plan.price
         = f.radio_button :price_id, plan.id, id: "plan_#{plan.id}"
-
-  / - @payment_methods.each do |payment_method|
-  /   .flex.flex-col.gap-1
-  /     .flex.gap-2
-  /       .
-  /         = payment_method.card.brand
-  /       .
-  /         = payment_method.card.last4
-  /       .
-  /         = payment_method.card.exp_month
-  /         |/
-  /         = payment_method.card.exp_year.to_s[-2..]
-  /       = f.radio_button :payment_method_id, payment_method.id, id: "payment-method-#{payment_method.id}"
 
   .w-full.rounded-lg.border.border-neutral-300.p-3
     .flex.justify-between.pb-2
@@ -34,17 +20,17 @@
       = link_to new_payment_method_path, method: :get, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'icon-btn bg-gray-400 py-1 px-1.5'
         = lucide_icon('plus', class: 'w-4 h-4')
     #payment-methods.pt-2.border-t.border-neutral-300.flex.flex-col.gap-2
-      - if @payment_methods.empty?
+      - if @join_presenter.member_payment_methods.empty?
         .text-center.text-neutral-500.text-sm.py-5
           | No payment methods available. Please add one.
       - else
-        - @payment_methods.each do |payment_method|
+        - @join_presenter.member_payment_methods.each do |payment_method|
           = f.label :payment_method_id, for: "payment-method-#{payment_method.id}", class: 'flex gap-3 items-center py-2 cursor-pointer px-2 rounded-md payment-method-label border border-white' do
-            i class="fa-brands fa-cc-#{payment_method.card.brand} fa-xl"
+            i class="fa-brands fa-cc-#{payment_method.brand} fa-xl"
             span
               | •••• •••• •••• 
-              = payment_method.card.last4
-            span = "Exp #{payment_method.card.exp_month}/#{payment_method.card.exp_year.to_s[-2..]}"
+              = payment_method.last4
+            span = "Exp #{payment_method.exp_month}/#{payment_method.exp_year.to_s[-2..]}"
             = f.radio_button :payment_method_id, payment_method.id, id: "payment-method-#{payment_method.id}", class: 'ml-auto'
     
   = f.submit 'Join', class: 'btn btn-primary'
