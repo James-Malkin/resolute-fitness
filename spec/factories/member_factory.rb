@@ -2,6 +2,8 @@
 
 FactoryBot.define do
   factory :member do
+    stripe_customer_id { 'cus_123' }
+
     association :user
   end
 end

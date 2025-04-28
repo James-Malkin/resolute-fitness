@@ -87,6 +87,26 @@ describe 'Authentication' do
     end
   end
 
+  describe 'User confirmation' do
+    let(:user) { create(:user, confirmation_token: 'token123') }
+
+    before do
+      allow(Stripe::Customer).to receive(:create).and_return(instance_double(Stripe::Customer, id: 'cus_123'))
+      get user_confirmation_path(confirmation_token: user.confirmation_token)
+    end
+
+    it 'creates a member for the user' do
+      expect(Member.last.user).to eq(user)
+    end
+
+    it 'creates a Stripe customer for the member' do
+      expect(Stripe::Customer).to have_received(:create).with(
+        email: user.email,
+        metadata: { member_id: Member.last.id }
+      )
+    end
+  end
+
   describe 'user abilities' do
     let(:user) { create(:user) }
 
