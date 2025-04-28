@@ -1,7 +1,8 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe StripeManager::Customer do
-
   describe '.create' do
     context 'when the member does not have a stripe customer ID' do
       let(:member) { create(:member, stripe_customer_id: nil) }
@@ -25,7 +26,6 @@ RSpec.describe StripeManager::Customer do
         expect(member).to have_received(:update!).with(stripe_customer_id: 'cus_123')
       end
     end
-
 
     context 'when the member already has a stripe customer ID' do
       let(:member) { create(:member, stripe_customer_id: 'cus_123') }
