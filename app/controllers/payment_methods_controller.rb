@@ -6,7 +6,7 @@ class PaymentMethodsController < ApplicationController
   def create
     StripeManager::PaymentMethod.attach(current_user.member, payment_method_params[:payment_method_id])
 
-    redirect_to profile_edit_path, notice: 'Payment method added successfully.'
+    redirect_to request.referer || profile_edit_path, notice: 'Payment method added successfully.'
   end
 
   private
