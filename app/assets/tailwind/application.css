@@ -312,33 +312,64 @@
     &#bronze_plan_label {
       @apply border-bronze;
 
-      >input[type="radio"]:checked {
+      h3 {
+        @apply text-bronze;
+      }
+
+      input:checked {
         @apply border-bronze;
+
+        &:before {
+          @apply bg-bronze;
+        }
       }
     }
 
     &#silver_plan_label {
       @apply border-gray-400;
 
-      >input[type="radio"]:checked {
+      h3 {
+        @apply text-gray-400;
+      }
+      
+      input:checked {
         @apply border-gray-400;
+
+        &:before {
+          @apply bg-gray-400;
+        }
       }
     }
 
     &#gold_plan_label {
       @apply border-yellow-500;
 
-      >input[type="radio"]:checked {
-        @apply border-yellow-500;
+      h3 {
+        @apply text-yellow-500;
+      }
+
+      &:has(input:checked) {
+        input {
+          @apply border-yellow-500;
+
+          &:before {
+            @apply bg-yellow-500;
+          }
+        }
       }
     }
   }
 
   input[type="radio"] {
-    @apply appearance-none border-2 border-neutral-300 rounded-full h-4 w-4;
+    @apply appearance-none border-2 border-neutral-300 rounded-full h-4 w-4 relative;
     
     &:checked {
-      @apply border-chateau-green-300 border-3;
+      @apply border-chateau-green-300;
+
+      &::before {
+        content: '';
+        @apply block w-2 h-2 bg-chateau-green-300 rounded-full absolute inset-1/2 -translate-x-1/2 -translate-y-1/2;
+      }
     }
   }
 }
