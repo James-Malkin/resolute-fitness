@@ -293,4 +293,18 @@
       }
     }
   }
+
+  .payment-method-label {
+    &:has(input:checked) {
+      @apply border-chateau-green-300!;
+    }
+
+    input {
+      @apply appearance-none border-2 border-neutral-300 rounded-full h-4 w-4;
+      
+      &:checked {
+        @apply border-chateau-green-300 border-3;
+      }
+    }
+  }
 }
