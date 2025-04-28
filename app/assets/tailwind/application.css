@@ -132,7 +132,7 @@
 
     .nav-brand {
       @media (max-width: 768px) {
-        @apply self-center mr-5;
+        @apply self-center mr-2;
       }
     }
 
