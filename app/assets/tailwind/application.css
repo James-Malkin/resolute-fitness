@@ -13,12 +13,18 @@
   --color-chateau-green-900: #0e462d;
   --color-chateau-green-950: #07271a;
 
+  --color-bronze: #CD7F32;
+
   --color-primary: var(--color-chateau-green-400);
 }
 
 @layer components {
   .btn {
     @apply bg-primary text-white font-semibold py-2 px-4 rounded;
+
+    &:disabled {
+      @apply bg-gray-300 text-gray-500 cursor-not-allowed;
+    }
   }
 
   .btn-slim {
@@ -291,6 +297,48 @@
       dd {
         @apply basis-2/3 border-t border-l-0 !mb-0;
       }
+    }
+  }
+
+  .payment-method-label {
+    &:has(input:checked) {
+      @apply border-chateau-green-300!;
+    }
+  }
+
+  .plan-label {
+    @apply w-full flex flex-col items-center gap-2 border-2 p-5 rounded-md;
+
+    &#bronze_plan_label {
+      @apply border-bronze;
+
+      >input[type="radio"]:checked {
+        @apply border-bronze;
+      }
+    }
+
+    &#silver_plan_label {
+      @apply border-gray-400;
+
+      >input[type="radio"]:checked {
+        @apply border-gray-400;
+      }
+    }
+
+    &#gold_plan_label {
+      @apply border-yellow-500;
+
+      >input[type="radio"]:checked {
+        @apply border-yellow-500;
+      }
+    }
+  }
+
+  input[type="radio"] {
+    @apply appearance-none border-2 border-neutral-300 rounded-full h-4 w-4;
+    
+    &:checked {
+      @apply border-chateau-green-300 border-3;
     }
   }
 }

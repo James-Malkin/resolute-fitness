@@ -6,10 +6,6 @@ class PlansController < ApplicationController
   def index; end
 
   def join
-    @plans = Stripe::Plans.all
-    @payment_methods = Stripe::PaymentMethod.list(
-      customer: current_user.member.stripe_customer_id,
-      type: 'card'
-    )
+    @join_presenter = JoinPlanPresenter.new(current_user.member)
   end
 end
