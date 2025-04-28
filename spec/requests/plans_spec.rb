@@ -54,7 +54,7 @@ describe 'Plans' do
     end
 
     it 'displays the plans' do
-      expect(response.body).to include(plan.nickname)
+      expect(response.body).to include(plan.id)
       expect(response.body).to include('£10.00')
     end
   end

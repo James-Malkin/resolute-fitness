@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module StripeHelper
   def build_payment_method(id: 'pm_123', brand: 'Visa', last4: '1234', exp_month: 12, exp_year: 2050)
     Stripe::PaymentMethod.construct_from(

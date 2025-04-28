@@ -17,7 +17,6 @@ describe JoinPlanPresenter do
       let(:member) { create(:member, :with_plan) }
 
       it 'returns true' do
-
         expect(presenter.member_has_a_plan?).to be true
       end
     end
