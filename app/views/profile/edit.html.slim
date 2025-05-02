@@ -94,4 +94,12 @@ h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mt-3.mb-2 Personal Det
 
     = f.submit 'Update profile', class: 'btn'
 
+- if @user.member
+  h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mt-3.mb-2 Privacy Preferences
+  = form_with model: @user.member, method: :patch do |f|
+
+    = f.check_box :public_profile, class: 'form-checkbox'
+
+    = f.submit 'Update preferences', class: 'btn'
+
 = render 'shared/modal'

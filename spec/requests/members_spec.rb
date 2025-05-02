@@ -3,7 +3,13 @@
 require 'rails_helper'
 
 describe 'Members' do
-  describe 'POST /subscribe' do
+  let(:member) { create(:member) }
+
+  before do
+    sign_in member.user, scope: :user
+  end
+
+  describe 'POST /members/:id/subscribe' do
     subject(:post_subscribe) { post subscribe_member_path(member.id), params: params }
 
     let(:params) do
@@ -12,8 +18,6 @@ describe 'Members' do
         payment_method_id: 'pm_123'
       }
     end
-
-    let(:member) { create(:member) }
 
     before do
       allow(StripeManager::Subscription).to receive(:create)
@@ -28,6 +32,29 @@ describe 'Members' do
           payment_method_id: 'pm_123'
         ).permit!
       )
+    end
+  end
+
+  describe 'PATCH /members/:id/update' do
+    subject(:patch_update) { patch member_path(member.id), params: { member: { public_profile: true } } }
+
+    let(:member) { create(:member) }
+
+    before do
+      patch_update
+    end
+
+    it 'updates the member' do
+      expect(member.reload.public_profile).to be true
+    end
+
+    it 'redirects to the profile page' do
+      expect(response).to redirect_to(profile_path)
+    end
+
+    it 'sets a flash notice' do
+      follow_redirect!
+      expect(response.body).to include('Privacy preferences successfully updated')
     end
   end
 end
