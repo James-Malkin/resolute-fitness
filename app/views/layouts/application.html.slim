@@ -25,7 +25,7 @@ html
         .toast class="toast-#{key}" data-toast-target='toast' data-action='click->toast#remove'
           .toast-wrapper
             .toast-header
-              = lucide_icon("#{toast_icon(key)}", class: 'w-3.5 h-3.5')
+              = lucide_icon(toast_icon(key), class: 'w-3.5 h-3.5')
               h4 = key.upcase
               button type='button'
                 = lucide_icon('x', class: 'w-4 h-4')

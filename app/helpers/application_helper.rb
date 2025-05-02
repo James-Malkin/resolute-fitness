@@ -12,15 +12,11 @@ module ApplicationHelper
   end
 
   def toast_icon(type)
-    case type
-    when 'success'
-      'circle-check'
-    when 'notice'
-      'info'
-    when 'error'
-      'circle-alert'
-    when 'alert'
-      'triangle-alert'
-    end
+    {
+      'success' => 'circle-check',
+      'notice' => 'info',
+      'error' => 'circle-alert',
+      'alert' => 'triangle-alert'
+    }[type]
   end
 end
