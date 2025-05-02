@@ -40,4 +40,8 @@ class User < ApplicationRecord
     self.confirmation_token = nil
     save!
   end
+
+  def full_name
+    "#{first_name} #{last_name}"
+  end
 end

@@ -1,1 +1,35 @@
-= render 'profile_details', profile_presenter: @profile_presenter, user: @user
+- content_for :main_style, 'md:flex-row gap-5'
+
+.flex.flex-wrap.md:flex-nowrap.md:flex-col.gap-3
+  .flex.md:flex-col.w-full.gap-4.items-center.md:items-start
+    = render 'shared/avatar', user: @user, style: 'w-22 md:w-60 h-22 md:h-60 md:mb-3'
+
+    h1.flex.flex-col.gap-1
+      - if @user.first_name && @user.last_name
+        span.text-2xl.font-semibold = @user.full_name
+
+      span.text-neutral-600.text-xl = @user.username
+
+  hr.border-neutral-300.w-full.hidden.md:block
+
+  .flex.md:flex-col.w-full.gap-2.my-2.md:my-0
+    span.rounded-md.px-2.w-fit.border-2.font-cal-sans.py-1.5 class="#{@user.member.plan_pill}"
+      = @user.member.plan.upcase
+
+    - if @user.member
+      .flex.gap-2.text-neutral-600.items-center.text-sm
+        = lucide_icon('check-circle', class: 'w-4 h-4 text-primary')
+        span = "Member since #{@user.member.created_at.strftime('%B %Y')}"
+
+  - if @user == current_user
+    = link_to 'Edit Profile', profile_edit_path, class: 'btn-slim w-full'
+
+  hr.border-neutral-300.w-full.md:hidden
+
+
+.flex.flex-col
+  . sdfsxdf
+
+
+
+/ = render 'profile_details', profile_presenter: @profile_presenter, user: @user

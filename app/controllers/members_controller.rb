@@ -4,6 +4,7 @@ class MembersController < ApplicationController
   before_action :authenticate_user!, only: %i[update subscribe]
   before_action :find_member, only: %i[update]
 
+
   def update
     if @member.update(member_params)
       redirect_to profile_path, notice: 'Privacy preferences successfully updated'

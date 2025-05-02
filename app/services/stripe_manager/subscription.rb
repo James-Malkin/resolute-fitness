@@ -11,6 +11,8 @@ module StripeManager
         default_payment_method: params[:payment_method_id]
       )
 
+      puts subscription
+
       member.update_subscription!(subscription)
     rescue Stripe::CardError => e
       Rails.logger.error("Stripe CardError: #{e.message}")
