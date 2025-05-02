@@ -10,6 +10,12 @@ class ProfileController < ApplicationController
 
   def show
     @user = User.find_by!(username: params[:username])
+
+    if @user.member && !@user.member.public_profile?
+      redirect_to root_path, alert: 'This profile is private'
+      return
+    end
+
     @profile_presenter = UserProfilePresenter.new(@user)
   end
 
