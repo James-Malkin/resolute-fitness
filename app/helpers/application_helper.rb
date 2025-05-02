@@ -10,4 +10,17 @@ module ApplicationHelper
       "#{attribute_name} #{object.errors[attribute].join(', ')}"
     end
   end
+
+  def toast_icon(type)
+    case type
+    when 'success'
+      'circle-check'
+    when 'notice'
+      'info'
+    when 'error'
+      'circle-alert'
+    when 'alert'
+      'triangle-alert'
+    end
+  end
 end
