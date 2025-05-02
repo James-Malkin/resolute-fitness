@@ -120,7 +120,7 @@
            overflow-clip hidden items-center justify-center;
     
     img {
-      @apply w-full h-full object-cover;
+      @apply w-full h-full object-cover min-w-10 min-h-10;
     }
 
     &:not(:has(img)) {
