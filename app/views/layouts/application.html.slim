@@ -20,5 +20,9 @@ html
   = render 'shared/navbar'
 
   body
+    - flash.each do |key, value|
+      div class="flash-message flash-#{key}"
+        = value
+
     main.container.mx-auto.my-5.px-3.md:px-5.flex.flex-col
       = yield

@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 20_250_427_134_700) do
+ActiveRecord::Schema[8.0].define(version: 20_250_502_095_540) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pg_catalog.plpgsql'
 
@@ -100,6 +100,7 @@ ActiveRecord::Schema[8.0].define(version: 20_250_427_134_700) do
     t.datetime 'subscription_period_end'
     t.string 'default_payment_method_id'
     t.integer 'plan', default: 0, null: false
+    t.boolean 'public_profile', default: false
     t.index ['stripe_customer_id'], name: 'index_members_on_stripe_customer_id', unique: true
     t.index ['user_id'], name: 'index_members_on_user_id'
   end

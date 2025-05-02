@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     get :join, on: :collection
   end
 
-  resources :members, only: [] do
+  resources :members, only: [:update] do
     post :subscribe, on: :member
   end
 
