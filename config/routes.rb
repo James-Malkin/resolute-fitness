@@ -8,7 +8,6 @@ Rails.application.routes.draw do
   get 'up' => 'rails/health#show', as: :rails_health_check
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
-  get '/profile', to: 'profile#index', as: :profile
   get '/profile/edit', to: 'profile#edit', as: :profile_edit
   get '/:username', to: 'profile#show', as: :profile_show
 
