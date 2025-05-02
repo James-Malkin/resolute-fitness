@@ -17,6 +17,6 @@ module ApplicationHelper
       'notice' => 'info',
       'error' => 'circle-alert',
       'alert' => 'triangle-alert'
-    }[type]
+    }.fetch(type, 'circle-help')
   end
 end
