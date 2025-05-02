@@ -91,3 +91,6 @@ gem 'image_processing', '~> 1.2'
 gem 'cancancan', '~> 3.6'
 gem 'stripe'
 gem 'stripe-rails', '~> 2.6'
+
+gem "groupdate", "~> 6.5"
+gem "chartkick"
