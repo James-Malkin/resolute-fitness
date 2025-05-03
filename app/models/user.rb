@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   attr_accessor :login
 
+  delegate :plan, to: :member, prefix: true, allow_nil: true
+
   has_one :member, dependent: :destroy
   has_one :employee, dependent: :destroy
 

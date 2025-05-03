@@ -19,13 +19,4 @@ class Member < ApplicationRecord
       default_payment_method_id: subscription.default_payment_method
     )
   end
-
-  def plan_pill
-    {
-      guest: 'border-neutral-600 text-neutral-600',
-      bronze: 'border-bronze text-bronze',
-      silver: 'border-gray-400 text-gray-400',
-      gold: 'border-yellow-500 text-yellow-500'
-    }[plan.to_sym]
-  end
 end
