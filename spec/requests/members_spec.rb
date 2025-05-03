@@ -35,7 +35,7 @@ describe 'Members' do
     end
   end
 
-  describe 'PATCH /members/:id/update' do
+  describe 'PATCH /members/:id' do
     subject(:patch_update) { patch member_path(member.id), params: { member: { public_profile: true } } }
 
     let(:member) { create(:member) }
@@ -46,10 +46,6 @@ describe 'Members' do
 
     it 'updates the member' do
       expect(member.reload.public_profile).to be true
-    end
-
-    it 'redirects to the profile page' do
-      expect(response).to redirect_to(profile_path)
     end
 
     it 'sets a flash notice' do

@@ -6,7 +6,7 @@ class MembersController < ApplicationController
 
   def update
     if @member.update(member_params)
-      redirect_to profile_path, notice: 'Privacy preferences successfully updated'
+      redirect_to profile_show_path(@member.username), notice: 'Privacy preferences successfully updated'
     else
       @profile_presenter = UserProfilePresenter.new(@member.user, 'edit_profile')
       render profile_edit_path

@@ -3,11 +3,6 @@
 class ProfileController < ApplicationController
   before_action :authenticate_user!, only: %i[index edit]
 
-  def index
-    @user = current_user
-    @profile_presenter = UserProfilePresenter.new(@user)
-  end
-
   def show
     @user = User.find_by!(username: params[:username])
 

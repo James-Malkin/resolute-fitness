@@ -8,7 +8,7 @@
   = f.file_field :avatar
 
   = f.submit 'Update'
-  = link_to 'Cancel', profile_path(@user), class: 'button'
+  = link_to 'Cancel', profile_show_path(@user.username), class: 'button'
 
 h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mb-2 Account Details
 

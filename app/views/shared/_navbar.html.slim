@@ -24,7 +24,7 @@ header.navbar data-controller='navbar'
         button data-action='click->navbar#close'
           = lucide_icon('x')
 
-      = link_to 'Profile', profile_path, class: 'drawer-link'
+      = link_to 'Profile', profile_show_path(current_user.username), class: 'drawer-link'
       - if current_user.employee
         = link_to 'Staff Tools', staff_tools_path, class: 'drawer-link flex gap-2 items-center'
       = button_to 'Sign Out', destroy_user_session_path, method: :delete, data: { turbo: false }

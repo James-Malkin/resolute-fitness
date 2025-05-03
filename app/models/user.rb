@@ -9,6 +9,8 @@ class User < ApplicationRecord
 
   attr_accessor :login
 
+  delegate :plan, to: :member, prefix: true, allow_nil: true
+
   has_one :member, dependent: :destroy
   has_one :employee, dependent: :destroy
 
@@ -39,5 +41,9 @@ class User < ApplicationRecord
     self.unconfirmed_email = nil
     self.confirmation_token = nil
     save!
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 end

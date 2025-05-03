@@ -8,11 +8,12 @@ class Member < ApplicationRecord
 
   enum :plan, { guest: 0, bronze: 1, silver: 2, gold: 3 }, default: :guest
 
-  delegate :email, to: :user
+  delegate :email, :username, to: :user
 
   def update_subscription!(subscription)
     Rails.logger.debug "Updating subscription with ID: #{subscription.id}"
     update!(
+      plan: subscription.plan.id,
       stripe_subscription_id: subscription.id,
       subscription_period_end: Time.at(subscription.items.data[0].current_period_end),
       default_payment_method_id: subscription.default_payment_method

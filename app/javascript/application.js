@@ -18,3 +18,10 @@ document.addEventListener("turbo:general-load", () => {
     el.addEventListener("click", dispatchElementToggleEvent);
   });
 });
+
+document.addEventListener("turbo:load", function() {
+  Chartkick.options = {
+    colors: ["#000000", "#000000", "#000000"],
+    library: { animation: { duration: 500 } }
+  };
+});

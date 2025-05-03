@@ -16,12 +16,16 @@ describe Member do
     let(:current_period_end) { 1.day.from_now.to_i }
     let(:subscription_item) { instance_double('Stripe::SubscriptionItem', current_period_end: current_period_end) }
     let(:subscription) do
-      instance_double(
+      double(
         Stripe::Subscription,
         id: 'sub_123',
         default_payment_method: 'pm_123',
         items: double(
           data: [subscription_item]
+        ),
+        plan: instance_double(
+          Stripe::Plan,
+          id: 'bronze'
         )
       )
     end

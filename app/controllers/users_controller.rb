@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      redirect_to profile_path, notice: 'User was successfully updated.'
+      redirect_to profile_show_path(@user.username), notice: 'User was successfully updated.'
     else
       @profile_presenter = UserProfilePresenter.new(@user, 'edit_email')
       render profile_edit_path
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       flash[:notice] = 'Email was successfully updated.'
       respond_to do |format|
         format.turbo_stream { render turbo_stream: turbo_stream.refresh(request_id: nil) }
-        format.html { redirect_to profile_path }
+        format.html { redirect_to profile_show_path(@user.username) }
       end
     else
       @profile_presenter = UserProfilePresenter.new(@user, 'edit_email')
@@ -36,7 +36,7 @@ class UsersController < ApplicationController
 
   def cancel_change_email
     @user.cancel_change_email!
-    redirect_back fallback_location: profile_path, notice: 'Email change was successfully canceled.'
+    redirect_back fallback_location: profile_show_path(@user.username), notice: 'Email change was successfully canceled.'
   end
 
   private

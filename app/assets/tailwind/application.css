@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Cal+Sans&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
 
 @import "tailwindcss";
 
@@ -21,6 +20,7 @@
   --color-primary: var(--color-chateau-green-400);
 
   --font-cal-sans: 'Cal Sans', sans-serif;
+
   --font-display: 'Inter', sans-serif;
 }
 
@@ -36,6 +36,10 @@
   
     overflow-x: hidden;
     position: relative;
+  }
+
+  .font-cal-sans {
+    @apply leading-none tracking-wider;
   }
 }
 
@@ -59,18 +63,6 @@
 
     button, a {
       @apply bg-gray-200 text-gray-600 font-semibold py-2 px-3;
-    }
-  }
-
-  .avatar {
-    @apply w-10 h-10 rounded-full border border-gray-400 overflow-clip;
-
-    img {
-      @apply w-full h-full object-cover;
-    }
-
-    &:not(:has(img)) {
-      @apply flex items-center justify-center bg-primary font-semibold text-xl text-white;
     }
   }
 

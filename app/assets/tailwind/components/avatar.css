@@ -1,0 +1,11 @@
+.avatar {
+  @apply w-10 h-10 rounded-full border-2 border-gray-400 overflow-clip;
+
+  img {
+    @apply w-full h-full object-cover;
+  }
+
+  &:not(:has(img)) {
+    @apply flex items-center justify-center bg-primary font-semibold text-4xl text-gray-400;
+  }
+}

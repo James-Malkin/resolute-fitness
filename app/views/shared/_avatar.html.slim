@@ -1,0 +1,5 @@
+.avatar.bg-gray-200 class=style
+  - if user.avatar.attached?
+    = image_tag user.avatar
+  - else
+    = user.username[0].upcase

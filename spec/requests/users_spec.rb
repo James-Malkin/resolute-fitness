@@ -8,7 +8,7 @@ describe 'Users' do
 
     let(:user) { create(:user) }
 
-    context 'when the update is succeeds' do
+    context 'when the update succeeds' do
       it 'updates the user' do
         patch_user
         user.reload
@@ -41,7 +41,7 @@ describe 'Users' do
 
     context 'when the update is succeeds' do
       it 'redirects to the profile page' do
-        expect(response).to redirect_to(profile_path)
+        expect(response).to redirect_to(profile_show_path(user.username))
       end
 
       it 'updates user unconfirmed email' do
@@ -73,7 +73,7 @@ describe 'Users' do
     end
 
     it 'returns a success message' do
-      expect(response).to redirect_to(profile_path)
+      expect(response).to redirect_to(profile_show_path(user.username))
       expect(flash[:notice]).to eq('Email change was successfully canceled.')
     end
   end

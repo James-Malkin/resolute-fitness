@@ -10,7 +10,7 @@ describe 'Profiles' do
   end
 
   it 'shows the profile page' do
-    visit profile_path
+    visit profile_show_path(user.username)
     expect(page).to have_content(user.username)
   end
 end
