@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 
   get '/profile/edit', to: 'profile#edit', as: :profile_edit
-  get '/:username', to: 'profile#show', as: :profile_show
+  get '/profile/:username', to: 'profile#show', as: :profile_show
 
   get '/staff', to: 'staff_tools#index', as: :staff_tools
   # get '/staff/schedule/new', to: 'class_schedules#new', as: :new_class_schedule
