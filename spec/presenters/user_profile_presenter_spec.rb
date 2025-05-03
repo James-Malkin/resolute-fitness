@@ -51,4 +51,27 @@ describe UserProfilePresenter do
       end
     end
   end
+
+  describe '#user_favourite_class' do
+    let(:user) { create(:member).user }
+
+    context 'when the user has a favourite class' do
+      let(:exercise_class) { create(:exercise_class, name: 'Test') }
+      let(:class_schedule) { create(:class_schedule, exercise_class: exercise_class) }
+
+      before do
+        create(:booking, member: user.member, class_schedule: class_schedule)
+      end
+
+      it 'returns the favourite class' do
+        expect(presenter.user_favourite_class).to eq('Test')
+      end
+    end
+
+    context 'when the user does not have a favourite class' do
+      it 'returns nil' do
+        expect(presenter.user_favourite_class).to be_nil
+      end
+    end
+  end
 end

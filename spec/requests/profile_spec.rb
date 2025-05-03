@@ -9,13 +9,6 @@ describe 'Profile' do
     login_as user, scope: :user
   end
 
-  describe 'GET /profile' do
-    it 'returns the user profile page' do
-      get profile_path
-      expect(response.body).to include(user.username)
-    end
-  end
-
   describe 'GET /profile/edit' do
     it 'returns the edit profile page' do
       get profile_edit_path

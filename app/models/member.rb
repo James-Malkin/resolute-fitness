@@ -8,7 +8,7 @@ class Member < ApplicationRecord
 
   enum :plan, { guest: 0, bronze: 1, silver: 2, gold: 3 }, default: :guest
 
-  delegate :email, to: :user
+  delegate :email, :username, to: :user
 
   def update_subscription!(subscription)
     Rails.logger.debug "Updating subscription with ID: #{subscription.id}"

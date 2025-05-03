@@ -56,4 +56,12 @@ describe User do
       expect { cancel_change_email }.to change(user, :confirmation_token).to(nil)
     end
   end
+
+  describe '#full_name' do
+    let(:user) { create(:user, first_name: 'John', last_name: 'Doe') }
+
+    it 'returns the full name' do
+      expect(user.full_name).to eq('John Doe')
+    end
+  end
 end
