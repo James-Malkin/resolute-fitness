@@ -1,1 +1,12 @@
-p Home
+.relative.hero-container
+  = image_tag 'home-hero.jpeg', alt: 'Image description', id: 'home-hero-image'
+
+  .hero-text-container
+    h1.hero-heading
+      | PLANS FROM
+      br
+      span.font-bold.text-7xl = '£19.99 '
+      br.md:hidden
+      | A MONTH
+
+  = button_to 'JOIN TODAY', join_plans_path, class: 'hero-cta-button btn btn-primary'

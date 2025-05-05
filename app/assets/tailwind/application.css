@@ -41,6 +41,12 @@
   .font-cal-sans {
     @apply leading-none tracking-wider;
   }
+
+  .relative.hero-container {
+    img {
+      @apply w-full h-165 sm:h-240 object-cover object-center relative;
+    }
+  }
 }
 
 @layer components {

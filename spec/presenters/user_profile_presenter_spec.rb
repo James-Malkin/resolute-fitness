@@ -69,8 +69,8 @@ describe UserProfilePresenter do
     end
 
     context 'when the user does not have a favourite class' do
-      it 'returns nil' do
-        expect(presenter.user_favourite_class).to be_nil
+      it 'returns N/A' do
+        expect(presenter.user_favourite_class).to eq('N/A')
       end
     end
   end

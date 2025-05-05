@@ -1,0 +1,21 @@
+.hero-text-container {
+  @apply absolute text-white font-cal-sans;
+  @apply top-7 inset-x-1/4 text-center;
+  @apply md:top-3/4 md:left-1/8 md:inset-x-auto md:text-left;
+}
+
+.hero-heading {
+  @apply text-3xl font-semibold;
+  @apply md:text-5xl;
+}
+
+.hero-price {
+  @apply font-bold text-7xl;
+}
+
+.hero-cta-button {
+  @apply absolute font-cal-sans font-bold text-nowrap shadow-lg;
+  @apply left-1/2 -translate-x-1/2 -bottom-8 text-3xl tracking-wider px-6 py-3;
+  @apply md:left-1/8 md:-translate-x-0 md:bottom-10;
+  @apply sm:text-4xl sm:tracking-widest;
+}
