@@ -54,7 +54,7 @@ class UserProfilePresenter
   end
 
   def user_favourite_class
-    return nil if @user.member.nil? || @user.member.bookings.empty?
+    return 'N/A' if @user.member.nil? || @user.member.bookings.empty?
 
     favorite = @user.member.bookings
                     .joins(class_schedule: :exercise_class)
@@ -69,6 +69,6 @@ class UserProfilePresenter
   def recent_user_bookings
     Booking.where(member_id: @user.member.id)
            .order(created_at: :desc)
-           .limit(8)
+           .limit(10)
   end
 end
