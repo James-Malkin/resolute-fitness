@@ -4,7 +4,7 @@ require 'rails_helper'
 
 describe 'Payment Methods' do
   describe 'POST /subscribe' do
-    subject(:post_payment_methods) { post stripe_payment_methods_path, params: params }
+    subject(:post_payment_methods) { post payment_methods_path, params: params }
 
     let(:params) { { payment_method_id: 'pm_123' } }
 

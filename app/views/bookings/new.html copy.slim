@@ -1,0 +1,19 @@
+= turbo_frame_tag :modal_content, data: { modal_target: 'frame' }, target: '_top'
+  . data-modal-target='titleValue' data-title="#{@booking.class_schedule.exercise_class_name}"
+  = form_with model: @booking, url: bookings_path do |f|
+    dl#booking-details
+      dt Time and Date
+      dd = @booking.date_time.strftime('%I:%M%P')
+      dt Duration
+      dd = @booking.duration
+      dt Trainer
+      dd = @booking.class_schedule.trainer.username
+      dt Capacity
+      dd = @booking.class_schedule_capacity
+
+    p.my-5 = @booking.class_schedule.exercise_class_description
+    - if can? :create, @booking
+      = f.submit 'Book', class: 'btn w-full'
+    - else
+      .btn.w-full.text-center.border-neutral-700.bg-neutral-300.text-neutral-700.border
+        | Sorry, you cannot book this class.

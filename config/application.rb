@@ -20,6 +20,8 @@ module ResoluteFitness
 
     config.autoload_paths.push Rails.root.join('/app/mailers/concerns')
 
+    config.active_job.queue_adapter = :delayed_job
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

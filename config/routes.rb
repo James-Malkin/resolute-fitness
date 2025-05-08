@@ -16,7 +16,9 @@ Rails.application.routes.draw do
   # post '/staff/schedule', to: 'class_schedules#create', as: :class_schedules
 
   resources :class_schedules, only: %i[index new create]
-  resources :bookings, only: %i[new create]
+  resources :bookings, only: %i[new create] do
+    get :pay, on: :member
+  end
 
   resources :users, only: [:update] do
     member do
@@ -36,8 +38,10 @@ Rails.application.routes.draw do
 
   resources :exercise_classes, only: %i[index new create edit update], path: 'classes'
 
-  namespace :stripe do
+  scope :stripe, path: 'stripe' do
+    resources :webhooks, only: [:create]
     resources :payment_methods, only: %i[new create], path: 'payment-methods'
+    resources :payments, only: %i[create]
   end
 
   get '/test', to: 'home#test', as: :test

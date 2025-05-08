@@ -1,0 +1,12 @@
+= turbo_frame_tag :payment_form
+  = form_with data: { controller: 'booking', action: 'submit->booking#handleSubmit', booking_requires_payment: @requires_payment } do |f|
+    = f.hidden_field :booking_id, value: @booking.id, data: { booking_target: 'bookingID' }
+    .mb-5 data-booking-target='paymentContainer'
+      . data-booking-target='paymentElement'
+      .text-red-500.mt-2.hidden data-booking-target='errorMessage'
+
+    - if can? :create, @booking
+      = f.submit 'Pay', class: 'btn w-full', data: { booking_target: 'submitButton' }
+    - else
+      .btn.w-full.text-center.border-neutral-700.bg-neutral-300.text-neutral-700.border
+        | Sorry, you cannot book this class.
