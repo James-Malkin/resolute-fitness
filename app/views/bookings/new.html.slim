@@ -11,7 +11,7 @@
     dd = @booking.class_schedule_capacity
 
   p.my-5 = @booking.class_schedule.exercise_class_description
-  
+
   - if can? :create, @booking
     - if @payment_required
       = turbo_frame_tag :payment_form
@@ -25,4 +25,3 @@
   - else
     .btn.w-full.text-center.border-neutral-700.bg-neutral-300.text-neutral-700.border
       | Sorry, you cannot book this class.
-

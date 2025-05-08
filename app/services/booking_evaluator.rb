@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class BookingEvaluator
   def self.payment_required?(user)
     user.member.guest?
@@ -7,7 +9,7 @@ class BookingEvaluator
     booking = Booking.new(booking_params)
 
     return [:error, booking] unless booking.save
-    
+
     if payment_required?(user)
       [:payment_required, booking]
     else
