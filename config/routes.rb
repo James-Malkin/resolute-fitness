@@ -36,7 +36,9 @@ Rails.application.routes.draw do
 
   resources :exercise_classes, only: %i[index new create edit update], path: 'classes'
 
-  resources :payment_methods, only: %i[new create], path: 'payment-methods'
+  namespace :stripe do
+    resources :payment_methods, only: %i[new create], path: 'payment-methods'
+  end
 
   get '/test', to: 'home#test', as: :test
 

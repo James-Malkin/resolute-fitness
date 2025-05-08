@@ -57,7 +57,7 @@ h2 Email
         = link_to profile_edit_path(page_context: 'edit_email')
           = lucide_icon('square-pen')
 
-  = button_to new_payment_method_path, method: :get, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'btn btn-primary'
+  = link_to new_stripe_payment_method_path, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'btn btn-primary'
     | Add Payment Method
 
 h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mt-3.mb-2 Personal Details

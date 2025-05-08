@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 20_250_502_095_540) do
+ActiveRecord::Schema[8.0].define(version: 20_250_508_170_549) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pg_catalog.plpgsql'
 
@@ -72,6 +72,7 @@ ActiveRecord::Schema[8.0].define(version: 20_250_502_095_540) do
     t.bigint 'trainer_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.decimal 'price', precision: 10, scale: 2
     t.index ['exercise_class_id'], name: 'index_class_schedules_on_exercise_class_id'
     t.index ['trainer_id'], name: 'index_class_schedules_on_trainer_id'
   end
