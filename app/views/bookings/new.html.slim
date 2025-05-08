@@ -11,8 +11,18 @@
     dd = @booking.class_schedule_capacity
 
   p.my-5 = @booking.class_schedule.exercise_class_description
+  
+  - if can? :create, @booking
+    - if @payment_required
+      = turbo_frame_tag :payment_form
+        = form_with model: @booking, url: bookings_path do |f|
+          = f.hidden_field :class_schedule_id
+          = f.submit 'Continue to Payment', class: 'btn w-full'
+    - else
+        = form_with model: @booking, url: bookings_path do |f|
+          = f.hidden_field :class_schedule_id
+          = f.submit 'Book', class: 'btn w-full'
+  - else
+    .btn.w-full.text-center.border-neutral-700.bg-neutral-300.text-neutral-700.border
+      | Sorry, you cannot book this class.
 
-  = turbo_frame_tag :payment_form
-    = form_with model: @booking, url: bookings_path do |f|
-      = f.hidden_field :class_schedule_id
-      = f.submit 'Book', class: 'btn w-full', data: { booking_target: 'submitButton' }

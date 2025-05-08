@@ -7,9 +7,7 @@ module StripeManager
 
       stripe_customer = Stripe::Customer.create(
         email: member.email,
-        metadata: {
-          member_id: member.id
-        }
+        metadata: { member_id: member.id }
       )
 
       member.update!(stripe_customer_id: stripe_customer.id)
