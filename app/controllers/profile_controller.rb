@@ -3,13 +3,14 @@
 class ProfileController < ApplicationController
   before_action :authenticate_user!, only: %i[index edit]
 
-  def show
-    @user = User.find_by!(username: params[:username])
+  rescue_from CanCan::AccessDenied do
+    redirect_to root_path, alert: 'This profile is private'
+  end
 
-    if @user.member && !@user.member.public_profile?
-      redirect_to root_path, alert: 'This profile is private'
-      return
-    end
+  def show
+    @user = User.by_username(params[:username])
+
+    authorize! :view, :profile, @user
 
     @profile_presenter = UserProfilePresenter.new(@user)
   end

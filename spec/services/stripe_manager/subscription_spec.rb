@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe StripeManager::Subscription do
+describe StripeManager::Subscription do
   describe '.create' do
     subject(:create_subscription) { described_class.create(subscription_params) }
 

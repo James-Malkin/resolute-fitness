@@ -38,19 +38,34 @@ describe 'Members' do
   describe 'PATCH /members/:id' do
     subject(:patch_update) { patch member_path(member.id), params: { member: { public_profile: true } } }
 
-    let(:member) { create(:member) }
+    context 'the update is successful' do
+      before do
+        patch_update
+      end
 
-    before do
-      patch_update
+      it 'updates the member' do
+        expect(member.reload.public_profile).to be true
+      end
+
+      it 'sets a flash notice' do
+        follow_redirect!
+        expect(response.body).to include('Privacy preferences successfully updated')
+      end
     end
 
-    it 'updates the member' do
-      expect(member.reload.public_profile).to be true
-    end
+    context 'the update fails' do
+      before do
+        allow_any_instance_of(Member).to receive(:update).and_return(false)
+        patch_update
+      end
 
-    it 'sets a flash notice' do
-      follow_redirect!
-      expect(response.body).to include('Privacy preferences successfully updated')
+      it 'does not updates the member' do
+        expect(member.reload.public_profile).to be false
+      end
+
+      it 're-renders the edit page' do
+        expect(response.body).to include('Privacy Preferences')
+      end
     end
   end
 end

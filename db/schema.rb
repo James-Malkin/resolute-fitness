@@ -12,7 +12,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 20_250_502_095_540) do
+ActiveRecord::Schema[8.0].define(version: 20_250_508_212_207) do
   # These are extensions that must be enabled in order to support this database
   enable_extension 'pg_catalog.plpgsql'
 
@@ -60,6 +60,9 @@ ActiveRecord::Schema[8.0].define(version: 20_250_502_095_540) do
     t.bigint 'class_schedule_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.string 'payment_intent_id'
+    t.integer 'payment_status', default: 0
+    t.datetime 'paid_at'
     t.index ['class_schedule_id'], name: 'index_bookings_on_class_schedule_id'
     t.index ['member_id'], name: 'index_bookings_on_member_id'
   end
@@ -72,8 +75,24 @@ ActiveRecord::Schema[8.0].define(version: 20_250_502_095_540) do
     t.bigint 'trainer_id', null: false
     t.datetime 'created_at', null: false
     t.datetime 'updated_at', null: false
+    t.decimal 'price', precision: 10, scale: 2
     t.index ['exercise_class_id'], name: 'index_class_schedules_on_exercise_class_id'
     t.index ['trainer_id'], name: 'index_class_schedules_on_trainer_id'
+  end
+
+  create_table 'delayed_jobs', force: :cascade do |t|
+    t.integer 'priority', default: 0, null: false
+    t.integer 'attempts', default: 0, null: false
+    t.text 'handler', null: false
+    t.text 'last_error'
+    t.datetime 'run_at'
+    t.datetime 'locked_at'
+    t.datetime 'failed_at'
+    t.string 'locked_by'
+    t.string 'queue'
+    t.datetime 'created_at'
+    t.datetime 'updated_at'
+    t.index %w[priority run_at], name: 'delayed_jobs_priority'
   end
 
   create_table 'employees', force: :cascade do |t|

@@ -10,7 +10,7 @@
     .w-full.md:w-2/3.rounded-lg.border.border-neutral-300.p-3
       .flex.justify-between.pb-2
         h2.text-lg.font-semibold Payment Method
-        = link_to new_payment_method_path, method: :get, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'icon-btn bg-gray-400 py-1 px-1.5'
+        = link_to new_payment_method_path, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'icon-btn bg-gray-400 py-1 px-1.5'
           = lucide_icon('plus', class: 'w-4 h-4')
       #payment-methods.pt-2.border-t.border-neutral-300.flex.flex-col.gap-2
         - if @join_presenter.member_payment_methods.empty?

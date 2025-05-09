@@ -1,0 +1,8 @@
+= turbo_frame_tag :payment_form
+  = form_with data: { controller: 'booking', action: 'submit->booking#handleSubmit' } do |f|
+    = f.hidden_field :booking_id, value: @booking.id, data: { booking_target: 'bookingID' }
+    .mb-5 data-booking-target='paymentContainer'
+      . data-booking-target='paymentElement'
+      .text-red-500.mt-2.hidden data-booking-target='errorMessage'
+
+      = f.submit 'Pay', class: 'btn w-full mt-5', data: { booking_target: 'submitButton' }

@@ -5,9 +5,7 @@ module StripeManager
     def self.attach(member, payment_method_id)
       Stripe::PaymentMethod.attach(
         payment_method_id,
-        {
-          customer: member.stripe_customer_id
-        }
+        { customer: member.stripe_customer_id }
       )
     end
   end

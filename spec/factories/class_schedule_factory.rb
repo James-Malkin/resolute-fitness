@@ -7,5 +7,6 @@ FactoryBot.define do
     date_time { Faker::Time.forward(days: 23, period: :morning) }
     duration { rand(30..120) }
     capacity { rand(5..20) }
+    price { rand(5..10) }
   end
 end

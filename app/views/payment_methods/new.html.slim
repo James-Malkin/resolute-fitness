@@ -1,6 +1,6 @@
 = turbo_frame_tag :modal_content, data: { modal_target: 'frame' }, target: '_top'
   . data-modal-target='titleValue' data-title='New Payment Method'
-  = form_with url: payment_methods_path, method: :post, data: { controller: 'payment-method', action: 'submit->payment-method#submit' } do |f|
+  = form_with url: payment_methods_path, data: { controller: 'payment-method', action: 'submit->payment-method#submit' } do |f|
     .form-group
       label for="card-element" Card Details
       . data-payment-method-target='cardElement'
