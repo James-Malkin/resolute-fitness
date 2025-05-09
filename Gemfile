@@ -90,7 +90,7 @@ gem 'image_processing', '~> 1.2'
 
 gem 'cancancan', '~> 3.6'
 gem 'delayed_job_active_record'
+gem 'sentry-rails'
+gem 'sentry-ruby'
 gem 'stripe'
 gem 'stripe-rails', '~> 2.6'
-gem "sentry-ruby"
-gem "sentry-rails"
