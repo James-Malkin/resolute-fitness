@@ -8,7 +8,7 @@ class BookingEvaluator
   def self.process_booking(booking_params, user)
     booking = Booking.new(booking_params)
 
-    return [:error, booking] unless booking.save
+    return [:error, nil] unless booking.save
 
     if payment_required?(user)
       [:payment_required, booking]

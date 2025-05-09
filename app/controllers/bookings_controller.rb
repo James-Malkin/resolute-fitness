@@ -22,7 +22,7 @@ class BookingsController < ApplicationController
     when :payment_success
       redirect_to bookings_path, notice: 'Booking created successfully.'
     else
-      render :new, status: :unprocessable_entity
+      redirect_to new_booking_path(class_schedule_id: @booking.class_schedule_id)
     end
   end
 
