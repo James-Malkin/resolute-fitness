@@ -92,3 +92,5 @@ gem 'cancancan', '~> 3.6'
 gem 'delayed_job_active_record'
 gem 'stripe'
 gem 'stripe-rails', '~> 2.6'
+gem "sentry-ruby"
+gem "sentry-rails"

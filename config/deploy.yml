@@ -27,6 +27,8 @@ env:
     - RAILS_MASTER_KEY
     - POSTGRES_PASSWORD
     - STRIPE_SECRET_KEY
+    - STRIPE_WEBHOOK_SECRET
+    - SENTRY_DSN
 
 volumes:
   - rails-storage:/resolute-fitness/storage
