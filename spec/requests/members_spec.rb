@@ -38,8 +38,6 @@ describe 'Members' do
   describe 'PATCH /members/:id' do
     subject(:patch_update) { patch member_path(member.id), params: { member: { public_profile: true } } }
 
-    let(:member) { create(:member) }
-
     context 'the update is successful' do
       before do
         patch_update

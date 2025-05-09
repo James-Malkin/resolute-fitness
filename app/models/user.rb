@@ -23,6 +23,8 @@ class User < ApplicationRecord
                        length: { minimum: 3, maximum: 20 },
                        format: { with: /\A[a-zA-Z0-9\-]+\z/, message: 'can only contain letters, numbers, and hyphens' }
 
+  scope :by_username, ->(username) { find_by!(username: username) }
+
   # validates :avatar, content_type: { in: %w[image/png image/jpg image/jpeg] }, size: { less_than: 5.megabytes }, if: -> { avatar.attached? }
 
   def self.find_for_database_authentication(warden_conditions)
