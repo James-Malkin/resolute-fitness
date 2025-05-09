@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 describe BookingEvaluator do
@@ -37,7 +39,7 @@ describe BookingEvaluator do
       it 'returns :payment_required' do
         result = process_booking
         expect(result).to eq([:payment_required, Booking.last])
-      end      
+      end
     end
 
     context 'when payment is not required' do

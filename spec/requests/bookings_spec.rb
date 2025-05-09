@@ -5,7 +5,7 @@ require 'rails_helper'
 describe 'Bookings' do
   let(:member) { create(:member) }
   let(:exercise_class) { create(:exercise_class) }
-  let!(:class_schedule) { create(:class_schedule, exercise_class:) }
+  let(:class_schedule) { create(:class_schedule, exercise_class:) }
 
   before do
     sign_in member.user, scope: :user
@@ -64,7 +64,7 @@ describe 'Bookings' do
   describe 'POST /bookings' do
     subject(:post_booking) { post bookings_path, params: { booking: booking_params } }
 
-    let!(:booking_params) { build(:booking, member:, class_schedule:).attributes }
+    let!(:booking_params) { build(:booking, class_schedule:).attributes }
 
     context 'when the booking is created successfully' do
       it 'creates a new booking' do
@@ -94,8 +94,10 @@ describe 'Bookings' do
     end
 
     context 'when the booking creation fails' do
+      let(:invalid_booking) { build(:booking, class_schedule: class_schedule) }
+
       before do
-        allow_any_instance_of(Booking).to receive(:save).and_return(false)
+        allow(BookingEvaluator).to receive(:process_booking).and_return([:error, invalid_booking])
       end
 
       it 'does not create a new booking' do
@@ -104,12 +106,7 @@ describe 'Bookings' do
 
       it 'renders the new booking page' do
         post_booking
-        expect(response.body).to include(class_schedule.exercise_class_name)
-      end
-
-      it 'returns a 422 status code' do
-        post_booking
-        expect(response.status).to eq(422)
+        expect(response).to redirect_to(new_booking_path(class_schedule_id: class_schedule.id))
       end
     end
   end
