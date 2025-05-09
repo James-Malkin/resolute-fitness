@@ -31,5 +31,5 @@ html
                 = lucide_icon('x', class: 'w-4 h-4')
             p = value
 
-    main.flex.flex-col class="#{yield :main_style} #{!current_page?(root_path) && 'container mx-auto my-5 px-3 md:px-5'}"
+    main.flex.flex-col.mb-5 class="#{yield :main_style} #{!current_page?(root_path) && 'container mx-auto my-5 px-3 md:px-5'}"
       = yield
