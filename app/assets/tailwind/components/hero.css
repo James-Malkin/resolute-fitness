@@ -15,7 +15,7 @@
 
 .hero-cta-button {
   @apply absolute font-cal-sans font-bold text-nowrap shadow-lg;
-  @apply left-1/2 -translate-x-1/2 -bottom-8 text-3xl tracking-wider px-6 py-3;
+  @apply left-1/2 -translate-x-1/2 -bottom-8 text-4xl tracking-wider px-6 py-3;
   @apply md:left-1/8 md:-translate-x-0 md:bottom-10;
-  @apply sm:text-4xl sm:tracking-widest;
+  @apply sm:tracking-widest;
 }
