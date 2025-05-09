@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe StripeManager::PaymentIntent do
+describe StripeManager::PaymentIntent do
   describe '.create' do
     subject(:create_payment_intent) { described_class.create(member, booking) }
 

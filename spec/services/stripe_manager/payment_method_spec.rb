@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe StripeManager::PaymentMethod do
+describe StripeManager::PaymentMethod do
   describe '.attach' do
     subject(:attach_payment_method) { described_class.attach(member, payment_method_id) }
 

@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe StripeManager::Customer do
+describe StripeManager::Customer do
   describe '.create' do
     context 'when the member does not have a stripe customer ID' do
       let(:member) { create(:member, stripe_customer_id: nil) }
