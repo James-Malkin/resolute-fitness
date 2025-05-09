@@ -7,4 +7,9 @@ Sentry.init do |config|
   # Add data like request headers and IP for users,
   # see https://docs.sentry.io/platforms/ruby/data-management/data-collected/ for more info
   config.send_default_pii = true
+
+  config.traces_sample_rate = 0.5
+  config.traces_sampler = lambda do |context|
+    true
+  end
 end
