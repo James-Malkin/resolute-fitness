@@ -5,59 +5,81 @@ export default class extends Controller {
 
   static values = {
     active: { type: Number, default: 0 },
-    intervalTime: { type: Number, default: 5000 }
+    intervalTime: { type: Number, default: 5000 },
+    transitionDuration: { type: Number, default: 300 }
   }
 
-  intervalId = null
-
   connect() {
-    this.setupCarousel();
+    if (!this.hasCardTarget || !this.hasIndicatorsTarget) return
+    this.setupCarousel()
   }
 
   setupCarousel() {
-    this.initialiseIndicators();
-    this.showActiveTarget();
-    this.startAutoSlide();
+    this.initialiseIndicators()
+    this.showActiveTarget()
+    this.startAutoSlide()
   }
 
   next() {
-    this.transitionCard((this.activeValue + 1) % this.cardTargets.length)
+    this.goToIndex((this.activeValue + 1) % this.cardTargets.length)
   }
 
-  transitionCard(nextActiveValue) {
-    const entryDirection = 'left'
-    const exitDirection = 'right'
-
-    this.cardTargets[nextActiveValue].dataset.state = `entering-${entryDirection}`
-    this.cardTargets[this.activeValue].dataset.state = `exiting-${exitDirection}`
-
-    void this.cardTargets[nextActiveValue].offsetHeight;
-
-    requestAnimationFrame(() => {
-      this.cardTargets[nextActiveValue].dataset.state = 'active';
-      
-      setTimeout(() => {
-        this.cardTargets[this.activeValue].dataset.state = 'inactive';
-        this.activeValue = nextActiveValue;
-        this.updateIndicators();
-      }, 300);
-    });
+  previous() {
+    this.goToIndex((this.activeValue - 1 + this.cardTargets.length) % this.cardTargets.length)
   }
 
   goTo(index) {
-    if (index !== this.activeValue) { this.transitionCard(index) }
-    this.startAutoSlide();
+    if (index === this.activeValue) return
+    
+    this.goToIndex(index)
+    this.resetAutoSlide()
+  }
+
+  goToIndex(index) {
+    const isMovingForward = index > this.activeValue || 
+      (index === 0 && this.activeValue === this.cardTargets.length - 1)
+    
+    const currentIndex = this.activeValue
+    const nextIndex = index
+    
+    this.animateTransition(currentIndex, nextIndex, isMovingForward)
+  }
+
+  animateTransition(currentIndex, nextIndex, isMovingForward) {
+    const entryDirection = isMovingForward ? 'left' : 'right'
+    const exitDirection = isMovingForward ? 'right' : 'left'
+    
+    const currentCard = this.cardTargets[currentIndex]
+    const nextCard = this.cardTargets[nextIndex]
+    
+    nextCard.dataset.state = `entering-${entryDirection}`
+    currentCard.dataset.state = `exiting-${exitDirection}`
+
+    void nextCard.offsetHeight
+
+    requestAnimationFrame(() => {
+      nextCard.dataset.state = 'active'
+      
+      setTimeout(() => {
+        currentCard.dataset.state = 'inactive'
+        this.activeValue = nextIndex
+        this.updateIndicators()
+      }, this.transitionDurationValue)
+    })
   }
 
   initialiseIndicators() {
-    for (let i = 0; i < this.cardTargets.length; i++) {
+    this.indicatorsTarget.innerHTML = ''
+    
+    this.cardTargets.forEach((_, index) => {
       const indicator = document.createElement('div')
-      indicator.dataset.index = i
-      indicator.addEventListener('click', () => this.goTo(i))
+      indicator.classList.add('carousel-indicator')
+      indicator.dataset.index = index
+      indicator.addEventListener('click', () => this.goTo(index))
       this.indicatorsTarget.appendChild(indicator)
-    }
+    })
 
-    this.updateIndicators();
+    this.updateIndicators()
   }
 
   showActiveTarget() {
@@ -68,24 +90,33 @@ export default class extends Controller {
   }
 
   updateIndicators() {
-    const indicators = this.indicatorsTarget.querySelectorAll('div');
+    const indicators = this.indicatorsTarget.querySelectorAll('div')
     indicators.forEach((indicator, index) => {
-      indicator.dataset.active = (index === this.activeValue).toString();
-    });
+      indicator.dataset.active = (index === this.activeValue).toString()
+    })
   }
 
-  startAutoSlide() {
+  resetAutoSlide() {
+    this.stopAutoSlide()
+    this.startAutoSlide()
+  }
+
+  stopAutoSlide() {
     if (this.intervalId) {
       clearInterval(this.intervalId)
       this.intervalId = null
     }
+  }
 
+  startAutoSlide() {
+    this.stopAutoSlide()
+    
     this.intervalId = setInterval(() => {
-      this.next();
-    }, this.intervalTimeValue);
+      this.next()
+    }, this.intervalTimeValue)
   }
 
   disconnect() {
-    clearInterval(this.intervalId);
+    this.stopAutoSlide()
   }
 }
