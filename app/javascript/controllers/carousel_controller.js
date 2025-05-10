@@ -19,22 +19,36 @@ export default class extends Controller {
     this.showActiveTarget();
     this.startAutoSlide();
   }
-  
+
   next() {
-    this.cardTargets[this.activeValue].classList.remove('active')
-    this.activeValue = (this.activeValue + 1) % this.cardTargets.length
-    this.showActiveTarget()
+    this.transitionCard((this.activeValue + 1) % this.cardTargets.length)
+  }
+
+  transitionCard(nextActiveValue) {
+    const entryDirection = 'left'
+    const exitDirection = 'right'
+
+    this.cardTargets[nextActiveValue].dataset.state = `entering-${entryDirection}`
+    this.cardTargets[this.activeValue].dataset.state = `exiting-${exitDirection}`
+
+    void this.cardTargets[nextActiveValue].offsetHeight;
+
+    setTimeout(() => {
+      this.cardTargets[nextActiveValue].dataset.state = 'active';
+    }, 0);
+
+    setTimeout(() => {
+      this.cardTargets[this.activeValue].dataset.state = 'inactive';
+      this.activeValue = nextActiveValue;
+      this.updateIndicators();
+    }, 300);
   }
 
   goTo(index) {
-    if (index !== this.activeValue) {
-      this.cardTargets[this.activeValue].classList.remove('active')
-      this.activeValue = index
-      this.showActiveTarget()
-    }
+    if (index !== this.activeValue) { this.transitionCard(index) }
     this.startAutoSlide();
   }
-  
+
   initialiseIndicators() {
     for (let i = 0; i < this.cardTargets.length; i++) {
       const indicator = document.createElement('div')
@@ -42,11 +56,15 @@ export default class extends Controller {
       indicator.addEventListener('click', () => this.goTo(i))
       this.indicatorsTarget.appendChild(indicator)
     }
-  }
-  
-  showActiveTarget() {
-    this.cardTargets[this.activeValue].classList.add('active')
+
     this.updateIndicators();
+  }
+
+  showActiveTarget() {
+    this.cardTargets.forEach((card, index) => {
+      card.dataset.state = index === this.activeValue ? 'active' : 'inactive'
+      card.dataset.index = index
+    })
   }
 
   updateIndicators() {
@@ -55,7 +73,7 @@ export default class extends Controller {
       indicator.dataset.active = (index === this.activeValue).toString();
     });
   }
-  
+
   startAutoSlide() {
     if (this.intervalId) {
       clearInterval(this.intervalId)

@@ -1,6 +1,8 @@
 .carousel {
+  @apply w-full;
+
   .carousel-inner {
-    @apply relative;
+    @apply relative overflow-hidden w-full h-55;
 
     .carousel-control-prev {
       @apply absolute top-1/2 -translate-y-1/2 left-0.5 text-neutral-400;
@@ -12,13 +14,31 @@
   }
 
   @media (max-width: 768px) {
-    .info-card:not(.active) {
-      @apply hidden;
+    .info-card {
+      @apply w-full absolute transition-transform duration-500 ease-in-out;
+
+      &[data-state=active] {
+        transform: translateX(0);
+      }
+
+      &[data-state=inactive] {
+        @apply hidden;
+      }
+
+      &[data-state=entering-left],
+      &[data-state=exiting-left] {
+        transform: translateX(-150%);
+      }
+
+      &[data-state=entering-right],
+      &[data-state=exiting-right] {
+        transform: translateX(150%);
+      }
     }
   }
 
   .carousel-indicators {
-    @apply flex justify-center gap-3 mt-4 md:hidden;
+    @apply flex justify-center gap-3 mt-1 md:hidden;
 
     div {
       @apply w-2 h-2 bg-neutral-400 rounded-full cursor-pointer;
