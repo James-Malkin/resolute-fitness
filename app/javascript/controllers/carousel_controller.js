@@ -33,15 +33,15 @@ export default class extends Controller {
 
     void this.cardTargets[nextActiveValue].offsetHeight;
 
-    setTimeout(() => {
+    requestAnimationFrame(() => {
       this.cardTargets[nextActiveValue].dataset.state = 'active';
-    }, 0);
-
-    setTimeout(() => {
-      this.cardTargets[this.activeValue].dataset.state = 'inactive';
-      this.activeValue = nextActiveValue;
-      this.updateIndicators();
-    }, 300);
+      
+      setTimeout(() => {
+        this.cardTargets[this.activeValue].dataset.state = 'inactive';
+        this.activeValue = nextActiveValue;
+        this.updateIndicators();
+      }, 300);
+    });
   }
 
   goTo(index) {
