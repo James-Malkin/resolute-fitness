@@ -47,6 +47,7 @@ group :development, :test do
   gem 'brakeman', require: false
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
 
+  gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'faker', '~> 3.5'
   gem 'rails_best_practices-rake_task', '~> 1.0'
@@ -55,7 +56,6 @@ group :development, :test do
   gem 'rubocop-performance', require: false
   gem 'slim_lint', '~> 0.31.1'
   gem 'term-ansicolor', '~> 1.11'
-  gem 'dotenv-rails'
 end
 
 group :development do
