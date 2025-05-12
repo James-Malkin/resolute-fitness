@@ -95,3 +95,68 @@ exercise_classes.each do |key, data|
     image: File.open(Rails.root.join('db', 'seeds', 'images', 'exercise_classes', data[:image_path]))
   )
 end
+
+
+puts "\n== Creating class schedules for the next 6 months =="
+
+# Get all exercise classes to rotate through
+all_classes = ExerciseClass.all.to_a
+class_count = all_classes.length
+
+# Get a trainer to assign to classes
+trainer = Employee.first
+if trainer.nil?
+  puts "Error: No trainers found. Make sure you create employees first."
+  exit
+end
+
+# Calculate date range (today to 6 months from now)
+start_date = Date.today
+end_date = start_date + 6.months
+
+# Track how many schedules created
+created_count = 0
+
+# For each day in the next 6 months
+(start_date..end_date).each do |date|
+  # Set class capacity based on day of week (higher capacity on weekends)
+  capacity = date.on_weekend? ? 25 : 20
+  
+  # Morning class at 10:00 AM
+  morning_class = all_classes[date.yday % class_count] # Rotate through classes
+  morning_datetime = DateTime.new(date.year, date.month, date.day, 10, 0) # 10:00 AM
+  
+  morning_schedule = ClassSchedule.find_or_initialize_by(
+    exercise_class: morning_class,
+    date_time: morning_datetime
+  )
+  
+  if morning_schedule.new_record?
+    morning_schedule.capacity = capacity
+    morning_schedule.duration = 60 # 60 minutes
+    morning_schedule.trainer = trainer
+    morning_schedule.price = 15.00
+    morning_schedule.save!
+    created_count += 1
+  end
+  
+  # Afternoon class at 2:00 PM
+  afternoon_class = all_classes[(date.yday + 5) % class_count] # Different class than morning
+  afternoon_datetime = DateTime.new(date.year, date.month, date.day, 14, 0) # 2:00 PM
+  
+  afternoon_schedule = ClassSchedule.find_or_initialize_by(
+    exercise_class: afternoon_class,
+    date_time: afternoon_datetime
+  )
+  
+  if afternoon_schedule.new_record?
+    afternoon_schedule.capacity = capacity
+    afternoon_schedule.duration = 60 # 60 minutes
+    afternoon_schedule.trainer = trainer
+    afternoon_schedule.price = 15.00
+    afternoon_schedule.save!
+    created_count += 1
+  end
+end
+
+puts "Created #{created_count} class schedules from #{start_date} to #{end_date}"
