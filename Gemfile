@@ -55,6 +55,7 @@ group :development, :test do
   gem 'rubocop-performance', require: false
   gem 'slim_lint', '~> 0.31.1'
   gem 'term-ansicolor', '~> 1.11'
+  gem 'dotenv-rails'
 end
 
 group :development do

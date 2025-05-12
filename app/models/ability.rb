@@ -8,7 +8,7 @@ class Ability
     can :read, ClassSchedule
 
     can :view, :profile do |_, target|
-      target == user || target.member&.public_profile?
+      target == user || target.member&.public_profile? || target.employee
     end
 
     return unless user.present?
