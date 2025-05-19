@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 describe 'Plans' do
-  describe 'GET /join' do
+  describe 'GET /plans' do
     let(:member) { create(:member) }
     let(:payment_method) do
       Stripe::PaymentMethod.construct_from(
@@ -41,12 +41,12 @@ describe 'Plans' do
         Stripe::ListObject.construct_from(data: [plan])
       )
 
-      get join_plans_path
+      get plans_path
     end
 
     it 'returns the join page' do
       expect(response).to have_http_status(:ok)
-      expect(response.body).to include('Join')
+      expect(response.body).to include('Plans & Pricing')
     end
 
     it 'displays the payment methods' do
