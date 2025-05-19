@@ -1,5 +1,5 @@
 .toast-container {
-  @apply fixed bottom-0 flex flex-col-reverse items-center sm:items-end w-full p-2 container inset-x-1/2 -translate-x-1/2 bg-white;
+  @apply fixed bottom-0 flex flex-col-reverse items-center sm:items-end w-full p-2 container inset-x-1/2 -translate-x-1/2;
 
   & > * {
     transition: 
@@ -11,7 +11,7 @@
 }
 
 .toast {
-  @apply w-full bottom-2 rounded-sm overflow-clip flex max-w-md shadow-md opacity-100;
+  @apply w-full bottom-2 rounded-sm overflow-clip flex max-w-md shadow-md opacity-100 bg-white!;
   transform: translateX(0);
   max-height: 200px;
 
