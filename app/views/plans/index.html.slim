@@ -10,7 +10,7 @@ form.flex.flex-col.md:flex-row.gap-2 data-action='change->purchase-plan#change'
       p = plan.description
 
       span.text-center.font-cal-sans.tracking-wider.md:mb-3 = plan.price
-      input type="radio" name="price_id" id="plan_#{plan.id}" data-action="change->purchase-plan#changePlan" data-purchase-plan-target="plan" data-purchase-plan-price="#{plan.price}" value="#{plan.id}"
+      input type="radio" name="price_id" id="plan_#{plan.id}" value="#{plan.id}"
 
 .mt-5.md:hidden
   h3.font-semibold.text-center data-purchase-plan-target='title' Select a plan to view it's features
@@ -27,7 +27,7 @@ table.plan-features-table.mt-5 data-selected-plan=nil data-purchase-plan-target=
       th Gym Access
       td.placeholder = lucide_icon('minus', class: 'size-6')
       - @join_presenter.formatted_plans.each do |plan|
-        td id="plan_#{plan.id}" = plan.features.time_restriction&.humanize || 'Unrestricted'
+        td.rounded-t-md id="plan_#{plan.id}" = plan.features.time_restriction&.humanize || 'Unrestricted'
 
     tr
       th Peak Bookings
@@ -55,4 +55,7 @@ table.plan-features-table.mt-5 data-selected-plan=nil data-purchase-plan-target=
       th Free Wi-Fi
       td.placeholder = lucide_icon('minus', class: 'size-6')
       - @join_presenter.formatted_plans.each do |plan|
-        td id="plan_#{plan.id}" = lucide_icon('check', class: 'size-6')
+        td.rounded-b-md id="plan_#{plan.id}" = lucide_icon('check', class: 'size-6')
+
+- if current_user.member
+  = render 'join_form'

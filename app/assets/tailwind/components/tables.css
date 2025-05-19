@@ -9,17 +9,17 @@
     }
 
     td {
-      @apply py-2 hidden justify-center w-1/2 md:w-full;
+      @apply py-2 hidden justify-center w-1/2 md:w-full md:mx-10;
 
-        @media (min-width: 768px) {
-          @apply !flex;
+      @media (min-width: 768px) {
+        @apply !flex;
 
-          &.placeholder {
-            @apply !hidden;
-          }
+        &.placeholder {
+          @apply !hidden;
         }
+      }
     }
-    }
+  }
 
   td.placeholder {
     @apply hidden;
@@ -37,9 +37,7 @@
     }
 
     td.selected {
-      @apply !flex;
+      @apply !flex md:bg-chateau-green-100;
     }
   }
-
-
 }
