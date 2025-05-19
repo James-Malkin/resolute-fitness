@@ -11,10 +11,10 @@
         = link_to new_payment_method_path, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'icon-btn bg-gray-400 py-1 px-1.5'
           = lucide_icon('plus', class: 'w-4 h-4')
       #payment-methods.pt-2.border-t.border-neutral-300.flex.flex-col.gap-2
-        - if @join_presenter.member_payment_methods.empty?
+        - if member_payment_methods.empty?
           .text-center.text-neutral-500.text-sm.py-5 No payment methods available. Please add one.
         - else
-          - @join_presenter.member_payment_methods.each do |payment_method|
+          - member_payment_methods.each do |payment_method|
             = render 'payment_method_card', f:, payment_method:
 
     .flex.flex-col.gap-2.w-full.md:w-1/3

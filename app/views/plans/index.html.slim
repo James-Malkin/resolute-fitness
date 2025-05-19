@@ -6,7 +6,6 @@
   h1 class='text-6xl text-white absolute z-50 left-1/2 top-1/2 text-nowrap -translate-x-1/2 -translate-y-1/2 font-bold font-cal-sans tracking-wider' Plans & Pricing
   .absolute.top-0.left-0.right-0.bottom-0.bg-gradient-to-b.from-neutral-900.to-neutral-900.opacity-60
 
-
 .hidden data-purchase-plan-target='planData' data-plans="#{@join_presenter.formatted_plans.to_json}"
 
 form.flex.flex-col.md:flex-row.gap-2
@@ -22,7 +21,7 @@ table.plan-features-table.mt-5 data-selected-plan=nil data-purchase-plan-target=
     tr
       th.text-left Feature
       th.text-center Value
-  
+
   tbody.divide-y.divide-neutral-300
     - plans = @join_presenter.formatted_plans
 
@@ -38,11 +37,11 @@ table.plan-features-table.mt-5 data-selected-plan=nil data-purchase-plan-target=
     = render 'table_row', plans:, feature: 'Book in Advance' do |plan|
       = plan.features.book_in_advance
 
-    = render 'table_row', plans:, feature: 'Premium Facilities' do |plan|
+    = render 'table_row', plans:, feature: 'Premium Facilities' do
       = lucide_icon('check', class: 'size-6')
 
-    = render 'table_row', plans:, feature: 'Free Wi-Fi', style: 'rounded-b-md' do |plan|
+    = render 'table_row', plans:, feature: 'Free Wi-Fi', style: 'rounded-b-md' do
       = lucide_icon('check', class: 'size-6')
 
-- if current_user.member
-  = render 'join_form'
+- if current_user&.member
+  = render 'join_form', member_payment_methods: @join_presenter.member_payment_methods

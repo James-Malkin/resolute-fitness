@@ -9,7 +9,7 @@ class JoinPlanPresenter
   PaymentMethod = Struct.new(:id, :brand, :last4, :exp_month, :exp_year)
 
   def initialize(user)
-    @member = user.member
+    @member = user&.member
   end
 
   def member_has_a_plan?
