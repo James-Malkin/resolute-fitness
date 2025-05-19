@@ -36,7 +36,6 @@ table.plan-features-table.mt-5 data-selected-plan=nil data-purchase-plan-target=
 
     = render 'table_row', plans:, feature: 'Book in Advance' do |plan|
       = plan.features.book_in_advance
-      = plan.inspect
 
     = render 'table_row', plans:, feature: 'Premium Facilities' do
       = lucide_icon('check', class: 'size-6')
