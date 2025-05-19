@@ -1,0 +1,5 @@
+.plan-label
+  h3.font-bold.text-3xl.text-center.mb-1.font-cal-sans.tracking-wider = plan.id.upcase
+  p.text-sm.text-neutral-500.text-center = plan.description
+  span.text-center.font-cal-sans.tracking-wider.mt-1 = plan.price
+  / = f.radio_button :price_id, plan.id, id: "plan_#{plan.id}", data: { action: 'change->purchase-plan#changePlan', plan: plan.id.capitalize, price: plan.price }, class: 'mt-1'

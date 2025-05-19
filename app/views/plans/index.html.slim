@@ -1,0 +1,58 @@
+- content_for :main_controller, "purchase-plan"
+
+.hidden data-purchase-plan-target='planData' data-plans="#{@join_presenter.formatted_plans.to_json}"
+
+form.flex.flex-col.md:flex-row.gap-2 data-action='change->purchase-plan#change'
+  - @join_presenter.formatted_plans.each do |plan|
+    label for="plan_#{plan.id}" id="#{plan.id}_plan_label" class='plan-card'
+      h3 = plan.id.upcase
+
+      p = plan.description
+
+      span.text-center.font-cal-sans.tracking-wider.md:mb-3 = plan.price
+      input type="radio" name="price_id" id="plan_#{plan.id}" data-action="change->purchase-plan#changePlan" data-purchase-plan-target="plan" data-purchase-plan-price="#{plan.price}" value="#{plan.id}"
+
+.mt-5.md:hidden
+  h3.font-semibold.text-center data-purchase-plan-target='title' Select a plan to view it's features
+  p.text-center data-purchase-plan-target='description'
+
+table.plan-features-table.mt-5 data-selected-plan=nil data-purchase-plan-target='featuresTable'
+  thead.sr-only
+    tr
+      th.text-left Feature
+      th.text-center Value
+  
+  tbody.divide-y.divide-neutral-300
+    tr
+      th Gym Access
+      td.placeholder = lucide_icon('minus', class: 'size-6')
+      - @join_presenter.formatted_plans.each do |plan|
+        td id="plan_#{plan.id}" = plan.features.time_restriction&.humanize || 'Unrestricted'
+
+    tr
+      th Peak Bookings
+      td.placeholder = lucide_icon('minus', class: 'size-6')
+      - @join_presenter.formatted_plans.each do |plan|
+        td id="plan_#{plan.id}"
+          - if plan.features.peak_bookings[:type] == :icon
+            = lucide_icon(plan.features.peak_bookings[:value], class: 'size-6')
+          - else
+            = plan.features.peak_bookings[:value]
+
+    tr
+      th Book in Advance
+      td.placeholder = lucide_icon('minus', class: 'size-6')
+      - @join_presenter.formatted_plans.each do |plan|
+        td id="plan_#{plan.id}" = plan.features.book_in_advance
+    
+    tr
+      th Premium Facilities
+      td.placeholder = lucide_icon('minus', class: 'size-6')
+      - @join_presenter.formatted_plans.each do |plan|
+        td id="plan_#{plan.id}" = lucide_icon('check', class: 'size-6')
+
+    tr
+      th Free Wi-Fi
+      td.placeholder = lucide_icon('minus', class: 'size-6')
+      - @join_presenter.formatted_plans.each do |plan|
+        td id="plan_#{plan.id}" = lucide_icon('check', class: 'size-6')

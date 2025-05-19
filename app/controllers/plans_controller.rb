@@ -3,7 +3,11 @@
 class PlansController < ApplicationController
   before_action :authenticate_user!, only: [:join]
 
-  def index; end
+  def index
+    @join_presenter = JoinPlanPresenter.new(current_user.member)
+
+  
+  end
 
   def join
     @join_presenter = JoinPlanPresenter.new(current_user.member)
