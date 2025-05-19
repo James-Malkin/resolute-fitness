@@ -37,7 +37,7 @@ header.navbar data-controller='navbar'
     = link_to 'Home', root_path
     = link_to 'Classes', exercise_classes_path
     = link_to 'Timetable', class_schedules_path
-    = link_to 'Join', join_plans_path
+    = link_to 'Pricing', plans_path
 
     - if user_signed_in?
       button.nav-avatar data-action='click->navbar#open' data-target='profileMenu'
@@ -59,7 +59,7 @@ header.navbar data-controller='navbar'
     = link_to 'Home', root_path
     = link_to 'Classes', exercise_classes_path
     = link_to 'Timetable', class_schedules_path
-    = link_to 'Join', join_plans_path
+    = link_to 'Pricing', plans_path
 
     - unless user_signed_in?
       = link_to 'Sign Up', new_user_registration_path

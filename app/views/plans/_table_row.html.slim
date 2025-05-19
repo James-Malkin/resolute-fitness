@@ -1,0 +1,6 @@
+tr
+  th = feature
+  td.placeholder = lucide_icon('minus', class: 'size-6')
+  - plans.each do |plan|
+    td id="plan_#{plan.id}" class="#{defined?(style) && style}"
+      = yield plan

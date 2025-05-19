@@ -46,45 +46,45 @@ users.each do |user|
 end
 
 exercise_classes = {
-  "Strength Foundations" => {
-    description: "This class teaches the fundamentals of weightlifting with a focus on proper form, ideal for beginners building a solid strength base.",
-    image_path: "strength_foundations.jpg"
+  'Strength Foundations' => {
+    description: 'This class teaches the fundamentals of weightlifting with a focus on proper form, ideal for beginners building a solid strength base.',
+    image_path: 'strength_foundations.jpg'
   },
-  "Cardio Blast" => {
-    description: "A high-energy workout incorporating diverse movements to elevate your heart rate and maximize calorie expenditure.",
-    image_path: "cardio_blast.jpg"
+  'Cardio Blast' => {
+    description: 'A high-energy workout incorporating diverse movements to elevate your heart rate and maximize calorie expenditure.',
+    image_path: 'cardio_blast.jpg'
   },
-  "HIIT Circuit" => {
-    description: "Experience the effectiveness of high-intensity interval training, alternating short bursts of intense activity with brief recovery periods.",
-    image_path: "hiit_circuit.jpg"
+  'HIIT Circuit' => {
+    description: 'Experience the effectiveness of high-intensity interval training, alternating short bursts of intense activity with brief recovery periods.',
+    image_path: 'hiit_circuit.jpg'
   },
-  "Yoga Flow" => {
-    description: "Move through a fluid sequence of yoga poses to enhance flexibility, improve balance, and cultivate mental focus.",
-    image_path: "yoga_flow.jpg"
+  'Yoga Flow' => {
+    description: 'Move through a fluid sequence of yoga poses to enhance flexibility, improve balance, and cultivate mental focus.',
+    image_path: 'yoga_flow.jpg'
   },
-  "Pilates Core" => {
-    description: "Strengthen your deep core muscles through controlled movements, leading to better posture and increased body stability.",
-    image_path: "pilates_core.jpg"
+  'Pilates Core' => {
+    description: 'Strengthen your deep core muscles through controlled movements, leading to better posture and increased body stability.',
+    image_path: 'pilates_core.jpg'
   },
-  "Spin Power" => {
-    description: "A challenging indoor cycling class designed to improve cardiovascular fitness and build strength in your legs and glutes.",
-    image_path: "spin_power.jpg"
+  'Spin Power' => {
+    description: 'A challenging indoor cycling class designed to improve cardiovascular fitness and build strength in your legs and glutes.',
+    image_path: 'spin_power.jpg'
   },
-  "Body Combat" => {
-    description: "This dynamic, martial arts-inspired class combines punches, kicks, and other movements for a full-body workout that improves agility and coordination.",
-    image_path: "body_combat.jpg"
+  'Body Combat' => {
+    description: 'This dynamic, martial arts-inspired class combines punches, kicks, and other movements for a full-body workout that improves agility and coordination.',
+    image_path: 'body_combat.jpg'
   },
-  "Barre Sculpt" => {
-    description: "A low-impact yet effective class using ballet-inspired exercises to tone muscles, improve posture, and increase flexibility.",
-    image_path: "barre_sculpt.jpg"
+  'Barre Sculpt' => {
+    description: 'A low-impact yet effective class using ballet-inspired exercises to tone muscles, improve posture, and increase flexibility.',
+    image_path: 'barre_sculpt.jpg'
   },
-  "Functional Fitness" => {
-    description: "Train your body for everyday tasks with exercises that mimic real-life movements, enhancing overall strength and mobility.",
-    image_path: "functional_fitness.jpg"
+  'Functional Fitness' => {
+    description: 'Train your body for everyday tasks with exercises that mimic real-life movements, enhancing overall strength and mobility.',
+    image_path: 'functional_fitness.jpg'
   },
-  "Stretch & Recover" => {
-    description: "Dedicate time to improving your range of motion and accelerating muscle recovery through various stretching techniques and mobility work.",
-    image_path: "stretch_recover.jpg"
+  'Stretch & Recover' => {
+    description: 'Dedicate time to improving your range of motion and accelerating muscle recovery through various stretching techniques and mobility work.',
+    image_path: 'stretch_recover.jpg'
   }
 }
 
@@ -96,7 +96,6 @@ exercise_classes.each do |key, data|
   )
 end
 
-
 puts "\n== Creating class schedules for the next 6 months =="
 
 # Get all exercise classes to rotate through
@@ -106,7 +105,7 @@ class_count = all_classes.length
 # Get a trainer to assign to classes
 trainer = Employee.first
 if trainer.nil?
-  puts "Error: No trainers found. Make sure you create employees first."
+  puts 'Error: No trainers found. Make sure you create employees first.'
   exit
 end
 
@@ -121,16 +120,16 @@ created_count = 0
 (start_date..end_date).each do |date|
   # Set class capacity based on day of week (higher capacity on weekends)
   capacity = date.on_weekend? ? 25 : 20
-  
+
   # Morning class at 10:00 AM
   morning_class = all_classes[date.yday % class_count] # Rotate through classes
   morning_datetime = DateTime.new(date.year, date.month, date.day, 10, 0) # 10:00 AM
-  
+
   morning_schedule = ClassSchedule.find_or_initialize_by(
     exercise_class: morning_class,
     date_time: morning_datetime
   )
-  
+
   if morning_schedule.new_record?
     morning_schedule.capacity = capacity
     morning_schedule.duration = 60 # 60 minutes
@@ -139,24 +138,24 @@ created_count = 0
     morning_schedule.save!
     created_count += 1
   end
-  
+
   # Afternoon class at 2:00 PM
   afternoon_class = all_classes[(date.yday + 5) % class_count] # Different class than morning
   afternoon_datetime = DateTime.new(date.year, date.month, date.day, 14, 0) # 2:00 PM
-  
+
   afternoon_schedule = ClassSchedule.find_or_initialize_by(
     exercise_class: afternoon_class,
     date_time: afternoon_datetime
   )
-  
-  if afternoon_schedule.new_record?
-    afternoon_schedule.capacity = capacity
-    afternoon_schedule.duration = 60 # 60 minutes
-    afternoon_schedule.trainer = trainer
-    afternoon_schedule.price = 15.00
-    afternoon_schedule.save!
-    created_count += 1
-  end
+
+  next unless afternoon_schedule.new_record?
+
+  afternoon_schedule.capacity = capacity
+  afternoon_schedule.duration = 60 # 60 minutes
+  afternoon_schedule.trainer = trainer
+  afternoon_schedule.price = 15.00
+  afternoon_schedule.save!
+  created_count += 1
 end
 
 puts "Created #{created_count} class schedules from #{start_date} to #{end_date}"

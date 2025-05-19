@@ -25,14 +25,17 @@ export default class extends Controller {
 
     this.titleTarget.textContent = `The ${capitalizedPlan} Plan Includes:`;
     this.descriptionTarget.textContent = planData.description;
-
-    this.planNameTarget.textContent = `${capitalizedPlan} Plan`;
-    this.priceTarget.textContent = `${planData.price} / month`;
-
-    this.planTarget.value = planData.id;
-
+    
     this.updateFeatureHighlight(planData.id);
-    this.checkSubmitButton();
+
+    if (!this.readOnly) {
+      this.planNameTarget.textContent = `${capitalizedPlan} Plan`;
+      this.priceTarget.textContent = `${planData.price} / month`;
+
+      this.planTarget.value = planData.id;
+
+      this.checkSubmitButton();
+    }
   }
 
   changeCard(event) {

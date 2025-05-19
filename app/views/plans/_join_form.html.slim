@@ -18,18 +18,11 @@
             = render 'payment_method_card', f:, payment_method:
 
     .flex.flex-col.gap-2.w-full.md:w-1/3
-      .flex
-        = lucide_icon('chevron-right')
-        span data-purchase-plan-target='planName' No Plan Selected
-      .flex
-        = lucide_icon('chevron-right')
-        span data-purchase-plan-target='price' £0.00 / month
-      .flex
-        = lucide_icon('chevron-right')
-        span data-purchase-plan-target='card' No Card Selected
-      span.flex
-        = lucide_icon('chevron-right')
-        = "Starting #{Date.current.strftime('%B %d, %Y')}"
+      h3.font-medium Summary:
+      = render 'summary_item', target: 'planName', content: 'No Plan Selected'
+      = render 'summary_item', target: 'price', content: '£0.00 / month'
+      = render 'summary_item', target: 'card', content: 'No Card Selected'
+      = render 'summary_item', target: nil, content: "Starting #{Date.current.strftime('%B %d, %Y')}"
 
       = f.submit 'Join', disabled: true, data: { purchase_plan_target: 'submitButton' }, class: 'btn btn-primary mt-3'
 
