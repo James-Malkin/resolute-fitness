@@ -1,11 +1,7 @@
 # frozen_string_literal: true
 
 class PlansController < ApplicationController
-  before_action :authenticate_user!, only: [:join]
-
-  def index; end
-
-  def join
-    @join_presenter = JoinPlanPresenter.new(current_user.member)
+  def index
+    @join_presenter = JoinPlanPresenter.new(current_user)
   end
 end

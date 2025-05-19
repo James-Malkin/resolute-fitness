@@ -1,0 +1,43 @@
+.plan-features-table {
+  @apply mx-2;
+
+  tr {
+    @apply flex;
+
+    th {
+      @apply py-2 text-left font-medium text-neutral-800 w-1/2 md:w-full;
+    }
+
+    td {
+      @apply py-2 hidden justify-center w-1/2 md:w-full md:mx-10;
+
+      @media (min-width: 768px) {
+        @apply !flex;
+
+        &.placeholder {
+          @apply !hidden;
+        }
+      }
+    }
+  }
+
+  td.placeholder {
+    @apply hidden;
+  }
+
+  &:not([data-selected-plan]) {
+    td.placeholder {
+      @apply flex;
+    }
+  }
+
+  &[data-selected-plan] {
+    td.placeholder {
+      @apply hidden;
+    }
+
+    td.selected {
+      @apply !flex md:bg-chateau-green-100/50;
+    }
+  }
+}

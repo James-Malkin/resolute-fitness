@@ -18,6 +18,7 @@ Metrics/BlockLength:
     - config/environments/*.rb
     - spec/**/*
     - config/routes.rb
+    - db/seeds.rb
 
 Metrics/MethodLength:
   Exclude:

@@ -1,5 +1,5 @@
 .navbar {
-  @apply flex px-5 py-3 items-center justify-center relative h-28;
+  @apply flex px-5 py-3 items-center justify-center relative h-28 text-neutral-900;
 
   @media (min-width: 768px) {
     @apply border-b border-gray-100 px-10 flex-row justify-between;
@@ -115,7 +115,7 @@
 
   .nav-avatar {
     @apply w-10 h-10 rounded-full border border-gray-400 cursor-pointer 
-           overflow-clip hidden items-center justify-center;
+           overflow-clip hidden items-center justify-center ml-2;
     
     img {
       @apply w-full h-full object-cover min-w-10 min-h-10;

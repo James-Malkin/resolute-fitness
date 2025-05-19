@@ -1,5 +1,7 @@
-= f.label "plan_#{plan.id}", id: "#{plan.id}_plan_label", class: 'plan-label' do
-  h3.font-bold.text-3xl.text-center.mb-1.font-cal-sans.tracking-wider = plan.id.upcase
-  p.text-sm.text-neutral-500.text-center This is a description of the #{plan.id} plan.
-  span.text-center.font-cal-sans.tracking-wider.mt-1 = plan.price
-  = f.radio_button :price_id, plan.id, id: "plan_#{plan.id}", data: { action: 'change->purchase-plan#changePlan', plan: plan.id.capitalize, price: plan.price }, class: 'mt-1'
+  label for="plan_#{plan.id}" id="#{plan.id}_plan_label" class='plan-card'
+    h3 = plan.id.upcase
+
+    p = plan.description
+
+    span.text-center.font-cal-sans.tracking-wider.md:mb-3 = plan.price
+    input type="radio" name="price_id" id="plan_#{plan.id}" value="#{plan.id}" data-action="change->purchase-plan#changePlan"

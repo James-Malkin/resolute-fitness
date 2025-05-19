@@ -22,7 +22,11 @@ module StripeHelper
       interval: interval,
       interval_count: interval_count,
       metadata: {
-        plan_type: 'basic'
+        display_colour: '#000000',
+        description: 'Basic Plan Description',
+        book_in_advance: 7,
+        plan_type: 'basic',
+        time_restriction: 'off_peak'
       }
     )
   end

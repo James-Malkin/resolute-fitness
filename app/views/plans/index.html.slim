@@ -1,0 +1,47 @@
+- content_for :main_controller, 'purchase-plan'
+- content_for :main_style, 'mt-0'
+
+.relative.mb-3.rounded-md.md:mt-3.hidden.md:block
+  = image_tag 'pricing-hero.jpeg', class: 'w-full h-35 md:h-64 object-cover object-center', alt: 'Plans and Pricing'
+  h1 class='text-6xl text-white absolute z-50 left-1/2 top-1/2 text-nowrap -translate-x-1/2 -translate-y-1/2 font-bold font-cal-sans tracking-wider' Plans & Pricing
+  .absolute.top-0.left-0.right-0.bottom-0.bg-gradient-to-b.from-neutral-900.to-neutral-900.opacity-60
+
+.hidden data-purchase-plan-target='planData' data-plans="#{@join_presenter.formatted_plans.to_json}"
+
+form.flex.flex-col.md:flex-row.gap-2
+  - @join_presenter.formatted_plans.each do |plan|
+    = render 'plan_card', plan:
+
+.mt-5.md:hidden
+  h3.font-semibold.text-center data-purchase-plan-target='title' Select a plan to view it's features
+  p.text-center data-purchase-plan-target='description'
+
+table.plan-features-table.mt-5 data-selected-plan=nil data-purchase-plan-target='featuresTable'
+  thead.sr-only
+    tr
+      th.text-left Feature
+      th.text-center Value
+
+  tbody.divide-y.divide-neutral-300
+    - plans = @join_presenter.formatted_plans
+
+    = render 'table_row', plans:, feature: 'Gym Access', style: 'rounded-t-md' do |plan|
+      = plan.features.time_restriction&.humanize || 'Unrestricted'
+
+    = render 'table_row', plans:, feature: 'Peak Bookings' do |plan|
+      - if plan.features.peak_bookings[:type] == :icon
+        = lucide_icon(plan.features.peak_bookings[:value], class: 'size-6')
+      - else
+        = plan.features.peak_bookings[:value]
+
+    = render 'table_row', plans:, feature: 'Book in Advance' do |plan|
+      = plan.features.book_in_advance
+
+    = render 'table_row', plans:, feature: 'Premium Facilities' do
+      = lucide_icon('check', class: 'size-6')
+
+    = render 'table_row', plans:, feature: 'Free Wi-Fi', style: 'rounded-b-md' do
+      = lucide_icon('check', class: 'size-6')
+
+- if current_user&.member
+  = render 'join_form', member_payment_methods: @join_presenter.member_payment_methods

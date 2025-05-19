@@ -1,0 +1,7 @@
+.full-bleed-image {
+  width: calc(100% + 2rem); /* For mobile (2 * 1rem margin) */
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 100vw;
+}

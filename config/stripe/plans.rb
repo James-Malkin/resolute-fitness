@@ -37,6 +37,12 @@ Stripe.plan :bronze do |plan|
   plan.amount = 1999
   plan.currency = 'gbp'
   plan.interval = 'month'
+  plan.metadata = {
+    description: 'Off-peak access only. Perfect for flexible schedules.',
+    time_restriction: 'off_peak',
+    peak_bookings: 0,
+    book_in_advance: 7
+  }
 end
 
 Stripe.plan :silver do |plan|
@@ -44,6 +50,12 @@ Stripe.plan :silver do |plan|
   plan.amount = 2999
   plan.currency = 'gbp'
   plan.interval = 'month'
+  plan.metadata = {
+    description: 'Off-peak access + limited peak access. Ideal for regular users.',
+    time_restriction: 'limited_peak',
+    peak_bookings: 8,
+    book_in_advance: 7
+  }
 end
 
 Stripe.plan :gold do |plan|
@@ -51,4 +63,10 @@ Stripe.plan :gold do |plan|
   plan.amount = 3999
   plan.currency = 'gbp'
   plan.interval = 'month'
+  plan.metadata = {
+    description: 'Unrestricted access. Perfect for fitness enthusiasts.',
+    time_restriction: nil,
+    peak_bookings: nil,
+    book_in_advance: 14
+  }
 end
