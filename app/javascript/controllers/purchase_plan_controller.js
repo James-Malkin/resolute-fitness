@@ -9,59 +9,30 @@ export default class extends Controller {
   connect() {
     this.readOnly = !this.hasSubmitButtonTarget;
     this.plans = JSON.parse(this.planDataTarget.dataset.plans);
-
-    console.log(this.plans);
   }
 
-  change() {
-    console.log("Change event triggered");
-
+  changePlan() {
     const planSelected = this.element.querySelector('input[name="price_id"]:checked');
     if (!planSelected) return;
 
-    // Get the plan ID from the selected radio button
-    const planId = planSelected.value;
-    
-    // Find the matching plan from the parsed data
-    const selectedPlanData = this.plans.find(plan => plan.id === planId);
+    const planID = planSelected.value;
 
-    this.changePlan(selectedPlanData);
-    
-    // Update the table's selected plan attribute
-    this.featuresTableTarget.dataset.selectedPlan = planId;
-    
-    // Remove selected class from all cells
-    this.featuresTableTarget.querySelectorAll('td.selected').forEach(cell => {
-      cell.classList.remove('selected');
-    });
-    
-    // Then add 'selected' class to the features of the selected plan
-    const featureData = this.featuresTableTarget.querySelectorAll(`#plan_${planId}`);
-    featureData.forEach(feature => {
-      feature.classList.add('selected');
-    });
+    const planData = this.plans.find(plan => plan.id === planID);
 
-    // Capitalize the first letter of the plan ID
-    const capitalizedPlan = planId.charAt(0).toUpperCase() + planId.slice(1);
-    
-    // Update title and description using the data from the JSON
+    if (!planData) return;
+
+    const capitalizedPlan = planID.charAt(0).toUpperCase() + planID.slice(1);
+
     this.titleTarget.textContent = `The ${capitalizedPlan} Plan Includes:`;
-    
-    // Use the description from the JSON data
-    this.descriptionTarget.textContent = selectedPlanData.description;
+    this.descriptionTarget.textContent = planData.description;
 
-    // Handle payment method logic 
-    const paymentMethodSelected = this.element.querySelector('input[name="payment_method_id"]:checked');
+    this.planNameTarget.textContent = `${capitalizedPlan} Plan`;
+    this.priceTarget.textContent = `${planData.price} / month`;
 
-      this.checkSubmitButton();
-
-  }
-
-  changePlan(planData) {
     this.planTarget.value = planData.id;
 
-    this.planNameTarget.textContent = `${planData.id.charAt(0).toUpperCase() + planData.id.slice(1)} Plan`;
-    this.priceTarget.textContent = `${planData.price} / month`;
+    this.updateFeatureHighlight(planData.id);
+    this.checkSubmitButton();
   }
 
   changeCard(event) {
@@ -70,17 +41,28 @@ export default class extends Controller {
       this.cardTarget.textContent = `Card Ending in ${card}`;
     }
 
-          this.checkSubmitButton();
+    this.checkSubmitButton();
+  }
 
+  updateFeatureHighlight(planID) {
+    this.featuresTableTarget.dataset.selectedPlan = planID;
+
+    this.featuresTableTarget.querySelectorAll('td.selected').forEach(cell => {
+      cell.classList.remove('selected');
+    });
+
+    this.featuresTableTarget.querySelectorAll(`#plan_${planID}`).forEach(feature => {
+      feature.classList.add('selected');
+    });
   }
 
   checkSubmitButton() {
+    if (this.readOnly) return;
+
     const planSelected = this.element.querySelector('input[name="price_id"]:checked');
     const paymentMethodSelected = this.element.querySelector('input[name="payment_method_id"]:checked');
 
 
-    if (!this.readOnly) {
-      this.submitButtonTarget.disabled = !(planSelected && paymentMethodSelected);
-    }
+    this.submitButtonTarget.disabled = !(planSelected && paymentMethodSelected);
   }
 }

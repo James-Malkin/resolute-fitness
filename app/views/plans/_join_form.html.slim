@@ -1,7 +1,7 @@
 - content_for :head
   script src="https://kit.fontawesome.com/4bc312b1dc.js" crossorigin="anonymous"
 
-= form_with url: subscribe_member_path(current_user.member), class: 'flex flex-col mt-5', data_action: 'change->purchase-plan#change' do |f|
+= form_with url: subscribe_member_path(current_user.member), class: 'flex flex-col mt-5' do |f|
   = f.hidden_field :price_id, data: { purchase_plan_target: 'plan' }
 
   .flex.flex-col.md:flex-row.gap-3

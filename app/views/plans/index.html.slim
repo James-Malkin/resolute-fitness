@@ -2,7 +2,7 @@
 
 .hidden data-purchase-plan-target='planData' data-plans="#{@join_presenter.formatted_plans.to_json}"
 
-form.flex.flex-col.md:flex-row.gap-2 data-action='change->purchase-plan#change'
+form.flex.flex-col.md:flex-row.gap-2
   - @join_presenter.formatted_plans.each do |plan|
     label for="plan_#{plan.id}" id="#{plan.id}_plan_label" class='plan-card'
       h3 = plan.id.upcase
@@ -10,7 +10,7 @@ form.flex.flex-col.md:flex-row.gap-2 data-action='change->purchase-plan#change'
       p = plan.description
 
       span.text-center.font-cal-sans.tracking-wider.md:mb-3 = plan.price
-      input type="radio" name="price_id" id="plan_#{plan.id}" value="#{plan.id}"
+      input type="radio" name="price_id" id="plan_#{plan.id}" value="#{plan.id}" data-action="change->purchase-plan#changePlan"
 
 .mt-5.md:hidden
   h3.font-semibold.text-center data-purchase-plan-target='title' Select a plan to view it's features
