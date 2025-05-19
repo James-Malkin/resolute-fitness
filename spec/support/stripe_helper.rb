@@ -26,7 +26,7 @@ module StripeHelper
         description: 'Basic Plan Description',
         book_in_advance: 7,
         plan_type: 'basic',
-        time_restriction: "off_peak"
+        time_restriction: 'off_peak'
       }
     )
   end
