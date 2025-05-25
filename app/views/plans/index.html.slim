@@ -43,5 +43,11 @@ table.plan-features-table.mt-5 data-selected-plan=nil data-purchase-plan-target=
     = render 'table_row', plans:, feature: 'Free Wi-Fi', style: 'rounded-b-md' do
       = lucide_icon('check', class: 'size-6')
 
-- if current_user&.member
-  = render 'join_form', member_payment_methods: @join_presenter.member_payment_methods
+- if current_user
+  - if current_user.member
+    = render 'join_form', member_payment_methods: @join_presenter.member_payment_methods
+- else
+  p.mt-10.text-center.text-neutral-800
+    | You must be logged in to join a plan.
+    br.md:hidden
+    = link_to 'Sign in here.', new_user_session_path, class: 'ml-1 text-primary underline'
