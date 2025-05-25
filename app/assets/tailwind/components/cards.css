@@ -88,3 +88,7 @@ input[type="radio"] {
     }
   }
 }
+
+.exercise-class-card {
+  width: calc(25% - var(--spacing) * 2);
+}
