@@ -4,6 +4,7 @@ class ExerciseClassesController < ApplicationController
   load_and_authorize_resource
 
   def index
+    @featured_class = ExerciseClass.order('RANDOM()').first
     @exercise_classes = ExerciseClass.all
   end
 

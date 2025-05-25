@@ -1,4 +1,12 @@
-.flex.flex-wrap.gap-2
+.flex.flex-col-reverse.md:flex-row.rounded-lg.overflow-clip.mb-5
+  = image_tag @featured_class.image, class: 'exercise-class-image w-full md:w-1/3'
+  .flex.flex-col.p-5.border.border-b-0.md:border-l-0.md:border-b.border-neutral-300.rounded-t-lg.md:rounded-r-lg.md:rounded-tl-none
+    .flex.gap-4.font-cal-sans.items-center
+      h3.text-3xl.md:text-4xl = @featured_class.name
+      span.bg-primary.px-3.py-1.text-white.rounded-md Featured
+    p.text-xl.md:text-2xl.mt-2.md:mt-auto = @featured_class.description
+
+.grid.grid-cols-2.md:grid-cols-4.gap-2
   - @exercise_classes.each do |exercise_class|
     .bg-gray-200
       = image_tag exercise_class.image, class: 'exercise-class-image'
