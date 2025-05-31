@@ -44,7 +44,5 @@ Rails.application.routes.draw do
     resources :payments, only: %i[create]
   end
 
-  get '/test', to: 'home#test', as: :test
-
   root to: 'home#index'
 end
