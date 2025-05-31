@@ -34,7 +34,7 @@ header.navbar data-controller='navbar'
       = link_to 'Sign In', new_user_session_path, class: 'right-nav-action'
 
   nav.desktop-menu
-    = link_to 'Home', root_path
+    = link_to 'Home', root_path, class: 'hidden lg:block'
     = link_to 'Classes', exercise_classes_path
     = link_to 'Timetable', class_schedules_path
     = link_to 'Pricing', plans_path
