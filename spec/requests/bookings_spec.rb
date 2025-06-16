@@ -76,7 +76,7 @@ describe 'Bookings' do
 
         it 'redirects to the bookings page' do
           post_booking
-          expect(response).to redirect_to(bookings_path)
+          expect(response).to redirect_to(profile_show_path(member.user.username))
         end
 
         it 'sets a flash message' do
