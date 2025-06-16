@@ -27,6 +27,7 @@ header.navbar data-controller='navbar'
       = link_to 'Profile', profile_show_path(current_user.username), class: 'drawer-link'
       - if current_user.employee
         = link_to 'Staff Tools', staff_tools_path, class: 'drawer-link flex gap-2 items-center'
+      = link_to 'Settings', profile_edit_path, class: 'drawer-link'
       = button_to 'Sign Out', destroy_user_session_path, method: :delete, data: { turbo: false }
 
   - else
