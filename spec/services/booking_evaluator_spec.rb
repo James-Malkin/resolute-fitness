@@ -23,6 +23,28 @@ describe BookingEvaluator do
     end
   end
 
+  describe '.session_available?' do
+    subject(:session_available?) { described_class.session_available?(class_schedule.id) }
+
+    let(:class_schedule) { create(:class_schedule) }
+
+    context 'when the class schedule has available capacity' do
+      it 'returns true' do
+        expect(session_available?).to be true
+      end
+    end
+
+    context 'when the class schedule is at full capacity' do
+      before do
+        create_list(:booking, class_schedule.capacity, class_schedule:)
+      end
+
+      it 'returns false' do
+        expect(session_available?).to be false
+      end
+    end
+  end
+
   describe '.process_booking' do
     subject(:process_booking) { described_class.process_booking(booking_params, user) }
 
