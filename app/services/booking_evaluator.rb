@@ -2,7 +2,18 @@
 
 class BookingEvaluator
   def self.payment_required?(user)
+    return nil unless user
+
     user.member.guest?
+  end
+  
+  def self.session_available?(class_schedule_id)
+    class_schedule = ClassSchedule.find_by(id: class_schedule_id)
+
+    puts class_schedule.bookings.count
+    puts class_schedule.capacity
+
+    class_schedule.bookings.count < class_schedule.capacity
   end
 
   def self.process_booking(booking_params, user)

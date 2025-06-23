@@ -11,8 +11,7 @@
     dd = @booking.class_schedule_capacity
 
   p.my-5 = @booking.class_schedule.exercise_class_description
-
-  - if can? :create, @booking
+  - if (can? :create, @booking) && @booking_available
     - if @payment_required
       = turbo_frame_tag :payment_form
         = form_with model: @booking, url: bookings_path do |f|
