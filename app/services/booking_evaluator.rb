@@ -3,6 +3,7 @@
 class BookingEvaluator
   def self.payment_required?(user)
     return false unless user
+    return false if user.employee
 
     user.member.guest?
   end
