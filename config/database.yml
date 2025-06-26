@@ -6,7 +6,6 @@
 #
 default: &default
   adapter: postgresql
-  host: localhost
   username: resolute_app
   password: admin
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>

@@ -40,18 +40,6 @@ rescue ActiveRecord::PendingMigrationError => e
   abort e.to_s.strip
 end
 
-Capybara.register_driver(:cuprite) do |app|
-  Capybara::Cuprite::Driver.new(app, {
-                                  headless: true,
-                                  window_size: [1280, 720],
-                                  timeout: 60
-                                })
-end
-
-Capybara.javascript_driver = :cuprite
-
-Capybara.disable_animation = true
-
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
@@ -67,12 +55,21 @@ RSpec.configure do |config|
 
   config.include StripeHelper
 
+  config.before do
+    DatabaseCleaner.strategy = :transaction
+    DatabaseCleaner.clean_with(:truncation)
+  end
+
   config.use_transactional_fixtures = true
   config.infer_spec_type_from_file_location!
   config.filter_rails_from_backtrace!
 
   config.before(:each, type: :system) do
-    driven_by :cuprite
+    driven_by :rack_test
+  end
+
+  config.before(:each, :js, type: :system) do
+    driven_by :cuprite_custom
   end
 
   config.filter_gems_from_backtrace('capybara', 'cuprite', 'ferrum')
