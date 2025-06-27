@@ -1,3 +1,6 @@
+- content_for :head
+  script src="https://kit.fontawesome.com/4bc312b1dc.js" crossorigin="anonymous"
+
 = form_with model: @user, class: 'flex flex-col items-center w-full mb-8' do |f|
   .avatar.w-48.h-48.bg-gray-200.border-5
     - if @user.avatar.attached?
@@ -57,9 +60,6 @@ h2 Email
         = link_to profile_edit_path(page_context: 'edit_email')
           = lucide_icon('square-pen')
 
-  = link_to new_payment_method_path, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'btn btn-primary'
-    | Add Payment Method
-
 h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mt-3.mb-2 Personal Details
 
 = form_with model: @user do |f|
@@ -95,11 +95,20 @@ h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mt-3.mb-2 Personal Det
     = f.submit 'Update profile', class: 'btn'
 
 - if @user.member
+  h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mt-3.mb-2 Payment Details
+
+  = render 'shared/payment_methods/index', payment_methods: @payment_methods do |payment_method|
+    = render 'shared/payment_methods/card', payment_method: payment_method
+
   h2.bg-gray-300.rounded-xs.px-3.py-1.font-semibold.text-lg.mt-3.mb-2 Privacy Preferences
   = form_with model: @user.member, method: :patch do |f|
 
-    = f.check_box :public_profile, class: 'form-checkbox'
+    .flex.gap-1.items-center
+      = f.check_box :public_profile, class: 'accent-primary appearance-none border-3 border-gray-300 size-5 checked:bg-primary checked:border-primary peer rounded-sm cursor-pointer hover:border-primary relative'
+      = lucide_icon('check', class: 'absolute size-4 ml-0.5 hidden peer-checked:block text-white pointer-events-none stroke-4')
 
-    = f.submit 'Update preferences', class: 'btn'
+      = f.label :public_profile, 'Public Profile?', class: 'flex items-center gap-2'
+
+    = f.submit 'Update preferences', class: 'btn mt-2'
 
 = render 'shared/modal'

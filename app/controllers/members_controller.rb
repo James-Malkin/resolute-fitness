@@ -10,6 +10,7 @@ class MembersController < ApplicationController
     else
       @user = @member.user
       @profile_presenter = UserProfilePresenter.new(@member.user, 'edit_profile')
+      @payment_methods = PaymentMethodsPresenter.for_user(current_user)
       render profile_edit_path
     end
   end

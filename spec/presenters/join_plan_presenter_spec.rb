@@ -28,28 +28,6 @@ describe JoinPlanPresenter do
     end
   end
 
-  describe '#member_payment_methods' do
-    context 'when the member has payment methods' do
-      before do
-        allow(Stripe::PaymentMethod).to receive(:list)
-          .with(customer: member.stripe_customer_id, type: 'card')
-          .and_return([build_payment_method])
-      end
-
-      it 'returns a list of formatted payment methods' do
-        expect(presenter.member_payment_methods).to contain_exactly(
-          have_attributes(
-            id: 'pm_123',
-            brand: 'Visa',
-            last4: '1234',
-            exp_month: 12,
-            exp_year: 2050
-          )
-        )
-      end
-    end
-  end
-
   describe '#formatted_plans' do
     before do
       allow(Stripe::Plans).to receive(:all)

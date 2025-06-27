@@ -55,6 +55,7 @@ describe 'Members' do
 
     context 'the update fails' do
       before do
+        allow(Stripe::PaymentMethod).to receive(:list).and_return([])
         allow_any_instance_of(Member).to receive(:update).and_return(false)
         patch_update
       end

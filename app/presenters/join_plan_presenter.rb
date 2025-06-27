@@ -6,23 +6,12 @@ class JoinPlanPresenter
   PlanFeatures = Struct.new(:time_restriction, :peak_bookings, :book_in_advance)
   Plan = Struct.new(:id, :display_colour, :description, :price, :features)
 
-  PaymentMethod = Struct.new(:id, :brand, :last4, :exp_month, :exp_year)
-
   def initialize(user)
     @member = user&.member
   end
 
   def member_has_a_plan?
     @member.plan != 'guest'
-  end
-
-  def member_payment_methods
-    Stripe::PaymentMethod.list(
-      customer: @member.stripe_customer_id,
-      type: 'card'
-    ).map do |payment_method|
-      build_payment_method(payment_method)
-    end
   end
 
   def formatted_plans
@@ -38,16 +27,6 @@ class JoinPlanPresenter
   end
 
   private
-
-  def build_payment_method(payment_method)
-    PaymentMethod.new(
-      id: payment_method.id,
-      brand: payment_method.card.brand,
-      last4: payment_method.card.last4,
-      exp_month: payment_method.card.exp_month,
-      exp_year: payment_method.card.exp_year
-    )
-  end
 
   def build_plan_features(metadata)
     PlanFeatures.new(
