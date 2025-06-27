@@ -4,7 +4,7 @@ class JoinPlanPresenter
   include ActionView::Helpers::NumberHelper
 
   PlanFeatures = Struct.new(:time_restriction, :peak_bookings, :book_in_advance)
-  Plan = Struct.new(:id, :display_colour, :name, :description, :price, :features)
+  Plan = Struct.new(:id, :display_colour, :description, :price, :features)
 
   PaymentMethod = Struct.new(:id, :brand, :last4, :exp_month, :exp_year)
 
@@ -30,7 +30,6 @@ class JoinPlanPresenter
       Plan.new(
         id: plan.id,
         display_colour: plan.metadata[:display_colour],
-        name: plan.nickname,
         description: plan.metadata[:description],
         price: number_to_currency(plan.amount / 100.0, unit: '£'),
         features: build_plan_features(plan.metadata)

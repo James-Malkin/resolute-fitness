@@ -4,33 +4,83 @@ require 'rails_helper'
 
 describe BookingEvaluator do
   describe '.payment_required?' do
+    subject(:payment_required) { described_class.payment_required?(user) }
+
     let(:user) { create(:user, member:) }
 
     context 'when the member is a guest' do
       let(:member) { create(:member) }
 
-      it 'returns true' do
-        expect(described_class.payment_required?(user)).to be true
-      end
+      it { is_expected.to be true }
     end
 
     context 'when the member is not a guest' do
       let(:member) { create(:member, :with_plan) }
 
-      it 'returns false' do
-        expect(described_class.payment_required?(user)).to be false
-      end
+      it { is_expected.to be false }
     end
   end
 
   describe '.session_available?' do
-    subject(:session_available?) { described_class.session_available?(class_schedule.id) }
+    subject(:session_available?) { described_class.session_available?(class_schedule.id, user) }
 
     let(:class_schedule) { create(:class_schedule) }
 
-    context 'when the class schedule has available capacity' do
+    context 'when the user is not authenticated' do
+      let(:user) { nil }
+
+      it 'returns false with reason :unauthenticated' do
+        expect(session_available?).to eq({ is_available: false, reason: :unauthenticated })
+      end
+    end
+
+    context 'when the user is authenticated but unauthorized' do
+      let(:user) { create(:user) }
+
+      before do
+        allow(Ability).to receive(:new).with(user).and_return(Ability.new(user))
+        allow_any_instance_of(Ability).to receive(:can?).with(:create, Booking).and_return(false)
+      end
+
+      it 'returns false with reason :unauthorized' do
+        expect(session_available?).to eq({ is_available: false, reason: :unauthorized })
+      end
+    end
+
+    context 'when the user is authenticated and authorized' do
+      let(:user) { create(:user, member: create(:member)) }
+
+      before do
+        allow(Ability).to receive(:new).with(user).and_return(Ability.new(user))
+        allow_any_instance_of(Ability).to receive(:can?).with(:create, Booking).and_return(true)
+      end
+
+      context 'when the class schedule has capacity' do
+        it 'returns true with no reason' do
+          expect(session_available?).to eq({ is_available: true, reason: nil })
+        end
+      end
+
+      context 'when the class schedule is at full capacity' do
+        before do
+          create_list(:booking, class_schedule.capacity, class_schedule:)
+        end
+
+        it 'returns false with reason :unavailable' do
+          expect(session_available?).to eq({ is_available: false, reason: :unavailable })
+        end
+      end
+    end
+  end
+
+  describe '.session_has_capacity?' do
+    subject(:session_has_capacity?) { described_class.session_has_capacity?(class_schedule.id) }
+
+    let(:class_schedule) { create(:class_schedule) }
+
+    context 'when the class schedule has capacity' do
       it 'returns true' do
-        expect(session_available?).to be true
+        expect(session_has_capacity?).to be true
       end
     end
 
@@ -40,7 +90,13 @@ describe BookingEvaluator do
       end
 
       it 'returns false' do
-        expect(session_available?).to be false
+        expect(session_has_capacity?).to be false
+      end
+    end
+
+    context 'when class schedule ID is nil' do
+      it 'returns false' do
+        expect(described_class.session_has_capacity?(nil)).to be false
       end
     end
   end

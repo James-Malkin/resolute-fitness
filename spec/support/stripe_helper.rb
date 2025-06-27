@@ -13,20 +13,20 @@ module StripeHelper
     )
   end
 
-  def build_plan(id: 'price_123', nickname: 'Basic Plan', amount: 1000, currency: 'gbp', interval: 'month', interval_count: 1)
+  def build_plan(id: 'price_123', amount: 1000, currency: 'gbp', interval: 'month', interval_count: 1, peak_bookings: nil)
     Stripe::Plan.construct_from(
-      id: id,
-      nickname: nickname,
-      amount: amount,
-      currency: currency,
-      interval: interval,
-      interval_count: interval_count,
+      id:,
+      amount:,
+      currency:,
+      interval:,
+      interval_count:,
       metadata: {
         display_colour: '#000000',
-        description: 'Basic Plan Description',
+        description: 'Test Plan Description',
         book_in_advance: 7,
         plan_type: 'basic',
-        time_restriction: 'off_peak'
+        time_restriction: 'off_peak',
+        peak_bookings:
       }
     )
   end
