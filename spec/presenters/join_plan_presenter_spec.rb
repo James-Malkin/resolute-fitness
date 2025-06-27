@@ -64,11 +64,11 @@ describe JoinPlanPresenter do
           id: 'price_123',
           display_colour: '#000000',
           description: 'Test Plan Description',
-          price: "£10.00",
+          price: '£10.00',
           features: have_attributes(
-            time_restriction: "off_peak",
-            peak_bookings: {type: :icon, value: "infinity", label: "Unlimited"},
-            book_in_advance: "7 days"
+            time_restriction: 'off_peak',
+            peak_bookings: { type: :icon, value: 'infinity', label: 'Unlimited' },
+            book_in_advance: '7 days'
           )
         )
       )
@@ -81,7 +81,7 @@ describe JoinPlanPresenter do
         expect(presenter.formatted_plans).to contain_exactly(
           have_attributes(
             features: have_attributes(
-              peak_bookings: {type: :icon, value: "minus", label: "None"}
+              peak_bookings: { type: :icon, value: 'minus', label: 'None' }
             )
           )
         )
@@ -95,7 +95,7 @@ describe JoinPlanPresenter do
         expect(presenter.formatted_plans).to contain_exactly(
           have_attributes(
             features: have_attributes(
-              peak_bookings: {type: :text, value: "5 bookings"}
+              peak_bookings: { type: :text, value: '5 bookings' }
             )
           )
         )

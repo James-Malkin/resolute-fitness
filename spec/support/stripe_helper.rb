@@ -30,4 +30,12 @@ module StripeHelper
       }
     )
   end
+
+  def build_payment_intent(id: 'pi_test_123', client_secret: 'pi_test_123_secret_test', status: 'requires_payment_method')
+    Stripe::PaymentIntent.construct_from(
+      id:,
+      client_secret:,
+      status:
+    )
+  end
 end
