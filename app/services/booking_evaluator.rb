@@ -2,13 +2,24 @@
 
 class BookingEvaluator
   def self.payment_required?(user)
-    return false unless user
-    return false if user.employee
+    return false if !user || user.employee
 
     user.member.guest?
   end
 
-  def self.session_available?(class_schedule_id)
+  def self.session_available?(class_schedule_id, current_user)
+    return { is_available: false, reason: :unauthenticated } unless current_user
+
+    return { is_available: false, reason: :unauthorized } unless Ability.new(current_user).can?(:create, Booking)
+
+    return { is_available: false, reason: :unavailable } unless session_has_capacity?(class_schedule_id)
+
+    { is_available: true, reason: nil }
+  end
+
+  def self.session_has_capacity?(class_schedule_id)
+    return false unless class_schedule_id
+
     class_schedule = ClassSchedule.find_by(id: class_schedule_id)
 
     class_schedule.bookings.count < class_schedule.capacity
