@@ -4,7 +4,7 @@ class PaymentMethodsPresenter
   PaymentMethod = Struct.new(:id, :brand, :last4, :exp_month, :exp_year)
 
   def self.for_user(user)
-    return [] unless user.member
+    return [] unless user&.member
 
     new.for_user(user.member)
   end
