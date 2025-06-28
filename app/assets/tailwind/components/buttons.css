@@ -1,15 +1,27 @@
 .btn {
-  @apply bg-primary text-white font-semibold py-2 px-4 rounded;
+  @apply bg-primary text-white font-semibold py-2 px-4 rounded transition-colors duration-100;
 
   &:disabled {
     @apply bg-gray-300 text-gray-500 cursor-not-allowed;
   }
+
+  &:hover {
+    @apply bg-chateau-green-500 cursor-pointer;
+  }
 }
 
 .btn-slim {
-  @apply bg-primary text-white font-semibold py-1 px-4 rounded text-center;
+  @apply bg-primary text-white font-semibold py-1 px-4 rounded text-center transition-colors duration-100;
+
+  &:hover {
+    @apply bg-chateau-green-500 cursor-pointer;
+  }
 }
 
 .icon-btn {
-  @apply bg-primary text-white font-semibold py-2 px-2 rounded flex items-center;
+  @apply bg-primary text-white font-semibold py-2 px-2 rounded flex items-center transition-colors duration-100;
+
+  &:hover {
+    @apply bg-chateau-green-500 cursor-pointer;
+  }
 }

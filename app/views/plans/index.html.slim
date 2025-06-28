@@ -47,7 +47,7 @@ table.plan-features-table.mt-5 data-selected-plan=nil data-purchase-plan-target=
   - if current_user.member
     = render 'join_form', payment_methods: @payment_methods
 - else
-  p.mt-10.text-center.text-neutral-800
+  p.mt-5.md:mt-10.text-center.text-neutral-800
     | You must be logged in to join a plan.
     br.md:hidden
     = link_to 'Sign in here.', new_user_session_path, class: 'ml-1 text-primary underline'
