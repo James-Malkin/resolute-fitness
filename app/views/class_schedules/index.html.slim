@@ -3,7 +3,7 @@
 .relative.mb-3.rounded-md.md:mt-3
   = image_tag 'booking-hero.jpeg', class: 'w-full h-35 md:h-64 object-cover object-top', alt: 'Book a Class'
   h1 class='text-4xl md:text-6xl text-white absolute z-1 left-1/2 top-1/2 text-nowrap -translate-x-1/2 -translate-y-1/2 font-bold font-cal-sans tracking-wider' Book a Class
-  .absolute.top-0.left-0.right-0.bottom-0.bg-gradient-to-b.from-neutral-900.to-neutral-900.opacity-60
+  .absolute.top-0.left-0.right-0.bottom-0.bg-neutral-900.opacity-60
 
 .flex.flex-col.gap-3
   - @schedule_presenter.next_two_weeks_by_date.each do |date, schedules|

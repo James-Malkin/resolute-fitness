@@ -71,7 +71,7 @@
   }
 
   &.toast-alert {
-    .toast-header { @apply text-yellow-500; }
-    &::before { @apply bg-yellow-500; }
+    .toast-header { @apply text-amber-400; }
+    &::before { @apply bg-amber-400; }
   }
 }
