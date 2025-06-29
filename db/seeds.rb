@@ -10,7 +10,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-password = ENV.fetch('SEED_PASSWORD', nil)
+password = Rails.application.credentials[:seed_password]
 password_confirmation = password
 
 employee_user = User.create!(

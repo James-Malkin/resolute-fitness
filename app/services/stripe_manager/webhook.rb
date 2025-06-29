@@ -6,7 +6,7 @@ module StripeManager
       payload = request.body.read
       signature_header = request.headers['HTTP_STRIPE_SIGNATURE']
 
-      Stripe::Webhook.construct_event(payload, signature_header, ENV.fetch('STRIPE_WEBHOOK_SECRET', nil))
+      Stripe::Webhook.construct_event(payload, signature_header, Rails.application.credentials.dig(:stripe, :webhook_secret))
     end
 
     def self.route_event(event)

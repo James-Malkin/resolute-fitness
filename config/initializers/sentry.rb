@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 Sentry.init do |config|
-  config.dsn = ENV.fetch('SENTRY_DSN', nil)
+  config.dsn = Rails.application.credentials[:sentry_dsn]
   config.breadcrumbs_logger = %i[active_support_logger http_logger]
 
   # Add data like request headers and IP for users,
