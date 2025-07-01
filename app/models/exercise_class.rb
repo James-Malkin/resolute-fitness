@@ -6,7 +6,7 @@ class ExerciseClass < ApplicationRecord
   has_one_attached :image
 
   validates :name, presence: true, uniqueness: true
-  validates :description, length: { maximum: 280 }, allow_blank: false
+  validates :description, length: { minimum: 25, maximum: 280 }
   validates :image, attached: true,
                     content_type: { in: %w[image/png image/jpeg] },
                     size: { less_than: 5.megabytes }

@@ -73,8 +73,8 @@ describe 'Class Schedules' do
 
       include_examples 'turbo stream response'
 
-      it 'includes a turbo-stream to replace the modal content' do
-        expect(response.body).to include('<turbo-stream action="replace"')
+      it 'includes a turbo-stream to update the modal content' do
+        expect(response.body).to include('<turbo-stream action="update"')
         expect(response.body).to include('target="modal_content"')
       end
     end

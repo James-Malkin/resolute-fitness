@@ -75,8 +75,8 @@ describe 'Exercise Classes' do
 
       include_examples 'turbo stream response'
 
-      it 'includes a turbo-stream to replace the modal content' do
-        expect(response.body).to include('<turbo-stream action="replace"')
+      it 'includes a turbo-stream to update the modal content' do
+        expect(response.body).to include('<turbo-stream action="update"')
         expect(response.body).to include('target="modal_content"')
       end
     end
@@ -112,7 +112,7 @@ describe 'Exercise Classes' do
     let(:exercise_class_params) do
       {
         name: 'Updated Class Name',
-        description: 'Updated description.',
+        description: 'This is an updated description that will satisfy validation.',
         image: fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'test_image.jpg'), 'image/jpeg')
       }
     end
@@ -124,8 +124,15 @@ describe 'Exercise Classes' do
     end
 
     context 'when the class is updated successfully' do
+      before { patch_class }
+
+      shared_examples 'successful response'
+
+      it 'redirects to the exercise classes page' do
+        expect(response).to redirect_to(exercise_classes_path)
+      end
+
       it 'updates the class' do
-        patch_class
         expect(exercise_class.reload.name).to eq('Updated Class Name')
       end
     end

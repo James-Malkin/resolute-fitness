@@ -11,8 +11,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def replace_turbo_frame(target_frame, partial:, locals: {})
-    render turbo_stream: turbo_stream.replace(target_frame, partial:, locals:)
+  def update_turbo_frame(target_frame, partial:, locals:)
+    render turbo_stream: turbo_stream.update(target_frame, partial:, locals:)
   end
 
   protected

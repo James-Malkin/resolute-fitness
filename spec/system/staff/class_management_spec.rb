@@ -1,0 +1,37 @@
+# frozen_string_literal: true
+
+require 'rails_helper'
+
+describe 'Class Management' do
+  let(:employee) { create(:employee) }
+
+  describe 'creating an exercise class', :js do
+    before do
+      sign_in employee.user, scope: :user
+      visit staff_tools_path
+      click_on 'Create Class'
+    end
+
+    it 'allows staff to create a new exercise class' do
+      within '#modal_content' do
+        fill_in 'Class Name', with: 'Test Class'
+        fill_in 'Description', with: 'This is a Test Description that will satisfy validation.'
+        attach_file 'Image', Rails.root.join('spec', 'fixtures', 'files', 'test_image.jpg')
+        click_on 'Save'
+      end
+
+      expect(page).to have_content('Class created successfully.')
+      expect(ExerciseClass.last.name).to eq('Test Class')
+    end
+
+    it 'shows an error when required fields are missing' do
+      within '#modal_content' do
+        click_on 'Save'
+      end
+
+      expect(page).to have_content("Name can't be blank")
+      expect(page).to have_content('Description is too short')
+      expect(page).to have_content("Image can't be blank")
+    end
+  end
+end

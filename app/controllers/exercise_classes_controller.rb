@@ -20,20 +20,20 @@ class ExerciseClassesController < ApplicationController
     render partial: 'edit', locals: { exercise_class: @exercise_class }
   end
 
-  def update
-    if @exercise_class.update(exercise_class_params)
-      redirect_to exercise_classes_path, notice: 'Class updated successfully.'
-    else
-      replace_turbo_frame('modal_content', partial: 'edit', locals: { exercise_class: @exercise_class })
-    end
-  end
-
   def create
     exercise_class = ExerciseClass.new(exercise_class_params)
     if exercise_class.save
       redirect_to exercise_classes_path, notice: 'Class created successfully.'
     else
-      replace_turbo_frame('modal_content', partial: 'new', locals: { exercise_class: })
+      update_turbo_frame(:modal_content, partial: 'new', locals: { exercise_class: exercise_class })
+    end
+  end
+
+  def update
+    if @exercise_class.update(exercise_class_params)
+      redirect_to exercise_classes_path, notice: 'Class updated successfully.'
+    else
+      update_turbo_frame(:modal_content, partial: 'edit', locals: { exercise_class: @exercise_class })
     end
   end
 
