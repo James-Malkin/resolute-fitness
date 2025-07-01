@@ -7,13 +7,13 @@
 
     = f.label :trainer
     = f.collection_select :trainer_id, Employee.all, :id, :username, { prompt: 'Select a trainer' }, class: 'form-input mb-2'
-    
+
     .flex.flex-col.mb-2
       = f.label :date_time, 'Date and Time'
       .flex.form-select
         = f.datetime_select :date_time, class: 'form-input mb-2', include_blank: true
-    
-    .flex.flex-col
+
+    .flex.flex-col.mb-2
       = f.label :duration, 'Duration (minutes)'
       = f.number_field :duration, class: 'form-input mb-2', min: 1, step: 1
 
