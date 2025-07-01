@@ -5,14 +5,15 @@ require 'rails_helper'
 describe 'Class Management' do
   let(:employee) { create(:employee) }
 
+  before { sign_in employee.user, scope: :user }
+
   describe 'creating an exercise class', :js do
     before do
-      sign_in employee.user, scope: :user
       visit staff_tools_path
       click_on 'Create Class'
     end
 
-    it 'allows staff to create a new exercise class' do
+    it 'allows employees to create a new exercise class' do
       within '#modal_content' do
         fill_in 'Class Name', with: 'Test Class'
         fill_in 'Description', with: 'This is a Test Description that will satisfy validation.'
