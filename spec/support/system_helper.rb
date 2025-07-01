@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module SystemHelper
   def select_datetime(datetime, options = {})
     field = options[:from]

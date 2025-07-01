@@ -33,3 +33,4 @@ Metrics/ParameterLists:
 Metrics/AbcSize:
   Exclude:
     - db/migrate/20250329191013_create_active_storage_tables.active_storage.rb
+    - spec/support/system_helper.rb
