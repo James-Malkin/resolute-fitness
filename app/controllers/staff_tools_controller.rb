@@ -3,7 +3,10 @@
 class StaffToolsController < ApplicationController
   before_action :authorize_user!
 
-  def index; end
+  def index
+    @exercise_classes = ExerciseClass.page params[:class_page]
+    @class_schedules = ClassSchedule.page params[:schedule_page]
+  end
 
   private
 

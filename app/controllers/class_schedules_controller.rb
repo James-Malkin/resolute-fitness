@@ -20,7 +20,7 @@ class ClassSchedulesController < ApplicationController
     if class_schedule.save
       redirect_to class_schedules_path, notice: 'Class schedule created successfully.'
     else
-      render partial: 'new', locals: { class_schedule: }
+      replace_turbo_frame('modal_content', 'new', locals: { class_schedule: })
     end
   end
 

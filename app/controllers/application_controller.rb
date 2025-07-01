@@ -9,6 +9,17 @@ class ApplicationController < ActionController::Base
     redirect_to root_path, alert: exception.message
   end
 
+  private
+
+  def replace_turbo_frame(target_frame, partial, locals = {})
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: turbo_stream.replace(target_frame, partial:, locals:)
+      end
+      format.html
+    end
+  end
+
   protected
 
   def configure_permitted_parameters

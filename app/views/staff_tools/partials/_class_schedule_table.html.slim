@@ -1,0 +1,23 @@
+= turbo_frame_tag :class_schedule_table
+  table.w-full
+    thead
+      tr
+        th Class Name
+        th Date & Time
+        th Duration
+        th Capacity
+        th Trainer
+        th Actions
+    tbody
+      - class_schedules.each do |class_schedule|
+        tr
+          td = class_schedule.exercise_class.name
+          td = class_schedule.date_time.strftime('%Y-%m-%d %H:%M')
+          td = class_schedule.duration
+          td = class_schedule.capacity
+          td = class_schedule.trainer.user.full_name
+          td
+
+  = paginate class_schedules,
+    param_name: :schedule_page,
+    params: request.query_parameters

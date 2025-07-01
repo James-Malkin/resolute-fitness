@@ -1,4 +1,6 @@
-= turbo_frame_tag :exercise_class_form, target: '_top' do
+= turbo_frame_tag :modal_content, target: '_top' do
+  . data-modal-target='titleValue' data-title='Create a Class'
+
   = form_with model: exercise_class do |f|
     = f.label :name, 'Class Name', class: 'form-label'
     = f.text_field :name, placeholder: 'Class Name', class: 'form-input'

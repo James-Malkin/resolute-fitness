@@ -9,7 +9,7 @@ class ExerciseClassesController < ApplicationController
   end
 
   def new
-    @exercise_class = ExerciseClass.new
+    render partial: 'new', locals: { exercise_class: ExerciseClass.new }
   end
 
   def edit; end
@@ -26,11 +26,11 @@ class ExerciseClassesController < ApplicationController
   end
 
   def create
-    @exercise_class = ExerciseClass.new(exercise_class_params)
-    if @exercise_class.save
+    exercise_class = ExerciseClass.new(exercise_class_params)
+    if exercise_class.save
       redirect_to exercise_classes_path, notice: 'Class created successfully.'
     else
-      render :new
+      replace_turbo_frame('modal_content', 'new', locals: { exercise_class: })
     end
   end
 
