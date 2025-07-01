@@ -34,4 +34,17 @@ describe 'Class Management' do
       expect(page).to have_content("Image can't be blank")
     end
   end
+
+  it 'prevents the duplication of class names' do
+    create(:exercise_class, name: 'Existing Class')
+
+    within '#modal_content' do
+      fill_in 'Class Name', with: 'Existing Class'
+      fill_in 'Description', with: 'This is a Test Description that will satisfy validation.'
+      attach_file 'Image', Rails.root.join('spec', 'fixtures', 'files', 'test_image.jpg')
+      click_on 'Save'
+    end
+
+    expect(page).to have_content('Name has already been taken')
+  end
 end
