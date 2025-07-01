@@ -34,7 +34,7 @@ describe 'Exercise Classes' do
     end
 
     it 'renders the new class form' do
-      expect(response.body).to include('New Class')
+      expect(response.body).to include('Create a Class')
     end
   end
 

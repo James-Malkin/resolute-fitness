@@ -8,7 +8,7 @@ class ClassSchedulesController < ApplicationController
   end
 
   def new
-    redirect_to class_schedules_path and return if request.headers['Turbo-Frame'].blank?
+    redirect_to root_path and return if request.headers['Turbo-Frame'].blank?
 
     class_schedule = ClassSchedule.new
 
@@ -20,7 +20,7 @@ class ClassSchedulesController < ApplicationController
     if class_schedule.save
       redirect_to class_schedules_path, notice: 'Class schedule created successfully.'
     else
-      replace_turbo_frame('modal_content', 'new', locals: { class_schedule: })
+      replace_turbo_frame('modal_content', partial: 'new', locals: { class_schedule: })
     end
   end
 

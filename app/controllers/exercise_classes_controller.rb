@@ -9,19 +9,22 @@ class ExerciseClassesController < ApplicationController
   end
 
   def new
+    redirect_to root_path and return if request.headers['Turbo-Frame'].blank?
+
     render partial: 'new', locals: { exercise_class: ExerciseClass.new }
   end
 
-  def edit; end
+  def edit
+    redirect_to root_path and return if request.headers['Turbo-Frame'].blank?
+
+    render partial: 'edit', locals: { exercise_class: @exercise_class }
+  end
 
   def update
     if @exercise_class.update(exercise_class_params)
       redirect_to exercise_classes_path, notice: 'Class updated successfully.'
     else
-      respond_to do |format|
-        format.turbo_stream { render turbo_stream: turbo_stream.replace('exercise_class_form', partial: 'exercise_classes/form', locals: { exercise_class: @exercise_class }) }
-        format.html { render :edit }
-      end
+      replace_turbo_frame('modal_content', partial: 'edit', locals: { exercise_class: @exercise_class })
     end
   end
 
@@ -30,7 +33,7 @@ class ExerciseClassesController < ApplicationController
     if exercise_class.save
       redirect_to exercise_classes_path, notice: 'Class created successfully.'
     else
-      replace_turbo_frame('modal_content', 'new', locals: { exercise_class: })
+      replace_turbo_frame('modal_content', partial: 'new', locals: { exercise_class: })
     end
   end
 

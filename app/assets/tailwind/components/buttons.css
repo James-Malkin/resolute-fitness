@@ -25,3 +25,11 @@
     @apply bg-chateau-green-500 cursor-pointer;
   }
 }
+
+.icon-btn-slim {
+  @apply bg-primary text-white font-semibold py-1 px-1 rounded flex items-center transition-colors duration-100;
+
+  &:hover {
+    @apply bg-chateau-green-500 cursor-pointer;
+  }
+}

@@ -11,13 +11,8 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def replace_turbo_frame(target_frame, partial, locals = {})
-    respond_to do |format|
-      format.turbo_stream do
-        render turbo_stream: turbo_stream.replace(target_frame, partial:, locals:)
-      end
-      format.html
-    end
+  def replace_turbo_frame(target_frame, partial:, locals: {})
+    render turbo_stream: turbo_stream.replace(target_frame, partial:, locals:)
   end
 
   protected

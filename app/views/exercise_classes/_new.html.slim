@@ -1,17 +1,4 @@
 = turbo_frame_tag :modal_content, target: '_top' do
   . data-modal-target='titleValue' data-title='Create a Class'
 
-  = form_with model: exercise_class do |f|
-    = f.label :name, 'Class Name', class: 'form-label'
-    = f.text_field :name, placeholder: 'Class Name', class: 'form-input'
-    = error_message_for(exercise_class, :name)
-
-    = f.label :description, 'Description', class: 'form-label'
-    = f.text_area :description, placeholder: 'Description', maxlength: 280, class: 'form-input'
-    = error_message_for(exercise_class, :description)
-
-    = f.label :image, 'Image', class: 'form-label'
-    = f.file_field :image, class: 'form-input'
-    = error_message_for(exercise_class, :image)
-
-    = f.submit 'Edit Class', class: 'btn btn-primary mt-3'
+  = render 'exercise_classes/partials/form', exercise_class:

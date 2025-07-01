@@ -17,9 +17,7 @@ describe 'Bookings' do
         get new_booking_path(class_schedule_id: class_schedule.id), headers: { 'Turbo-Frame' => 'booking_form' }
       end
 
-      it 'returns a 200 status code' do
-        expect(response.status).to eq(200)
-      end
+      include_examples 'successful response'
 
       it 'renders the new booking page' do
         expect(response.body).to include(exercise_class.name)

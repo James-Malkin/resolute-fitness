@@ -1,7 +1,7 @@
 = turbo_frame_tag :class_schedule_table
-  table.w-full
+  table.table
     thead
-      tr
+      tr.text-left
         th Class Name
         th Date & Time
         th Duration
@@ -17,5 +17,7 @@
           td = class_schedule.capacity
           td = class_schedule.trainer_full_name
           td
+      tr
+        td.text-center colspan='6' = button_to 'Schedule Class', new_class_schedule_path, method: :get, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'btn-slim'
 
   = render 'shared/paginator', object: class_schedules, param_name: :schedule_page

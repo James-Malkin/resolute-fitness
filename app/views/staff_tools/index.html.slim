@@ -1,10 +1,7 @@
 h1 Staff Tools
 
-= button_to 'Schedule Class', new_class_schedule_path, method: :get, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'btn'
-
-= button_to 'Create Class', new_exercise_class_path, method: :get, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'btn'
-
 = render 'staff_tools/partials/class_table', exercise_classes: @exercise_classes
+
 = render 'staff_tools/partials/class_schedule_table', class_schedules: @class_schedules
 
 = render 'shared/modal'

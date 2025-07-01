@@ -41,3 +41,38 @@
     }
   }
 }
+
+.table {
+  @apply w-full text-left;
+
+  thead > tr {
+    @apply text-white font-medium bg-neutral-700;
+
+    th {
+      &::first-child {
+        @apply rounded-tl-md;
+      }
+
+      &::last-child {
+        @apply rounded-tr-md;
+      }
+    }
+  }
+
+  tbody {
+    @apply divide-y divide-neutral-700;
+  }
+
+  th, td {
+    @apply py-2 px-3;
+  }
+
+  td {
+    @apply text-neutral-800;
+  }
+}
+
+.fit-cell-content {
+  white-space: nowrap;
+  width: 1%;
+}

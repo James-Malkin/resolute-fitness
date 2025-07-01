@@ -6,58 +6,57 @@ describe 'Class Schedules' do
   let(:trainer) { create(:employee) }
 
   describe 'GET /class_schedules' do
-    let!(:class_schedule) { create_list(:class_schedule, 3) }
-
     before do
+      create_list(:class_schedule, 3)
       get class_schedules_path
     end
 
-    it 'returns a 200 status code' do
-      expect(response.status).to eq(200)
-    end
+    include_examples 'successful response'
 
     it 'renders the bookings page' do
       expect(response.body).to include('Book a Class')
     end
   end
 
-  describe 'GET /staff/schedule/new' do
-    before do
-      sign_in trainer.user, scope: :user
-      get new_class_schedule_path
+  describe 'GET /class_schedules/new' do
+    before { sign_in trainer.user, scope: :user }
+
+    context 'when the request is made from a Turbo Frame' do
+      before { get new_class_schedule_path, headers: { 'Turbo-Frame' => 'booking_form' } }
+
+      include_examples 'successful response'
+
+      it 'renders the new booking form' do
+        expect(response.body).to include('Schedule a Class')
+      end
     end
 
-    it 'returns a successful response' do
-      expect(response).to have_http_status(:ok)
-    end
+    context 'when the request is made from outside a Turbo Frame' do
+      before { get new_class_schedule_path }
 
-    it 'renders the new booking form' do
-      expect(response.body).to include('Schedule a Class')
+      it 'redirects to the root path with appropriate status' do
+        expect(response).to redirect_to(root_path)
+        expect(response).to have_http_status(:found)
+      end
     end
   end
 
-  describe 'POST /staff/schedule' do
-    subject(:post_class_schedule) { post class_schedules_path, params: { class_schedule: class_schedule_params } }
+  describe 'POST /class_schedules' do
+    subject(:make_request) { post class_schedules_path, params: { class_schedule: class_schedule_params }, as: :turbo_stream }
 
     let(:exercise_class) { create(:exercise_class) }
-    let!(:class_schedule_params) { build(:class_schedule, trainer:, exercise_class:).attributes }
+    let(:class_schedule_params) { build(:class_schedule, trainer:, exercise_class:).attributes }
 
-    before do
-      sign_in trainer.user, scope: :user
-    end
+    before { sign_in trainer.user, scope: :user }
 
     context 'when the class schedule is created successfully' do
       it 'creates a new class schedule' do
-        expect { post_class_schedule }.to change(ClassSchedule, :count).by(1)
+        expect { make_request }.to change(ClassSchedule, :count).by(1)
       end
 
-      it 'redirects to the class schedule page' do
-        post_class_schedule
+      it 'redirects to the class schedule page with success message' do
+        make_request
         expect(response).to redirect_to(class_schedules_path)
-      end
-
-      it 'sets a flash message' do
-        post_class_schedule
         expect(flash[:notice]).to eq('Class schedule created successfully.')
       end
     end
@@ -65,15 +64,18 @@ describe 'Class Schedules' do
     context 'when the class schedule creation fails' do
       before do
         allow_any_instance_of(ClassSchedule).to receive(:save).and_return(false)
+        make_request
       end
 
       it 'does not create a new class schedule' do
-        expect { post_class_schedule }.not_to change(ClassSchedule, :count)
+        expect(ClassSchedule.count).to eq(0)
       end
 
-      it 'renders the new class schedule form again' do
-        post_class_schedule
-        expect(response.body).to include('Schedule a Class')
+      include_examples 'turbo stream response'
+
+      it 'includes a turbo-stream to replace the modal content' do
+        expect(response.body).to include('<turbo-stream action="replace"')
+        expect(response.body).to include('target="modal_content"')
       end
     end
   end
