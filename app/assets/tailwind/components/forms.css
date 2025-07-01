@@ -1,0 +1,20 @@
+.form-input {
+  @apply px-3 py-2 border border-gray-200 rounded w-full;
+}
+
+.form-select {
+  @apply flex items-center gap-1;
+
+  select {
+    @apply border px-1 py-2 border-gray-200 rounded w-full;
+  }
+}
+
+.form-editable-field {
+  @apply flex items-center justify-between border border-gray-200 rounded overflow-clip pl-3;
+
+  button,
+  a {
+    @apply bg-gray-200 text-gray-600 font-semibold py-2 px-3;
+  }
+}

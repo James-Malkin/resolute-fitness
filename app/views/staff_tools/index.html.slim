@@ -1,3 +1,5 @@
 h1 Staff Tools
 
-= link_to 'Schedule Class', new_class_schedule_path, class: 'btn btn-primary'
+= button_to 'Schedule Class', new_class_schedule_path, method: :get, data: { turbo_frame: :modal_content, el_toggle: :modal, el_target: '#modal' }, class: 'btn'
+
+= render 'shared/modal'

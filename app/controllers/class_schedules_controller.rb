@@ -8,15 +8,19 @@ class ClassSchedulesController < ApplicationController
   end
 
   def new
-    @class_schedule = ClassSchedule.new
+    redirect_to class_schedules_path and return if request.headers['Turbo-Frame'].blank?
+
+    class_schedule = ClassSchedule.new
+
+    render partial: 'new', locals: { class_schedule: }
   end
 
   def create
-    @class_schedule = ClassSchedule.new(class_schedule_params)
-    if @class_schedule.save
+    class_schedule = ClassSchedule.new(class_schedule_params)
+    if class_schedule.save
       redirect_to class_schedules_path, notice: 'Class schedule created successfully.'
     else
-      render :new
+      render partial: 'new', locals: { class_schedule: }
     end
   end
 

@@ -1,0 +1,23 @@
+= turbo_frame_tag :modal_content, data: { modal_target: 'frame' }, target: '_top'
+  . data-modal-target='titleValue' data-title='Schedule a Class'
+
+  = form_with model: class_schedule do |f|
+    = f.label :exercise_class, 'Class'
+    = f.collection_select :exercise_class_id, ExerciseClass.all, :id, :name, { prompt: 'Select a class' }, class: 'form-input mb-2'
+
+    = f.label :trainer
+    = f.collection_select :trainer_id, Employee.all, :id, :username, { prompt: 'Select a trainer' }, class: 'form-input mb-2'
+    
+    .flex.flex-col.mb-2
+      = f.label :date_time, 'Date and Time'
+      .flex.form-select
+        = f.datetime_select :date_time, class: 'form-input mb-2', include_blank: true
+    
+    .flex.flex-col
+      = f.label :duration, 'Duration (minutes)'
+      = f.number_field :duration, class: 'form-input mb-2', min: 1, step: 1
+
+    = f.label :capacity
+    = f.number_field :capacity, class: 'form-input mb-2', min: 1, step: 1
+
+    = f.submit 'Save', class: 'btn btn-primary'
