@@ -8,4 +8,5 @@ class ClassSchedule < ApplicationRecord
   has_many :members, through: :bookings
 
   delegate :name, :description, to: :exercise_class, prefix: true
+  delegate :full_name, to: :trainer, prefix: true
 end

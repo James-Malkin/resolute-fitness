@@ -233,7 +233,6 @@ GEM
       activerecord
       kaminari-core (= 1.2.2)
     kaminari-core (1.2.2)
-    kaminari-tailwind (0.1.0)
     language_server-protocol (3.17.0.4)
     launchy (3.1.1)
       addressable (~> 2.8)
@@ -585,7 +584,6 @@ DEPENDENCIES
   jbuilder
   kamal
   kaminari
-  kaminari-tailwind
   letter_opener_web
   lucide-rails (~> 0.5.1)
   pg (~> 1.5)

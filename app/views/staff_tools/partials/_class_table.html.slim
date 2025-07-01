@@ -12,8 +12,4 @@
           td = exercise_class.image.attached? ? 'Yes' : 'No'
           td
 
-  = paginate exercise_classes,
-    param_name: :class_page,
-    params: request.query_parameters
-          / = link_to 'Edit', edit_exercise_class_path(exercise_class), class: 'btn btn-secondary'
-          / = link_to 'Delete', exercise_class_path(exercise_class), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'
+  = render 'shared/paginator', object: exercise_classes, param_name: :class_page

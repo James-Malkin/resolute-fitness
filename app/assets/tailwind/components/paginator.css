@@ -1,3 +1,11 @@
 .pagination {
-  @apply inline-flex items-center gap-2 mt-2;
+  @apply inline-flex rounded-md border border-neutral-300 divide-x divide-neutral-300 mt-2;
+
+  .page-item {
+    @apply px-2 py-1;
+
+    &.active {
+      @apply bg-primary text-white;
+    }
+  }
 }

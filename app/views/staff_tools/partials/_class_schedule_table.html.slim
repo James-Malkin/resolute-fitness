@@ -11,13 +11,11 @@
     tbody
       - class_schedules.each do |class_schedule|
         tr
-          td = class_schedule.exercise_class.name
+          td = class_schedule.exercise_class_name
           td = class_schedule.date_time.strftime('%Y-%m-%d %H:%M')
           td = class_schedule.duration
           td = class_schedule.capacity
-          td = class_schedule.trainer.user.full_name
+          td = class_schedule.trainer_full_name
           td
 
-  = paginate class_schedules,
-    param_name: :schedule_page,
-    params: request.query_parameters
+  = render 'shared/paginator', object: class_schedules, param_name: :schedule_page

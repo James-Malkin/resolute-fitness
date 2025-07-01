@@ -4,5 +4,5 @@ class Employee < ApplicationRecord
   belongs_to :user
   has_many :class_schedules
 
-  delegate :username, to: :user
+  delegate :username, :full_name, to: :user
 end
