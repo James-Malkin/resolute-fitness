@@ -23,49 +23,61 @@ describe 'Exercise Classes' do
     end
   end
 
-  describe 'GET /classes/new' do
-    before do
-      sign_in employee.user, scope: :user
-      get new_exercise_class_path
+  describe 'GET /class_schedules/new' do
+    before { sign_in employee.user, scope: :user }
+
+    context 'when the request is made from a Turbo Frame' do
+      before { get new_exercise_class_path, headers: { 'Turbo-Frame' => 'test_frame' } }
+
+      include_examples 'successful response'
+
+      it 'renders the new booking form' do
+        expect(response.body).to include('Create a Class')
+      end
     end
 
-    it 'returns a 200 status code' do
-      expect(response.status).to eq(200)
-    end
+    context 'when the request is made from outside a Turbo Frame' do
+      before { get new_exercise_class_path }
 
-    it 'renders the new class form' do
-      expect(response.body).to include('Create a Class')
+      it 'redirects to the root path with appropriate status' do
+        expect(response).to redirect_to(root_path)
+        expect(response).to have_http_status(:found)
+      end
     end
   end
 
   describe 'POST /classes' do
-    subject(:post_classes) { post exercise_classes_path, params: { exercise_class: exercise_class_params } }
+    subject(:make_request) { post exercise_classes_path, params: { exercise_class: exercise_class_params }, as: :turbo_stream }
 
-    let!(:exercise_class_params) do
-      {
-        name: 'Yoga',
-        description: 'A relaxing yoga class.',
+    let(:exercise_class_params) do
+      attributes_for(:exercise_class).merge(
         image: fixture_file_upload(Rails.root.join('spec', 'fixtures', 'files', 'test_image.jpg'), 'image/jpeg')
-      }
+      )
     end
 
-    before do
-      sign_in employee.user, scope: :user
-    end
+    before { sign_in employee.user, scope: :user }
 
     context 'when the class is created successfully' do
       it 'creates a new class' do
-        expect { post_classes }.to change(ExerciseClass, :count).by(1)
+        expect { make_request }.to change(ExerciseClass, :count).by(1)
       end
     end
 
     context 'when the class creation fails' do
       before do
         allow_any_instance_of(ExerciseClass).to receive(:save).and_return(false)
+        make_request
       end
 
       it 'does not create a new class' do
-        expect { post_classes }.not_to change(ExerciseClass, :count)
+        expect(ExerciseClass.count).to eq(0)
+      end
+
+      include_examples 'turbo stream response'
+
+      it 'includes a turbo-stream to replace the modal content' do
+        expect(response.body).to include('<turbo-stream action="replace"')
+        expect(response.body).to include('target="modal_content"')
       end
     end
   end
@@ -73,17 +85,25 @@ describe 'Exercise Classes' do
   describe 'GET /classes/:id/edit' do
     let(:exercise_class) { create(:exercise_class) }
 
-    before do
-      sign_in employee.user, scope: :user
-      get edit_exercise_class_path(exercise_class)
+    before { sign_in employee.user, scope: :user }
+
+    context 'when the request is made from a Turbo Frame' do
+      before { get edit_exercise_class_path(exercise_class), headers: { 'Turbo-Frame' => 'test_frame' } }
+
+      include_examples 'successful response'
+
+      it 'renders the edit class form' do
+        expect(response.body).to include('Edit Class')
+      end
     end
 
-    it 'returns a 200 status code' do
-      expect(response.status).to eq(200)
-    end
+    context 'when the request is made from outside a Turbo Frame' do
+      before { get edit_exercise_class_path(exercise_class) }
 
-    it 'renders the edit class form' do
-      expect(response.body).to include('Edit Class')
+      it 'redirects to the root path with appropriate status' do
+        expect(response).to redirect_to(root_path)
+        expect(response).to have_http_status(:found)
+      end
     end
   end
 
