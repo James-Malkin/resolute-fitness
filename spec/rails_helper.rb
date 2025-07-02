@@ -56,6 +56,8 @@ RSpec.configure do |config|
   config.include StripeHelper
   config.include SystemHelper, type: :system
 
+  DatabaseCleaner.allow_remote_database_url = true
+
   config.before do
     DatabaseCleaner.strategy = :transaction
     DatabaseCleaner.clean_with(:truncation)
