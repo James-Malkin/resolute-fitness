@@ -7,41 +7,51 @@ on:
 
 jobs:
   scan:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Scan for common Rails security vulnerabilities using static analysis
-        run: | 
-          bin/brakeman --no-pager
-          bin/importmap audit
-
-  lint:
+    name: scan
     runs-on: ubuntu-latest
     container:
       image: ruby:3.3-slim
 
     steps:
+      - name: Install git
+        run: apt-get update && apt-get install -y --no-install-recommends git
+
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Ruby dependencies
+      - name: Install dependencies
         run: |
           gem install bundler
-          bundle install
+          bundle install --jobs 4
 
-      - name: Lint code for consistent style
+      - name: Run security scans
+        run: | 
+          bin/brakeman --no-pager
+          bin/importmap audit
+
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    container:
+      image: ruby:3.3-slim
+
+    steps:
+      - name: Install git
+        run: apt-get update && apt-get install -y --no-install-recommends git libyaml-dev
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          gem install bundler
+          bundle install --jobs 4
+
+      - name: Run linters
         run: bin/rubocop -f github
 
   test:
+    name: test
     runs-on: ubuntu-latest
     container:
       image: ruby:3.3-slim
@@ -58,31 +68,30 @@ jobs:
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
-      - name: Install packages
+      - name: Install system dependencies
         run: |
           apt-get update
           apt-get install -y --no-install-recommends \
             build-essential git libpq-dev nodejs npm \
-            wget curl unzip chromium
+            wget curl unzip chromium libyaml-dev
 
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install Ruby dependencies
+      - name: Install dependencies
         run: |
           gem install bundler
-          bundle install
+          bundle install --jobs 4
 
-      - name: Assets precompile
-        run: RAILS_ENV=test rails assets:precompile
-      
-      - name: Database setup
-        run: bin/rails db:create db:schema:load
+      - name: Prepare application
+        run: |
+          bin/rails db:create db:schema:load
+          bin/rails assets:precompile
         
       - name: Run tests
         run: bundle exec rspec
 
-      - name: Keep screenshots from failed system tests
+      - name: Upload screenshots
         uses: actions/upload-artifact@v4
         if: failure()
         with:
