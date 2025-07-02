@@ -6,7 +6,7 @@ This project was created as part of my dissertation for:
 
 *Bachelor of Science with Honours in Digital & Technology Solutions (Software Engineering)*
 
-It is a gym booking and membership management system adopting automated deployments using Ansible and Kamal.
+Resolute Fitness is a prototype gym booking and membership management system adopting automated deployments using Ansible and Kamal.
 
 ## Development
 
