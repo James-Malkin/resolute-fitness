@@ -1,25 +1,36 @@
-# README
+# Resolute Fitness
+[![Build Status](https://github.com/James-Malkin/resolute-fitness/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/James-Malkin/resolute-fitness/actions?query=branch%3Amain)
+[![Deploy Status](https://github.com/James-Malkin/resolute-fitness/actions/workflows/deploy.yml/badge.svg?branch=main)](https://github.com/James-Malkin/resolute-fitness/actions?query=branch%3Amain)
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This project was created as part of my dissertation for:
 
-Things you may want to cover:
+*Bachelor of Science with Honours in Digital & Technology Solutions (Software Engineering)*
 
-* Ruby version
+It is a gym booking and membership management system adopting automated deployments using Ansible and Kamal.
 
-* System dependencies
+## Development
 
-* Configuration
+The application requires the `master.key` to be written in the `/config` directory.
 
-* Database creation
+### Database
 
-* Database initialization
+To prepare the database, run:
 
-* How to run the test suite
+```bash
+rails db:prepare
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+### Running the app
 
-* Deployment instructions
+Once the database has been prepared, run the app with:
 
-* ...
-# resolute-fitness
+```bash
+bin/dev
+```
+
+## Tool Versions
+
+| Tool | Version |
+|------|:-------:|
+|Ruby|3.3.3 |
+|Postgres| 17 |
