@@ -6,7 +6,7 @@ on:
     branches: [ main ]
 
 jobs:
-  scan_ruby:
+  scan:
     runs-on: ubuntu-latest
 
     steps:
@@ -20,23 +20,9 @@ jobs:
           bundler-cache: true
 
       - name: Scan for common Rails security vulnerabilities using static analysis
-        run: bin/brakeman --no-pager
-
-  scan_js:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-
-      - name: Scan for security vulnerabilities in JavaScript dependencies
-        run: bin/importmap audit
+        run: | 
+          bin/brakeman --no-pager
+          bin/importmap audit
 
   lint:
     runs-on: ubuntu-latest
@@ -55,10 +41,6 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        ci_node_total: [4]
-        ci_node_index: [0, 1, 2, 3]
 
     services:
       postgres:
@@ -82,12 +64,6 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
-
-      - name: Install Rails
-        run: gem install rails
-      
-      - name: Install dependencies
-        run: bundle install
       
       - name: Assests precompile
         run: RAILS_ENV=test rails assets:precompile
@@ -102,10 +78,7 @@ jobs:
         env:
           RAILS_ENV: test
           DATABASE_URL: postgres://postgres:postgres@localhost:5432
-          CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
-          CI_NODE_INDEX: ${{ matrix.ci_node_index }}
-        run: |
-          bundle exec rspec --format documentation --format RspecJunitFormatter --out rspec-${{ matrix.ci_node_index }}.xml
+        run: bundle exec rspec
 
       - name: Keep screenshots from failed system tests
         uses: actions/upload-artifact@v4
