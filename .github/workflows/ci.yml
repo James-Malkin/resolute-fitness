@@ -10,14 +10,14 @@ jobs:
     name: scan
     runs-on: ubuntu-latest
     container:
-      image: ruby:3.3-slim
+      image: ruby:3.3
 
     steps:
       - name: Install system dependencies
         run: |
           apt-get update -qq && \
           apt-get install -y \
-          git build-essential nodejs npm ca-certificates libpq-dev libyaml-dev
+          build-essential nodejs npm 
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -36,15 +36,9 @@ jobs:
     name: lint
     runs-on: ubuntu-latest
     container:
-      image: ruby:3.3-slim
+      image: ruby:3.3
 
     steps:
-      - name: Install system dependencies
-        run: |
-          apt-get update -qq && \
-          apt-get install -y \
-          git build-essential ca-certificates libpq-dev libyaml-dev
-
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -60,7 +54,7 @@ jobs:
     name: test
     runs-on: ubuntu-latest
     container:
-      image: ruby:3.3-slim
+      image: ruby:3.3
       env:
         RAILS_ENV: test
         DATABASE_URL: postgres://postgres:postgres@postgres:5432
@@ -78,7 +72,7 @@ jobs:
         run: |
           apt-get update -qq && \
           apt-get install -y \
-          git build-essential nodejs npm ca-certificates chromium chromium-driver libpq-dev libyaml-dev
+          nodejs npm chromium chromium-driver
 
       - name: Checkout code
         uses: actions/checkout@v4
