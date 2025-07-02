@@ -41,5 +41,13 @@ describe 'Profiles' do
   end
 
   context 'when the user is an employee' do
+    let(:employee) { create(:employee) }
+
+    before { visit profile_show_path(employee.user.username) }
+
+    it 'shows the employee profile page' do
+      expect(page).to have_content(employee.user.username)
+      expect(page).to have_content('EMPLOYEE')
+    end
   end
 end
