@@ -8,6 +8,8 @@ This project was created as part of my dissertation for:
 
 Resolute Fitness is a prototype gym booking and membership management system adopting automated deployments using Ansible and Kamal.
 
+Live URL: https://resolutefitness.studio/
+
 ## Development
 
 The application requires the `master.key` to be written in the `/config` directory.
