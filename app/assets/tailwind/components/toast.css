@@ -1,5 +1,5 @@
 .toast-container {
-  @apply fixed bottom-0 flex flex-col-reverse items-center sm:items-end w-full p-2 container inset-x-1/2 -translate-x-1/2;
+  @apply fixed bottom-0 flex flex-col-reverse items-center sm:items-end w-full p-2 container inset-x-1/2 -translate-x-1/2 z-50;
 
   & > * {
     transition: 

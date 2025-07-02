@@ -6,9 +6,9 @@ export default class extends Controller {
   connect() {
     if (!this.hasToastTarget) return;
 
-    this.toastTargets.forEach((toast) => {
-      setTimeout(() => this.animateAndRemove(toast), 5000);
-    });
+    // this.toastTargets.forEach((toast) => {
+    //   setTimeout(() => this.animateAndRemove(toast), 5000);
+    // });
   }
 
   remove(event) {
