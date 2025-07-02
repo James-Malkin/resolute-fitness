@@ -26,21 +26,28 @@ jobs:
 
   lint:
     runs-on: ubuntu-latest
+    container:
+      image: ruby:3.3-slim
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
+      - name: Install Ruby dependencies
+        run: |
+          gem install bundler
+          bundle install
 
       - name: Lint code for consistent style
         run: bin/rubocop -f github
 
   test:
     runs-on: ubuntu-latest
+    container:
+      image: ruby:3.3-slim
+      env:
+        RAILS_ENV: test
+        DATABASE_URL: postgres://postgres:postgres@postgres:5432
 
     services:
       postgres:
@@ -48,36 +55,31 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-        ports:
-          - 5432:5432
         options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev node-gyp pkg-config python-is-python3 google-chrome-stable
+        run: |
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            build-essential git libpq-dev nodejs npm \
+            wget curl unzip chromium
 
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: .ruby-version
-          bundler-cache: true
-      
-      - name: Assests precompile
+      - name: Install Ruby dependencies
+        run: |
+          gem install bundler
+          bundle install
+
+      - name: Assets precompile
         run: RAILS_ENV=test rails assets:precompile
       
       - name: Database setup
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432
-        run: bin/rails db:create db:migrate
+        run: bin/rails db:create db:schema:load
         
       - name: Run tests
-        env:
-          RAILS_ENV: test
-          DATABASE_URL: postgres://postgres:postgres@localhost:5432
         run: bundle exec rspec
 
       - name: Keep screenshots from failed system tests
