@@ -23,3 +23,8 @@ Capybara::Screenshot.register_driver(:cuprite_custom) do |driver, path|
 end
 
 Capybara::Screenshot.prune_strategy = :keep_last_run
+
+if ENV['CI']
+  Capybara.server = :puma, { Silent: true }
+  Capybara.default_max_wait_time = 10
+end
