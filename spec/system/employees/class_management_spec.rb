@@ -34,18 +34,38 @@ describe 'Class Management' do
       expect(page).to have_content('Description is too short')
       expect(page).to have_content("Image can't be blank")
     end
+
+    it 'prevents the duplication of class names' do
+      create(:exercise_class, name: 'Existing Class')
+
+      within '#modal_content' do
+        fill_in 'Class Name', with: 'Existing Class'
+        fill_in 'Description', with: 'This is a Test Description that will satisfy validation.'
+        attach_file 'Image', Rails.root.join('spec', 'fixtures', 'files', 'test_image.jpg')
+        click_on 'Save'
+      end
+
+      expect(page).to have_content('Name has already been taken')
+    end
   end
 
-  it 'prevents the duplication of class names' do
-    create(:exercise_class, name: 'Existing Class')
+  describe 'editing an exercise class', :js do
+    let!(:exercise_class) { create(:exercise_class) }
 
-    within '#modal_content' do
-      fill_in 'Class Name', with: 'Existing Class'
-      fill_in 'Description', with: 'This is a Test Description that will satisfy validation.'
-      attach_file 'Image', Rails.root.join('spec', 'fixtures', 'files', 'test_image.jpg')
-      click_on 'Save'
+    before do
+      visit staff_tools_path
+      find('form[action="/classes/1/edit"]').click
     end
 
-    expect(page).to have_content('Name has already been taken')
+    it 'allows employees to edit an existing exercise class' do
+      within '#modal_content' do
+        fill_in 'Class Name', with: 'Updated Class Name'
+        fill_in 'Description', with: 'Updated Description that satisfies validation.'
+        click_on 'Save'
+      end
+
+      expect(page).to have_content('Class updated successfully.')
+      expect(exercise_class.reload.name).to eq('Updated Class Name')
+    end
   end
 end
