@@ -39,7 +39,7 @@ describe JoinPlanPresenter do
     it 'returns a list of formatted plans' do
       expect(presenter.formatted_plans).to contain_exactly(
         have_attributes(
-          id: 'price_123',
+          id: 'bronze',
           display_colour: '#000000',
           description: 'Test Plan Description',
           price: '£10.00',

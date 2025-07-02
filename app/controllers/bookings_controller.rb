@@ -6,7 +6,7 @@ class BookingsController < ApplicationController
 
     @booking = Booking.new(class_schedule_id: params[:class_schedule_id])
 
-    @session_available = BookingEvaluator.session_available?(params[:class_schedule_id], current_user)
+    @session_available = BookingEvaluator.session_availability(params[:class_schedule_id], current_user)
 
     @payment_required = BookingEvaluator.payment_required?(current_user || nil)
   end

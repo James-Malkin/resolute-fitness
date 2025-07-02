@@ -21,8 +21,8 @@ describe BookingEvaluator do
     end
   end
 
-  describe '.session_available?' do
-    subject(:session_available?) { described_class.session_available?(class_schedule.id, user) }
+  describe '.session_availability' do
+    subject(:session_availability) { described_class.session_availability(class_schedule.id, user) }
 
     let(:class_schedule) { create(:class_schedule) }
 
@@ -30,7 +30,7 @@ describe BookingEvaluator do
       let(:user) { nil }
 
       it 'returns false with reason :unauthenticated' do
-        expect(session_available?).to eq({ is_available: false, reason: :unauthenticated })
+        expect(session_availability).to eq({ is_available: false, reason: :unauthenticated })
       end
     end
 
@@ -43,7 +43,7 @@ describe BookingEvaluator do
       end
 
       it 'returns false with reason :unauthorized' do
-        expect(session_available?).to eq({ is_available: false, reason: :unauthorized })
+        expect(session_availability).to eq({ is_available: false, reason: :unauthorized })
       end
     end
 
@@ -57,7 +57,7 @@ describe BookingEvaluator do
 
       context 'when the class schedule has capacity' do
         it 'returns true with no reason' do
-          expect(session_available?).to eq({ is_available: true, reason: nil })
+          expect(session_availability).to eq({ is_available: true, reason: nil })
         end
       end
 
@@ -67,7 +67,7 @@ describe BookingEvaluator do
         end
 
         it 'returns false with reason :unavailable' do
-          expect(session_available?).to eq({ is_available: false, reason: :unavailable })
+          expect(session_availability).to eq({ is_available: false, reason: :unavailable })
         end
       end
     end

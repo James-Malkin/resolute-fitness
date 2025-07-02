@@ -7,7 +7,7 @@ class BookingEvaluator
     user.member.guest?
   end
 
-  def self.session_available?(class_schedule_id, current_user)
+  def self.session_availability(class_schedule_id, current_user)
     return { is_available: false, reason: :unauthenticated } unless current_user
 
     return { is_available: false, reason: :unauthorized } unless Ability.new(current_user).can?(:create, Booking)

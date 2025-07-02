@@ -17,6 +17,8 @@ class MembersController < ApplicationController
 
   def subscribe
     StripeManager::Subscription.create(subscribe_params)
+
+    redirect_to profile_show_path(current_user.username), notice: 'Plan purchased successfully'
   end
 
   private
