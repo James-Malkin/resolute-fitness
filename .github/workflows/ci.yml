@@ -13,8 +13,12 @@ jobs:
       image: ruby:3.3-slim
 
     steps:
-      - name: Install git
-        run: apt-get update && apt-get install -y --no-install-recommends git
+      - name: Install system dependencies
+        run: |
+          apt-get update -qq && \
+          apt-get install -y \
+          git nodejs npm postgresql-client ca-certificates \
+          vim chromium chromium-driver
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -36,8 +40,12 @@ jobs:
       image: ruby:3.3-slim
 
     steps:
-      - name: Install git
-        run: apt-get update && apt-get install -y --no-install-recommends git libyaml-dev
+      - name: Install system dependencies
+        run: |
+          apt-get update -qq && \
+          apt-get install -y \
+          git nodejs npm postgresql-client ca-certificates \
+          vim chromium chromium-driver
 
       - name: Checkout code
         uses: actions/checkout@v4
