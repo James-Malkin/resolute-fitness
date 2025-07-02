@@ -33,4 +33,4 @@ bin/dev
 | Tool | Version |
 |------|:-------:|
 |Ruby|3.3.3 |
-|Postgres| 17 |
+|PostgreSQL| 17 |
