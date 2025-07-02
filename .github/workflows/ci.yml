@@ -17,8 +17,7 @@ jobs:
         run: |
           apt-get update -qq && \
           apt-get install -y \
-          git nodejs npm postgresql-client ca-certificates \
-          vim chromium chromium-driver libpq-dev
+          git build-essential nodejs npm ca-certificates libpq-dev
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -44,8 +43,7 @@ jobs:
         run: |
           apt-get update -qq && \
           apt-get install -y \
-          git nodejs npm postgresql-client ca-certificates \
-          vim chromium chromium-driver libpq-dev
+          git build-essential ca-certificates libpq-dev
 
       - name: Checkout code
         uses: actions/checkout@v4
@@ -80,8 +78,7 @@ jobs:
         run: |
           apt-get update -qq && \
           apt-get install -y \
-          git nodejs npm postgresql-client ca-certificates \
-          vim chromium chromium-driver libpq-dev
+          git build-essential nodejs npm ca-certificates chromium chromium-driver libpq-dev
 
       - name: Checkout code
         uses: actions/checkout@v4
