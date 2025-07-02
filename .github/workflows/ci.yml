@@ -70,10 +70,10 @@ jobs:
     steps:
       - name: Install system dependencies
         run: |
-          apt-get update
-          apt-get install -y --no-install-recommends \
-            build-essential git libpq-dev nodejs npm \
-            wget curl unzip chromium libyaml-dev
+          apt-get update -qq && \
+          apt-get install -y \
+          git nodejs npm postgresql-client ca-certificates \
+          vim chromium chromium-driver
 
       - name: Checkout code
         uses: actions/checkout@v4
