@@ -70,7 +70,7 @@ group :test do
   gem 'capybara-screenshot'
   gem 'cuprite'
   gem 'database_cleaner-active_record'
-  gem 'rspec-rails', '~> 7.1'
+  gem 'rspec-rails', '~> 8.0'
   gem 'shoulda-matchers'
   gem 'simplecov'
   gem 'simplecov-cobertura'
